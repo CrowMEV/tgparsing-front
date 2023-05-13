@@ -1,0 +1,60 @@
+@import "/src/assets/styles/variables.sass"
+  
+.instructions
+  display: flex
+  flex-direction: column
+
+.title
+  font-weight: 700
+
+.steps
+  margin-top: 15px
+
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+  width: 200px
+  padding: 1rem 1rem
+
+  font-size: 12px
+
+  background-color: $c-primary-grey
+
+  border-radius: 10px
+
+
+.stepPoints
+  display: flex
+  align-items: center
+
+.stepPoint
+  display: block
+
+  width: 8px
+  height: 8px
+
+  background-color: $c-light-grey
+  border-radius: 50%
+
+  &:not(:last-child)
+    margin-right: 5px
+  
+  &__active
+    background-color: $c-primary-green
+  
+.currentStep
+  color: $c-primary-green
+
+.stepDescription
+  margin-top: 20px
+
+  font-size: 12px
+
+.checkboxPro
+  margin-top: 20px
+
+.descriptionPro
+  margin-top: 20px
+
+  font-size: 12px

@@ -1,0 +1,47 @@
+@import "src/assets/styles/variables.sass"
+@import "src/assets/styles/mixins.sass"
+
+.nav
+  background: $c-primary-grey
+  max-width: 100px
+  width: 100%
+  font-size: 12px
+  color: $c-light-grey
+  text-align: center
+  height: 100vh
+
+  &__link
+    display: block
+    padding: 7px 0
+    transition: all .4s ease
+
+    > span
+      display: block
+
+    &:hover
+      @include active-link
+
+  &__links
+
+  &__ul
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    height: 100%
+    padding: 25px 2px
+
+  &__avatar
+    margin: 0.5rem auto 0.5rem
+    background: white
+    width: 40px
+    height: 40px
+    border-radius: 100px
+    border: 3px solid white
+    display: flex
+    align-items: center
+    justify-content: center
+
+    > img
+      width: 95%
+      height: 95%
+      border-radius: 100px

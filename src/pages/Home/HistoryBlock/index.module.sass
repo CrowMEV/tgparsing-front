@@ -1,0 +1,21 @@
+@import "src/assets/styles/mixins.sass"
+
+.history
+  &__blocks
+    margin-top: 0rem
+
+  &__upper
+    display: flex
+    align-items: center
+    justify-content: space-between
+
+  &__btn
+    @include button
+    display: flex
+    align-items: center
+    padding: 0.2rem 1rem
+    margin: 0
+
+    > span
+      transform: rotate(-90deg)
+

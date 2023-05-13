@@ -1,0 +1,50 @@
+@import "src/assets/styles/variables.sass"
+@import "src/assets/styles/mixins.sass"
+
+.header
+  width: 100%
+  &__buttons
+    display: flex
+
+  &__link
+    @include button-link
+    @include transform-3
+
+  &__blocks
+    display: flex
+    justify-content: space-between
+
+  &__links
+    width: 55%
+    display: flex
+    font-size: 12px
+
+    > li
+      justify-content: center
+      margin: auto
+      padding: 10px
+      align-items: center
+      display: flex
+      color: $c-light-grey
+
+      > span
+        font-size: 22px
+        padding: 0 3px
+
+    &__balance
+      display: block !important
+
+      > label
+        display: block
+
+    &__btn
+      @include green-button
+      > button
+        color: $c-primary-green
+
+      > span
+        color: $c-transparent-green
+
+      &:hover
+        > span
+          color: $c-primary-green

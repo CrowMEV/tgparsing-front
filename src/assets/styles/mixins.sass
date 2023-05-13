@@ -1,0 +1,89 @@
+@import "variables.sass"
+
+@mixin active-link
+  color: $c-primary-green
+  cursor: pointer
+  @include transform-3
+
+@mixin transform-3
+  transition: all .4s ease
+  &:hover
+    transform: translateY(-3px)
+    transition: all .4s ease
+
+@mixin button-link
+  cursor: pointer
+  margin: 5px
+  background: $c-light-grey
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 40px
+  width: 170px
+  font-size: 13px
+  border-radius: 5px
+  transition: all .15s
+
+  &__active
+    color: $c-primary-green
+    background: #474747
+    border: 1px solid $c-primary-green
+
+@mixin button
+  cursor: pointer
+  margin: 5px
+  background: $c-transparent-green
+  padding: 4px 35px
+  font-size: 13px
+  border-radius: 5px
+  > button, span
+    color: $c-primary-green
+
+@mixin green-button
+  display: flex
+  align-items: center
+
+  margin: 0
+  padding: 1rem 1rem
+
+  background: $c-transparent-green
+
+  font-size: 13px
+  color: $c-primary-green
+
+  border-radius: 5px
+  cursor: pointer
+  transition: all 0.15s ease-in-out
+
+  > span
+    margin-right: 10px
+    transition: color .15s
+  
+  &:focus
+    @include element-focus
+
+  &:active
+    transform: (scale(0.97))
+
+
+@mixin text-input
+  padding: 1rem 1rem
+  background-color: $c-light-grey
+  border-radius: 10px
+  color: white
+  &:focus
+    @include element-focus
+
+@mixin element-focus
+  outline: 2px solid $c-primary-green
+
+@mixin tool-button
+  span
+    font-size: 18px
+    line-height: 2
+    color: #bbb6b6
+  &:hover
+    opacity: 0.8
+  
+  &:active
+      opacity: 0.6

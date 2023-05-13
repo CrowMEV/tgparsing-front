@@ -1,0 +1,86 @@
+@import "/src/assets/styles/variables.sass"
+@import "/src/assets/styles/mixins.sass"
+  
+.formGroup
+  display: flex
+  flex-direction: column
+
+  max-width: 500px
+
+  margin-bottom: 30px
+
+.label
+  font-weight: 700
+
+  margin-bottom: 20px
+
+.subText
+  font-size: 12px
+  color: $c-light-grey
+
+.textInput
+  @include text-input
+
+  &__mailing
+    margin-top: 15px
+
+  &__link
+    margin-bottom: 30px
+
+  &__linkDescription
+    margin-top: 30px
+
+  &:focus
+    @include element-focus
+
+.radioWrapper
+  display: flex
+
+.button
+  @include green-button
+
+  &:focus
+    @include element-focus
+
+  &__testMessage
+    margin-bottom: 20px
+
+.inputImage
+  position: absolute
+  z-index: -1
+  opacity: 0
+
+.image
+  display: block
+
+  margin-top: 15px
+
+  width: 60px
+  height: 60px
+
+  object-fit: contain
+
+.imageButton
+  margin-top: 15px
+
+  width: 300px
+
+  &__icon
+    display: block
+
+    margin-right: 10px
+
+    color: $c-transparent-green
+
+    transition: color 0.15s
+
+  &:hover .imageButton__icon
+    color: $c-primary-green
+    
+.inputImage:focus + .imageButton
+  @include element-focus
+
+.checkBoxWrapper
+  &:not(:last-child)
+    margin-bottom: 30px
+

@@ -1,0 +1,30 @@
+@import "/src/assets/styles/variables.sass"
+@import "src/assets/styles/mixins.sass"
+
+.tools
+  width: 500px
+
+.toolsTabs
+  display: flex
+  justify-content: space-between
+
+  font-size: 10px
+
+  margin-bottom: 20px
+
+.helpingBlock
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+  min-width: 50px
+
+.button
+  @include tool-button
+
+.toolsItems
+  max-height: 300px
+
+  padding-right: 20px
+
+  overflow-y: scroll

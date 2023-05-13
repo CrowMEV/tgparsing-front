@@ -1,0 +1,97 @@
+@import "/src/assets/styles/variables.sass"
+  
+.wrapper
+  margin-top: 20px
+  width: fit-content
+
+.header
+  font-size: 24px
+
+.discountOffer
+  display: flex
+  justify-content: space-between
+
+  &__text
+    display: flex
+    align-items: center
+
+  &__amount
+    color: $c-primary-green
+    font-size: 70px
+    font-weight: bold
+
+.accent
+  color: $c-primary-green
+
+.additionalText
+  display: flex
+  flex-direction: column
+  gap: 10px
+  font-size: smaller
+  color: $c-light-grey
+
+.referral
+  margin-top: 30px
+
+  &__top
+    display: flex
+    justify-content: space-between
+
+  &__copyBtn
+    font-size: smaller
+    cursor: pointer
+    transition: color .15s
+
+    &:hover
+      color: $c-active-green
+
+  &__link
+    cursor: pointer
+    width: 100%
+    background-color: $c-light-grey
+    padding: 7px
+    border-radius: 5px
+    font-size: 14px
+    border: 1px solid grey
+    transition: border .15s
+    display: flex
+    justify-content: space-between
+
+    span
+      color: grey
+      transition: color .15s
+
+    &:hover
+      border: 1px solid white
+      
+      span
+        color: white
+
+.share
+  margin-top: 30px
+  
+  &__icons
+    display: flex
+    gap: 10px
+
+  &__icon
+    display: block
+    width: 54px
+    height: 54px
+
+  .VK
+    background-image: url(../../../assets/images/vk.svg)
+
+  .WA
+    background-image: url(../../../assets/images/whatsapp.svg)
+
+  .TW
+    background-image: url(../../../assets/images/twitter.svg)
+
+  .FB
+    background-image: url(../../../assets/images/facebook.svg)
+
+  .TG
+    background-image: url(../../../assets/images/telegram.svg)
+
+      

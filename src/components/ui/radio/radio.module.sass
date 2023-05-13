@@ -1,0 +1,35 @@
+@import "/src/assets/styles/variables.sass"
+@import "/src/assets/styles/mixins.sass"
+  
+.radioInput
+  position: absolute
+  z-index: -1
+  opacity: 0
+  
+.radioLabel
+  padding: 1rem 3rem
+
+  border: 1px solid $c-light-grey
+
+  cursor: pointer
+
+  transition: all 0.15s
+
+  &:first-of-type
+    border-top-left-radius: 15px 15px
+    border-bottom-left-radius: 15px 15px
+  
+  &:last-of-type
+    border-top-right-radius: 15px 15px
+    border-bottom-right-radius: 15px 15px
+
+  &:hover
+    background-color: $c-transparent-green
+
+
+.radioInput:checked + .radioLabel
+  background-color: $c-transparent-green
+  border-color: $c-primary-green
+
+.radioInput:focus + .radioLabel
+  @include element-focus

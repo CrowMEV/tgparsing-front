@@ -1,0 +1,22 @@
+@import "src/assets/styles/variables.sass"
+@import "src/assets/styles/mixins.sass"
+
+.form
+  display: flex
+  flex-direction: column
+  gap: 1.25rem
+
+.inputGroup
+  display: flex
+  gap: .5rem
+
+.input
+  @include text-input
+  width: 100%
+  
+.button
+  @include green-button
+  width: 100%
+  display: flex
+  align-items: center
+  justify-content: center

@@ -1,0 +1,14 @@
+.idea
+.next
+node_modules
+public
+src/assets
+
+*.sass
+
+*.config.*
+*.txt
+*.md
+.prettierrc
+.eslintignore
+*.json

@@ -1,0 +1,63 @@
+@import "/src/assets/styles/variables.sass"
+  
+.label
+  position: relative
+
+  display: flex
+  flex-direction: column
+
+  padding-left: 45px
+
+  cursor: pointer
+
+.input
+  opacity: 0
+  visibility: hidden
+  position: absolute
+  
+.toggle
+  display: block
+  position: absolute
+
+  top: 50%
+  left: 0
+  transform: translateY(-50%)
+
+  width: 35px
+  height: 8px
+
+  
+  background-color: $c-primary-red
+  border-radius: 15px
+
+  &::before
+    content: ""
+    position: absolute
+    display: block
+
+    top: 50%
+    left: -5%
+    transform: translateY(-50%)
+  
+    width: 20px
+    height: 20px
+
+    background: #202020
+    background: linear-gradient(0deg, #202020, #73717B)
+    border-radius: 50%
+
+    transition: all 0.2s
+
+.input:checked + .toggle
+  background-color: $c-primary-green
+
+  &::before
+    left: 45%
+
+
+.supTitle
+  font-size: 10px
+  color: $c-light-grey
+    
+.title
+  font-size: 12px
