@@ -87,3 +87,44 @@
   
   &:active
       opacity: 0.6
+
+@mixin close-button
+    width: 40px
+    height: 40px
+  
+    border: none
+  
+    background-color: transparent
+    cursor: pointer
+  
+    transition: 0.2s all
+  
+    &:before,
+    &:after
+      content: ""
+      position: absolute
+      top: 0
+      left: 50%
+    
+      transform: translateX(-50%)
+    
+      height: 30px
+      width: 2px
+    
+      background-color: $c-transparent-green
+  
+      transition: 0.2s all ease-in-out
+  
+    &:before
+      transform: rotate(45deg)
+  
+    &:after
+      transform: rotate(-45deg)
+  
+    &:hover
+      &:before,
+      &:after
+        background-color: $c-primary-red
+    
+    &:active
+      transform: scale(0.9)
