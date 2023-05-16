@@ -1,0 +1,49 @@
+@import "/src/assets/styles/variables.sass"
+@import "src/assets/styles/mixins.sass"
+  
+.modal
+  display: flex
+  justify-content: center
+  align-items: center
+
+  position: fixed
+  top: 0
+  left: 0
+  opacity: 0
+
+  height: 100vh
+  width: 100vw
+
+  background-color: rgba(0, 0, 0, 0.6)
+
+  pointer-events: none
+  transition: 0.5s
+  z-index: 10
+
+.modal__active
+  opacity: 1
+  pointer-events: all
+
+.content
+  width: auto
+
+  background-color: $c-primary-grey
+
+  padding: 30px
+
+  box-shadow: 0 10px 10px #0c0c0c
+  border-radius: 5px
+
+  transform: scale(0.6)
+  transition: 0.2s all
+
+.content__active
+  transform: scale(1)
+
+.closeButton
+  position: absolute
+  top: 10px
+  right: 10px
+  @include close-button
+ 
+    
