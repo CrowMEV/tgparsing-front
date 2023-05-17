@@ -2,10 +2,6 @@
 @import "src/assets/styles/mixins.sass"
   
 .modal
-  display: flex
-  justify-content: center
-  align-items: center
-
   position: fixed
   top: 0
   left: 0
@@ -25,11 +21,12 @@
   pointer-events: all
 
 .content
-  width: auto
+  width: fit-content
 
-  background-color: $c-primary-grey
-
+  margin: 10vh auto 0
   padding: 30px
+  
+  background-color: $c-primary-grey
 
   box-shadow: 0 10px 10px #0c0c0c
   border-radius: 5px

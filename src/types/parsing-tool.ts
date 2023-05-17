@@ -1,7 +1,7 @@
 import { Marker } from './marker';
 
 export interface ParsingTool {
-  id: string,
+  id: string;
   name: string;
   date: string;
   mailings: number;
@@ -11,7 +11,7 @@ export interface ParsingTool {
   period: {
     from: string;
     to: string;
-  }
+  };
   markers: Marker[];
   radius: number;
 }

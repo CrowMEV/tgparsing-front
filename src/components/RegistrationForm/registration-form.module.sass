@@ -1,0 +1,27 @@
+@import "/src/assets/styles/form-mixins.sass"
+  
+.registrationForm
+  @include form
+
+.title
+  @include title
+
+.input
+  @include input
+
+.error
+  @include error
+
+.registrationButton
+  @include enterButton
+
+  svg
+    stroke: $c-light-grey
+
+  &:hover
+    svg
+      stroke: $c-primary-green
+      
+
+.loginLink
+  @include link

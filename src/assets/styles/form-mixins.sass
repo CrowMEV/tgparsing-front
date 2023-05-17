@@ -1,0 +1,74 @@
+@import "/src/assets/styles/mixins.sass"
+@import "/src/assets/styles/variables.sass"
+
+@mixin form
+  display: flex
+  flex-direction: column
+  row-gap: 30px
+
+  width: 400px
+
+  text-align: center
+
+@mixin title
+  font-size: 28px
+
+@mixin input
+   @include text-input
+   width: 100%
+ 
+   padding: 0.8rem
+
+@mixin inputLabel
+  display: block
+
+@mixin input
+  @include text-input
+  width: 100%
+
+  padding: 0.8rem
+
+@mixin error
+  font-size: 14px
+  color: $c-primary-red
+  text-align: left
+
+  margin-top: 5px
+
+@mixin enterButton
+  @include green-button
+
+  justify-content: center
+  column-gap: 5px
+
+  padding: 0.8rem
+
+  font-size: 16px
+
+  border-radius: 10px
+
+  svg
+    color: $c-light-grey
+    transition: 0.2s color ease-out
+
+  &:hover
+    svg
+      color: $c-primary-green
+      
+  &:disabled
+    opacity: 0.6
+
+    &:hover
+      svg
+        color: $c-light-grey
+
+@mixin link
+  color: $c-light-grey
+  text-decoration: underline
+  transition: 0.2s color ease-out
+
+  &:hover
+    color: $c-primary-green
+  
+  &:active
+    opacity: 0.8
