@@ -7,8 +7,8 @@ import styles from './index.module.sass';
 const Sidebar = () => {
   return (
     <div className={styles.nav}>
-      <nav className={styles.nav__ul}>
-        <ul className={styles.nav__links}>
+      <nav className={styles.nav__links}>
+        <ul>
           <li>
             <Link to={Routes.Mailing} className={styles.nav__link}>
               <span className="material-icons-outlined">rocket</span>

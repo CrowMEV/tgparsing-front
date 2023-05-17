@@ -25,7 +25,8 @@ const ReplenishmentModal: FC<ReplenishmentModalProps> = ({
 
   return (
     <ModalWindow isActive={isOpen} setActive={closeModal}>
-      <main className={styles.wrapper}>
+      <article className={styles.wrapper}>
+        <h2 className="visually-hidden">Пополнение баланса</h2>
         <ul className={styles.tabs}>
           {tabs.map((tab) => (
             <li
@@ -49,7 +50,7 @@ const ReplenishmentModal: FC<ReplenishmentModalProps> = ({
               return null;
           }
         })()}
-      </main>
+      </article>
     </ModalWindow>
   );
 };
