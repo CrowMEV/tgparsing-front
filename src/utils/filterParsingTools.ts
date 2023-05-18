@@ -1,4 +1,3 @@
-import { Tab } from '../types/tab';
 import { ParsingTool } from './../types/parsing-tool';
 
 export const filterParsingTools = (tools: ParsingTool[], filterTab: string) => {
