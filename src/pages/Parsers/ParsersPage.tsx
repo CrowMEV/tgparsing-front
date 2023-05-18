@@ -3,9 +3,9 @@ import ParsersPageHeader from './Header/ParsersPageHeader';
 import Geolocation from '../../components/parsers/geolocation/Geolocation';
 import Participants from '../../components/parsers/participants/Participants';
 import Activities from '../../components/parsers/activities/Activities';
-
-import styles from './parsers.module.sass';
 import Navbar from './Navigation/Navbar';
+
+import styles from './parsersPage.module.sass';
 
 const PARSERS = [
   { title: 'geolocation', icon: 'location_on' },
