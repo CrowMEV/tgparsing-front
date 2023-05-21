@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Routes } from '../../router/routes';
 import styles from './login-form.module.sass';
-import LoginIcon from '../icons/loginIcon/LoginIcon';
-import { loginSchema } from '../../utils/validation-schemas';
+import { loginSchema } from './validation-schema';
 import { Formik, Form, Field } from 'formik';
 import Loader from '../ui/loader/loader';
 import { useState } from 'react';
 import { LoginData } from '../../types/auth';
+import { ReactComponent as LoginIcon } from '../../assets/images/icons/login.svg';
 
 const LoginForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);

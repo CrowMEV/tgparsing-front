@@ -4,9 +4,7 @@ export interface LoginData {
 }
 
 export interface RegistrationData {
-  firstName: string;
   email: string;
-  telegramId: string;
   password: string;
   passwordCheck?: string;
 }

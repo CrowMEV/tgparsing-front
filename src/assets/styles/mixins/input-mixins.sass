@@ -1,0 +1,13 @@
+@import "/src/assets/styles/variables.sass"
+  
+@mixin text-input
+  width: 100%
+  padding: 0.8rem
+  background-color: $c-light-grey
+  border-radius: 10px
+  color: white
+  &:focus
+    @include element-focus
+
+@mixin element-focus
+  outline: 2px solid $c-primary-green
