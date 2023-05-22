@@ -21,6 +21,12 @@ export const ToolTabs: Tab[] = [
   },
 ];
 
+export enum AuthorizationStatus {
+  Auth = 'Auth',
+  NoAuth = 'NoAuth',
+  Unknown = 'Unknown',
+}
+
 export enum ParserNames {
   Geolocation = 'Geolocation',
   Activities = 'Activities',

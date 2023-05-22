@@ -7,14 +7,18 @@ import Loader from '../ui/loader/loader';
 import { useState } from 'react';
 import { RegistrationData } from '../../types/auth';
 import { ReactComponent as RegistrationIcon } from '../../assets/images/icons/registration.svg';
+import { useAppDispatch } from '../../hooks/redux';
+import { register } from '../../store/user-slice/apiActions';
 
 const RegistrationForm = () => {
+  const dispatch = useAppDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const submitHandler = (values: RegistrationData) => {
     setIsSubmitting(true);
     const sendedData = { ...values };
     delete sendedData['passwordCheck'];
+    dispatch(register({ username: values.email, password: values.password }));
     console.log(sendedData);
     setTimeout(() => setIsSubmitting(false), 3000);
   };
