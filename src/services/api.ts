@@ -1,18 +1,45 @@
-import axios, {
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-  AxiosError,
-} from 'axios';
+import axios from 'axios';
+import type { AppStore } from '../store';
+import { refresh } from '../store/user-slice/apiActions';
 
-const BACKEND_URL = 'http://127.0.0.1:8000';
+export const BASE_URL = 'http://62.113.102.145/api';
 const REQUEST_TIME = 5000;
+let store: AppStore;
 
-export const createApi = (): AxiosInstance => {
-  const api = axios.create({
-    baseURL: BACKEND_URL,
-    timeout: REQUEST_TIME,
-  });
+export const injectStore = (_store: AppStore) => (store = _store);
 
-  return api;
-};
+export const api = axios.create({
+  baseURL: BASE_URL,
+  timeout: REQUEST_TIME,
+});
+
+api.interceptors.request.use((config) => {
+  const token = store.getState().UserData.accessToken;
+
+  if (token && config.headers) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
+api.interceptors.response.use(
+  (config) => config,
+  async (error) => {
+    const originalRequest = error.config;
+    if (
+      error.response.status === 401 &&
+      originalRequest &&
+      !originalRequest._isReplica
+    ) {
+      originalRequest._isReplica = true;
+      try {
+        await store.dispatch(refresh());
+        return api.request(originalRequest);
+      } catch (error) {
+        //not auth error
+      }
+    }
+    throw error;
+  },
+);

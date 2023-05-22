@@ -3,7 +3,7 @@ import { useAppSelector } from '../../../hooks/redux';
 import { getCurrentUser } from '../../../store/user-process/selectors';
 
 import styles from './replenishmentBlock.module.sass';
-import { api } from '../../../store';
+import { api } from '../../../services/api';
 import Radio from '../../ui/radio/Radio';
 
 const replenishmentWays = ['Банковская карта', 'Онлайн кошелек'];

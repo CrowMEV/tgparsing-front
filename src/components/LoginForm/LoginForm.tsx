@@ -1,19 +1,22 @@
 import { Link } from 'react-router-dom';
 import { Routes } from '../../router/routes';
 import styles from './login-form.module.sass';
-import LoginIcon from '../icons/loginIcon/LoginIcon';
-import { loginSchema } from '../../utils/validation-schemas';
+import { loginSchema } from './validation-schema';
 import { Formik, Form, Field } from 'formik';
 import Loader from '../ui/loader/loader';
 import { useState } from 'react';
 import { LoginData } from '../../types/auth';
+import { ReactComponent as LoginIcon } from '../../assets/images/icons/login.svg';
+import { useFetchBaseUserInfo } from '../../hooks/useFetchBaseUserInfo';
 
 const LoginForm = () => {
+  const { fetch } = useFetchBaseUserInfo();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const submitHandler = (values: LoginData) => {
     setIsSubmitting(true);
     console.log(values);
+    fetch({ username: values.email, password: values.password });
     setTimeout(() => setIsSubmitting(false), 3000);
   };
 

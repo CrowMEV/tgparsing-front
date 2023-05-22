@@ -4,8 +4,8 @@ import Layout from '../components/layout/Layout';
 import MainPage from '../pages/Home/MainPage';
 import MailingPage from '../pages/Mailing/MailingPage';
 import ParsersPage from '../pages/Parsers/ParsersPage';
-import Login from '../pages/Login/Login';
-import Registration from '../pages/Registration/Registration';
+import LoginPage from '../pages/LoginPage/LoginPage';
+import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
 
 export const router = createBrowserRouter([
   {
@@ -29,11 +29,11 @@ export const router = createBrowserRouter([
   },
   {
     path: Routes.Login,
-    element: <Login />,
+    element: <LoginPage />,
   },
   {
     path: Routes.Registration,
-    element: <Registration />,
+    element: <RegistrationPage />,
   },
   {
     path: '*',

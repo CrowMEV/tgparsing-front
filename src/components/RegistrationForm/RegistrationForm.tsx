@@ -1,20 +1,24 @@
 import { Link } from 'react-router-dom';
 import { Routes } from '../../router/routes';
 import styles from './registration-form.module.sass';
-import RegistrationIcon from '../icons/registrationIcon/RegistrationIcon';
 import { Formik, Form, Field } from 'formik';
-import { registrationSchema } from '../../utils/validation-schemas';
+import { registrationSchema } from './validation-schema';
 import Loader from '../ui/loader/loader';
 import { useState } from 'react';
 import { RegistrationData } from '../../types/auth';
+import { ReactComponent as RegistrationIcon } from '../../assets/images/icons/registration.svg';
+import { useAppDispatch } from '../../hooks/redux';
+import { register } from '../../store/user-slice/apiActions';
 
 const RegistrationForm = () => {
+  const dispatch = useAppDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const submitHandler = (values: RegistrationData) => {
     setIsSubmitting(true);
     const sendedData = { ...values };
     delete sendedData['passwordCheck'];
+    dispatch(register({ username: values.email, password: values.password }));
     console.log(sendedData);
     setTimeout(() => setIsSubmitting(false), 3000);
   };
@@ -22,9 +26,7 @@ const RegistrationForm = () => {
   return (
     <Formik
       initialValues={{
-        firstName: '',
         email: '',
-        telegramId: '',
         password: '',
         passwordCheck: '',
       }}
@@ -37,34 +39,12 @@ const RegistrationForm = () => {
           <label>
             <Field
               className={styles.input}
-              name="firstName"
-              type="text"
-              placeholder="Введите ваше имя"
-            />
-            {errors.firstName && touched.firstName ? (
-              <p className={styles.error}>{errors.firstName}</p>
-            ) : null}
-          </label>
-          <label>
-            <Field
-              className={styles.input}
               name="email"
               type="email"
               placeholder="Введите ваш email"
             />
             {errors.email && touched.email ? (
               <p className={styles.error}>{errors.email}</p>
-            ) : null}
-          </label>
-          <label>
-            <Field
-              className={styles.input}
-              name="telegramId"
-              type="text"
-              placeholder="Введите ваш ник в Telegram"
-            />
-            {errors.telegramId && touched.telegramId ? (
-              <p className={styles.error}>{errors.telegramId}</p>
             ) : null}
           </label>
           <label>

@@ -1,0 +1,127 @@
+@import "/src/assets/styles/variables.sass"
+  
+@mixin button-link
+  cursor: pointer
+  margin: 5px
+  background: $c-light-grey
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 40px
+  width: 170px
+  font-size: 13px
+  border-radius: 5px
+  transition: all .15s
+
+  &__active
+    color: $c-primary-green
+    background: #474747
+    border: 1px solid $c-primary-green
+
+@mixin button
+  cursor: pointer
+  margin: 5px
+  background: $c-transparent-green
+  padding: 4px 35px
+  font-size: 13px
+  border-radius: 5px
+  > button, span
+    color: $c-primary-green
+
+@mixin green-button
+  display: flex
+  align-items: center
+
+  margin: 0
+  padding: 1rem 1rem
+
+  background: $c-transparent-green
+
+  font-size: 13px
+  color: $c-primary-green
+
+  border-radius: 5px
+  cursor: pointer
+  transition: all 0.15s ease-in-out
+
+  > span
+    margin-right: 10px
+    transition: color .15s
+
+  &:active
+    opacity: 0.6
+
+@mixin tool-button
+  span
+    font-size: 18px
+    line-height: 2
+    color: #bbb6b6
+  &:hover
+    opacity: 0.8
+  
+  &:active
+      opacity: 0.6
+
+@mixin enterButton
+  @include green-button
+
+  justify-content: center
+  column-gap: 5px
+
+  padding: 0.8rem
+
+  font-size: 16px
+
+  border-radius: 10px
+
+  svg
+    color: $c-light-grey
+    transition: 0.2s color ease-out
+
+  &:hover
+    svg
+      color: $c-primary-green
+      
+  &:disabled
+    opacity: 0.6
+
+@mixin close-button
+  width: 40px
+  height: 40px
+
+  border: none
+
+  background-color: transparent
+  cursor: pointer
+
+  transition: 0.2s all
+
+  &:before,
+  &:after
+    content: ""
+    position: absolute
+    top: 0
+    left: 50%
+  
+    transform: translateX(-50%)
+  
+    height: 30px
+    width: 2px
+  
+    background-color: $c-transparent-green
+
+    transition: 0.2s all ease-in-out
+
+  &:before
+    transform: rotate(45deg)
+
+  &:after
+    transform: rotate(-45deg)
+
+  &:hover
+    &:before,
+    &:after
+      background-color: $c-primary-red
+  
+  &:active
+    transform: scale(0.9)

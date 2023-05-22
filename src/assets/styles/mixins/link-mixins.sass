@@ -1,0 +1,23 @@
+@import "/src/assets/styles/variables.sass"
+
+@mixin active-link
+  color: $c-primary-green
+  cursor: pointer
+  @include transform-3
+
+@mixin transform-3
+  transition: all .4s ease
+  &:hover
+    transform: translateY(-3px)
+    transition: all .4s ease
+  
+@mixin link
+  color: $c-light-grey
+  text-decoration: underline
+  transition: 0.2s color ease-out
+
+  &:hover
+    color: $c-primary-green
+  
+  &:active
+    opacity: 0.8

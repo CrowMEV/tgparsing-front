@@ -1,12 +1,14 @@
 import LoginForm from '../../components/LoginForm/LoginForm';
 import styles from './login.module.sass';
 
-const Login = () => {
+const LoginPage = () => {
   return (
     <div className={styles.wrapper}>
-      <LoginForm />
+      <div className={styles.container}>
+        <LoginForm />
+      </div>
     </div>
   );
 };
 
-export default Login;
+export default LoginPage;

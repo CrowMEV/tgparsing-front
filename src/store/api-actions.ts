@@ -1,4 +1,4 @@
-import { AppDispatch, State, api } from './index';
+import { AppDispatch, State } from './index';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 
