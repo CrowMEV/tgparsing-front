@@ -16,7 +16,7 @@ const LoginForm = () => {
   const submitHandler = (values: LoginData) => {
     setIsSubmitting(true);
     console.log(values);
-    fetch({ username: values.email, password: values.password });
+    fetch(values);
     setTimeout(() => setIsSubmitting(false), 3000);
   };
 

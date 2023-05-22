@@ -12,8 +12,7 @@ import { User } from '../../types/user';
 
 export const register = createAppAsyncThunk<
   RegistrationResponse,
-  any
-  //TODO RegistrationRequestData
+  RegistrationRequestData
 >(
   ApiRoutes.Register,
   async (registrationData, { rejectWithValue, extra: api }) => {

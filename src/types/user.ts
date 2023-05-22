@@ -3,7 +3,10 @@ import { Operation } from './operation';
 
 export interface User {
   id: number;
-  name: string;
+  avatar: string;
+  firstName: string;
+  lastName: string;
+  //TODO: Убрать лишнее
   balance: number;
   cards: Card[];
   operations: Operation[];

@@ -11,11 +11,11 @@ export const useFetchBaseUserInfo = () => {
   const user = useAppSelector((state) => state.UserData.user);
   const status = useAppSelector((state) => state.UserData.status);
 
-  //TODO const fetch = async (loginData: LoginData) => {
-  const fetch = async (loginData: any) => {
+  const fetch = async (loginData: LoginData) => {
     try {
       await dispatch(login(loginData)).unwrap();
-      const user = await dispatch(getUser()).unwrap();
+      const userPromise = dispatch(getUser()).unwrap();
+      const [user] = await Promise.all([userPromise]);
       console.log(user);
       navigate(Routes.Home);
     } catch (error) {

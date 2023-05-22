@@ -7,7 +7,11 @@ import { store } from './store';
 import './assets/styles/global.sass';
 import { getUser, refresh } from './store/user-slice/apiActions';
 
-store.dispatch(refresh()).then(() => store.dispatch(getUser()));
+store
+  .dispatch(refresh())
+  .unwrap()
+  .then(() => store.dispatch(getUser()))
+  .catch((e) => console.error(e));
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
