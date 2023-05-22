@@ -14,11 +14,17 @@ const RegistrationForm = () => {
   const dispatch = useAppDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submitHandler = (values: RegistrationData) => {
+  const submitHandler = async (values: RegistrationData) => {
     setIsSubmitting(true);
     const sendedData = { ...values };
     delete sendedData['passwordCheck'];
-    dispatch(register({ username: values.email, password: values.password }));
+
+    try {
+      await dispatch(register(values)).unwrap();
+    } catch (error) {
+      console.error(error);
+    }
+
     console.log(sendedData);
     setTimeout(() => setIsSubmitting(false), 3000);
   };
