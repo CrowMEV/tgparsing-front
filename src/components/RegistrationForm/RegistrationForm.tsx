@@ -26,6 +26,8 @@ const RegistrationForm = () => {
   return (
     <Formik
       initialValues={{
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
         passwordCheck: '',
@@ -36,6 +38,28 @@ const RegistrationForm = () => {
       {({ errors, touched, isValid, dirty }) => (
         <Form className={styles.registrationForm}>
           <h2 className={styles.title}>Регистрация</h2>
+          <label>
+            <Field
+              className={styles.input}
+              name="firstName"
+              type="text"
+              placeholder="Введите ваше имя"
+            />
+            {errors.firstName && touched.firstName ? (
+              <p className={styles.error}>{errors.firstName}</p>
+            ) : null}
+          </label>
+          <label>
+            <Field
+              className={styles.input}
+              name="lastName"
+              type="text"
+              placeholder="Введите вашу фамилию"
+            />
+            {errors.lastName && touched.lastName ? (
+              <p className={styles.error}>{errors.lastName}</p>
+            ) : null}
+          </label>
           <label>
             <Field
               className={styles.input}
