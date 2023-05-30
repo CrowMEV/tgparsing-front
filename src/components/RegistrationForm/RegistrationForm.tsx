@@ -20,7 +20,7 @@ const RegistrationForm = () => {
     delete sendedData['passwordCheck'];
 
     try {
-      await dispatch(register(values)).unwrap();
+      await dispatch(register(sendedData)).unwrap();
     } catch (error) {
       console.error(error);
     }
@@ -32,8 +32,8 @@ const RegistrationForm = () => {
   return (
     <Formik
       initialValues={{
-        firstName: '',
-        lastName: '',
+        firstname: '',
+        lastname: '',
         email: '',
         password: '',
         passwordCheck: '',
@@ -47,23 +47,23 @@ const RegistrationForm = () => {
           <label>
             <Field
               className={styles.input}
-              name="firstName"
+              name="firstname"
               type="text"
               placeholder="Введите ваше имя"
             />
-            {errors.firstName && touched.firstName ? (
-              <p className={styles.error}>{errors.firstName}</p>
+            {errors.firstname && touched.firstname ? (
+              <p className={styles.error}>{errors.firstname}</p>
             ) : null}
           </label>
           <label>
             <Field
               className={styles.input}
-              name="lastName"
+              name="lastname"
               type="text"
               placeholder="Введите вашу фамилию"
             />
-            {errors.lastName && touched.lastName ? (
-              <p className={styles.error}>{errors.lastName}</p>
+            {errors.lastname && touched.lastname ? (
+              <p className={styles.error}>{errors.lastname}</p>
             ) : null}
           </label>
           <label>

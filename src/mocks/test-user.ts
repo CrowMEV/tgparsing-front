@@ -3,9 +3,13 @@ import { User } from '../types/user';
 export const users: User[] = [
   {
     id: 1,
-    firstName: 'James',
-    lastName: 'Bond',
+    firstname: 'James',
+    lastname: 'Bond',
     avatar: 'https://multiavatar.com/06cde7712cf55ae47b',
+    email: '',
+    is_active: true,
+    is_superuser: false,
+    is_verified: true,
     //TODO Убрать лишние моки
     balance: 2000,
     operations: [

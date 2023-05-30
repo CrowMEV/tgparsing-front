@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { getUser, login } from '../store/user-slice/apiActions';
+import { login } from '../store/user-slice/apiActions';
 import { LoginData } from '../types/auth';
 import { useAppDispatch, useAppSelector } from './redux';
 import { Routes } from '../router/routes';
@@ -13,9 +13,9 @@ export const useFetchBaseUserInfo = () => {
 
   const fetch = async (loginData: LoginData) => {
     try {
-      await dispatch(login(loginData)).unwrap();
-      const userPromise = dispatch(getUser()).unwrap();
-      const [user] = await Promise.all([userPromise]);
+      const user = await dispatch(login(loginData)).unwrap();
+      // const userPromise = dispatch(getUser()).unwrap();
+      // const [user] = await Promise.all([userPromise]);
       console.log(user);
       navigate(Routes.Home);
     } catch (error) {
