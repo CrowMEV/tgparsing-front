@@ -3,7 +3,7 @@ import type { AppStore } from '../store';
 // import { refresh } from '../store/user-slice/apiActions';
 // import { ApiRoutes } from '../store/user-slice/apiRoutes';
 
-export const BASE_URL = 'http://62.113.102.145/api';
+export const BASE_URL = 'https://api.tgparsing.ru';
 const REQUEST_TIME = 5000;
 let store: AppStore;
 
