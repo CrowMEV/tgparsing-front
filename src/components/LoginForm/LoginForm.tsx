@@ -7,17 +7,24 @@ import Loader from '../ui/loader/loader';
 import { useState } from 'react';
 import { LoginData } from '../../types/auth';
 import { ReactComponent as LoginIcon } from '../../assets/images/icons/login.svg';
-import { useFetchBaseUserInfo } from '../../hooks/useFetchBaseUserInfo';
+import { useAppDispatch } from '../../hooks/redux';
+import { login } from '../../store/user-slice/apiActions';
 
 const LoginForm = () => {
-  const { fetch } = useFetchBaseUserInfo();
+  const dispatch = useAppDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const submitHandler = (values: LoginData) => {
+  const submitHandler = async (values: LoginData) => {
     setIsSubmitting(true);
-    console.log(values);
-    fetch(values);
-    setTimeout(() => setIsSubmitting(false), 3000);
+
+    dispatch(login(values))
+      .unwrap()
+      .catch((error) => {
+        setErrorMessage(error.detail);
+      });
+
+    setIsSubmitting(false);
   };
 
   return (

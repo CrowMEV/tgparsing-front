@@ -6,15 +6,20 @@ import MailingPage from '../pages/Mailing/MailingPage';
 import ParsersPage from '../pages/Parsers/ParsersPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
+import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
 
 export const router = createBrowserRouter([
+  //TODO Убрать верхний path. Поменять Home на dashboard. Сделать отделный объект с path для Home.
   {
     path: Routes.Home,
-    element: <Layout />,
-    errorElement: <div>error</div>,
+    element: (
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
+    ),
     children: [
       {
-        path: '/',
+        path: Routes.Home,
         element: <MainPage />,
       },
       {
@@ -29,11 +34,19 @@ export const router = createBrowserRouter([
   },
   {
     path: Routes.Login,
-    element: <LoginPage />,
+    element: (
+      <ProtectedRoute isAuth={false}>
+        <LoginPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: Routes.Registration,
-    element: <RegistrationPage />,
+    element: (
+      <ProtectedRoute isAuth={false}>
+        <RegistrationPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '*',
