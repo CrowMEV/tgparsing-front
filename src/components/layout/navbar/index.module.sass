@@ -1,0 +1,74 @@
+@import "src/assets/styles/variables.sass"
+@import "src/assets/styles/mixins.sass"
+
+.nav
+  display: flex
+  width: 100%
+  padding: 30px 20px
+
+  font-size: 18px
+  color: $c-light-grey
+  text-align: center
+
+  background: $c-primary-grey
+
+  &__avatar
+    margin: 0.5rem auto 0.5rem
+    background: white
+    width: 40px
+    height: 40px
+    border-radius: 100px
+    border: 3px solid white
+    display: flex
+    align-items: center
+    justify-content: center
+
+    > img
+      width: 95%
+      height: 95%
+      border-radius: 100px
+
+.nav__links
+  display: flex
+  justify-content: space-between
+  column-gap: 8rem
+  width: 100%
+
+.nav__list
+  position: relative
+  align-self: center
+  display: flex
+  justify-content: space-between
+  align-items: center
+  width: 100%
+
+.nav__link
+  @include nav-link
+
+.nav__link_active
+  color: $c-primary-green
+
+.balance__title
+  font-size: 16px
+
+.balance__value
+  font-size: 24px
+
+.underline
+  position: absolute
+  display: block
+  bottom: 0
+  content: ""
+  height: 2px
+  width: 100%
+  background-color: $c-primary-green
+  transition: 0.3s all ease-out
+
+.nav__links__btn
+  @include green-button
+  > span
+    color: $c-primary-green
+  
+  &:hover
+    > span
+      color: $c-primary-green
