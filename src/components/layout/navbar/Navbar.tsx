@@ -1,24 +1,26 @@
 import { Link } from 'react-router-dom';
 import styles from './index.module.sass';
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import ReplenishmentModal from '../../ReplenishmentModal/ReplenishmentModal';
 import { useAppSelector } from '../../../hooks/redux';
 import { getCurrentUser } from '../../../store/user-process/selectors';
 import { Routes } from '../../../router/routes';
 import NavTabs from '../../ui/navTabs/navTabs';
+import { MenuCategory, MenuItem } from '../menu-items';
 
 interface PropTypes {
-  menuItems: { text: string; link: Routes }[];
-  currentPage: { text: string; link: Routes };
+  menuItems: { text: string; link: Routes; icon?: ReactElement }[];
+  currentPage: MenuItem;
 }
 
 const Navbar = ({ menuItems, currentPage }: PropTypes) => {
   const [isReplenishmentOpen, setIsReplenishmentOpen] = useState(false);
   const userInfo = useAppSelector(getCurrentUser);
 
-  const currentLinkIndex = menuItems.findIndex(
-    (item) => item.link === currentPage.link,
-  );
+  const currentLinkPosition =
+    currentPage.menuCategory === MenuCategory.Navbar
+      ? currentPage.position
+      : -1;
 
   return (
     <div className={styles.nav}>
@@ -28,15 +30,18 @@ const Navbar = ({ menuItems, currentPage }: PropTypes) => {
       />
       <nav className={styles.nav__links}>
         <div className={styles.nav__list}>
-          <NavTabs currentElementIndex={currentLinkIndex}>
+          <NavTabs currentElementIndex={currentLinkPosition}>
             {menuItems.map((item, index) => (
               <Link
                 to={item.link}
                 className={`${styles.nav__link} ${
-                  index === currentLinkIndex ? styles.nav__link_active : ''
+                  index === currentLinkPosition ? styles.nav__link_active : ''
                 }`}
                 key={item.text}
               >
+                {item.icon && (
+                  <div className={styles.nav__icon}>{item.icon}</div>
+                )}
                 <span>{item.text}</span>
               </Link>
             ))}
