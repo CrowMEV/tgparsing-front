@@ -1,0 +1,30 @@
+@import "/src/assets/styles/variables.sass"
+
+@mixin arrow
+  border: solid white
+  border-width: 0 3px 3px 0
+  display: inline-block
+  padding: 3px
+
+@mixin rightArrow
+  @include arrow
+  transform: rotate(-45deg)
+  -webkit-transform: rotate(-45deg)
+
+
+@mixin leftArrow
+  @include arrow
+  transform: rotate(135deg)
+  -webkit-transform: rotate(135deg)
+
+
+@mixin upArrow
+  @include arrow
+  transform: rotate(-135deg)
+  -webkit-transform: rotate(-135deg)
+
+
+@mixin downArrow
+  @include arrow
+  transform: rotate(45deg)
+  -webkit-transform: rotate(45deg)
