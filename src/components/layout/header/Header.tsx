@@ -1,73 +1,48 @@
-import { useState } from 'react';
 import styles from './index.module.sass';
-import { Link, useLocation } from 'react-router-dom';
-import { Routes } from '../../../router/routes';
-import { useAppSelector } from '../../../hooks/redux';
-import { getCurrentUser } from '../../../store/user-process/selectors';
-import ReplenishmentModal from '../../ReplenishmentModal/ReplenishmentModal';
+import { Link } from 'react-router-dom';
 import Notification from '../../ui/notification/Notification';
+import { Routes } from '../../../router/routes';
+import NavTabs from '../../ui/navTabs/navTabs';
+import { ReactElement } from 'react';
+import { MenuCategory, MenuItem } from '../menu-items';
 
-const NAV_ITEMS = [
-  { text: 'РАССЫЛКИ', link: Routes.Home },
-  { text: 'ПАРСЕРЫ', link: Routes.Parsers },
-];
+interface PropTypes {
+  menuItems: { text: string; link: Routes; icon?: ReactElement }[];
+  currentPage: MenuItem;
+}
 
-const Header = () => {
-  const { pathname } = useLocation();
-  const [isReplenishmentOpen, setIsReplenishmentOpen] = useState(false);
-  const userInfo = useAppSelector(getCurrentUser);
+const Header = ({ menuItems, currentPage }: PropTypes) => {
+  const currentLinkPosition =
+    currentPage.menuCategory === MenuCategory.Profile
+      ? currentPage.position
+      : -1;
 
   return (
     <header className={styles.header}>
-      <ReplenishmentModal
-        isOpen={isReplenishmentOpen}
-        handleClose={() => setIsReplenishmentOpen(false)}
-      />
       <div className={styles.header__blocks}>
-        <ul className={styles.header__buttons}>
-          {NAV_ITEMS.map((item) => (
-            <li key={item.text}>
+        <div className={styles.header__currentPage}>{currentPage.text}</div>
+        <div className={styles.header__links}>
+          <NavTabs currentElementIndex={currentLinkPosition}>
+            {menuItems.map((item, index) => (
               <Link
-                className={`${styles.header__link} ${
-                  item.link === pathname ? styles.header__link__active : ''
-                }`}
                 to={item.link}
+                className={`${styles.header__link} ${
+                  index === currentLinkPosition
+                    ? styles.header__link_active
+                    : ''
+                }`}
+                key={item.text}
               >
-                {item.text}
+                {item.icon && (
+                  <div className={styles.header__icon}>{item.icon}</div>
+                )}
+                <span>{item.text}</span>
               </Link>
-            </li>
-          ))}
-        </ul>
-        <ul className={styles.header__links}>
-          <li>
-            <span className="material-icons-outlined">description</span>
-            <Link to="/">Документы</Link>
-          </li>
-          <li>
-            <span className="material-icons-outlined">account_circle</span>
-            <Link to="/">Профиль</Link>
-          </li>
-          <li>
-            <span className="material-icons-outlined">monetization_on</span>
-            <Link to="/">Тарифы</Link>
-          </li>
-          <li className={styles.header__links__balance}>
-            <label>Ваш баланс:</label>
-            <label>{userInfo.balance} Р</label>
-          </li>
-          <li
-            className={styles.header__links__btn}
-            onClick={() => setIsReplenishmentOpen(true)}
-          >
-            <span className="material-icons-outlined">
-              account_balance_wallet
-            </span>
-            <button>Пополнить баланс</button>
-          </li>
-          <li>
-            <Notification count={4} />
-          </li>
-        </ul>
+            ))}
+          </NavTabs>
+          <button className={styles.header__link}>Уведомления</button>
+          <Notification count={4} />
+        </div>
       </div>
     </header>
   );
