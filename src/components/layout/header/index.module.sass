@@ -6,43 +6,45 @@
   &__buttons
     display: flex
 
-  &__link
-    @include button-link
-    @include transform-3
 
-  &__blocks
-    display: flex
-    justify-content: space-between
+.header__currentPage
+  font-size: 18px
 
-  &__links
-    display: flex
-    font-size: 12px
+.header__blocks
+  display: flex
+  align-items: center
+  justify-content: space-between
 
-    > li
-      justify-content: center
-      padding: 10px
-      align-items: center
-      display: flex
-      color: $c-light-grey
+.header__links
+  position: relative
+  display: flex
 
-      > span
-        font-size: 22px
-        padding: 0 3px
+.header__link
+  @include nav-link
+  
+  display: flex
+  justify-content: center
+  align-items: center
 
-    &__balance
-      display: block !important
+  padding: 10px
 
-      > label
-        display: block
+  font-size: 12px
+  color: $c-light-grey
 
-    &__btn
-      @include green-button
-      > button
-        color: $c-primary-green
+.header__icon
+  >svg
+    width: 30px
+    height: 30px
 
-      > span
-        color: $c-transparent-green
+.header__link_active
+  color: $c-primary-green
 
-      &:hover
-        > span
-          color: $c-primary-green
+.underline
+  position: absolute
+  display: block
+  bottom: 0
+  content: ""
+  height: 2px
+  width: 100%
+  background-color: $c-primary-green
+  transition: 0.3s all ease-out
