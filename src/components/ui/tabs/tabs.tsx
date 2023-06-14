@@ -8,7 +8,7 @@ interface TabsProps {
   setCurrentValue: (value: string) => void;
 }
 
-const Tabs: FC<TabsProps> = ({tabs, currentValue, setCurrentValue}) => {
+const Tabs: FC<TabsProps> = ({ tabs, currentValue, setCurrentValue }) => {
   return (
     <ul className={styles.toolsCategories}>
       {tabs.map((tab) => (
@@ -18,16 +18,14 @@ const Tabs: FC<TabsProps> = ({tabs, currentValue, setCurrentValue}) => {
           }`}
           onClick={() => setCurrentValue(tab.value)}
         >
-          {
-            tab.icon
-            ?
+          {tab.icon ? (
             <>
               <span className="material-icons">{tab.icon}</span>
-              <span className='visually-hidden'>{tab.title}</span>
+              <span className="visually-hidden">{tab.title}</span>
             </>
-            :
+          ) : (
             tab.title
-          }
+          )}
         </li>
       ))}
     </ul>

@@ -3,10 +3,10 @@ import styles from './toolItem.module.sass';
 import { ParsingTool } from '../../../types/parsing-tool';
 
 interface ToolItemProps {
-  tool: ParsingTool
+  tool: ParsingTool;
 }
 
-const ToolItem: FC<ToolItemProps> = ({tool}) => {
+const ToolItem: FC<ToolItemProps> = ({ tool }) => {
   return (
     <div className={styles.toolItem}>
       <div className={styles.toolCharacteristics}>
