@@ -12,4 +12,4 @@ jobs:
       - name: Install modules
         run: npm install
       - name: Run ESLint
-        run: Lint src/
+        run: ESLint src/
