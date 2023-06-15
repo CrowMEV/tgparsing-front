@@ -1,4 +1,4 @@
-name: Lint Front Code
+name: Test Frontend and Deploy
 
 on: 
   push:
@@ -13,3 +13,19 @@ jobs:
         run: npm install
       - name: Run ESLint
         run: npx eslint ./src
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    needs: Lint
+    steps:
+      - name: Connect and Deploy
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd ${{ secrets.SSH_PROJECT_FOLDER }}
+            git switch main
+            git pull
+            docker compose up -d --build --no-deps frontend
