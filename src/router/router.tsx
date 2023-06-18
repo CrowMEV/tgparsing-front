@@ -1,6 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Routes } from './routes';
 import Layout from '../components/layout/Layout';
+import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
+
 import MainPage from '../pages/Home/MainPage';
 import MailingPage from '../pages/Mailing/MailingPage';
 import ParsersPage from '../pages/Parsers/ParsersPage';
@@ -14,13 +16,17 @@ import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import DocumentsPage from '../pages/DocumentsPage/DocumentsPage';
 
 export const router = createBrowserRouter([
+  //TODO Убрать верхний path. Поменять Home на dashboard. Сделать отделный объект с path для Home.
   {
     path: Routes.Home,
-    element: <Layout />,
-    errorElement: <div>error</div>,
+    element: (
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
+    ),
     children: [
       {
-        path: '/',
+        path: Routes.Home,
         element: <MainPage />,
       },
       {
@@ -63,11 +69,19 @@ export const router = createBrowserRouter([
   },
   {
     path: Routes.Login,
-    element: <LoginPage />,
+    element: (
+      <ProtectedRoute isAuth={false}>
+        <LoginPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: Routes.Registration,
-    element: <RegistrationPage />,
+    element: (
+      <ProtectedRoute isAuth={false}>
+        <RegistrationPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '*',

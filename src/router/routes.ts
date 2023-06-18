@@ -4,6 +4,7 @@ export enum Routes {
   Parsers = '/parsers',
   Login = '/login',
   Registration = '/registration',
+  Dashboard = '/dashboard',
   Base = '/base',
   Finance = '/finance',
   Reports = '/reports',
@@ -11,4 +12,5 @@ export enum Routes {
   Tariffs = '/tariffs',
   Documents = '/documents',
   Profile = '/profile',
+
 }

@@ -13,20 +13,20 @@ import { register } from '../../store/user-slice/apiActions';
 const RegistrationForm = () => {
   const dispatch = useAppDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const submitHandler = async (values: RegistrationData) => {
     setIsSubmitting(true);
     const sendedData = { ...values };
     delete sendedData['passwordCheck'];
 
-    try {
-      await dispatch(register(sendedData)).unwrap();
-    } catch (error) {
-      console.error(error);
-    }
+    dispatch(register(sendedData))
+      .unwrap()
+      .catch((error) => {
+        setErrorMessage(error);
+      });
 
-    console.log(sendedData);
-    setTimeout(() => setIsSubmitting(false), 3000);
+    setIsSubmitting(false);
   };
 
   return (
