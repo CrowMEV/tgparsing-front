@@ -1,0 +1,62 @@
+@import '../../../assets/styles/mixins.sass'
+  
+.dropdownContainer
+  position: relative
+  max-width: 386px
+  outline: 1px solid $c-additional
+  border-radius: 4px
+
+  font-family: 'Roboto', sans-serif
+  font-size: 16px
+  font-weight: 400
+
+  &.disabled
+    outline-color: $c-disabled
+    color: $c-disabled
+    user-select: none
+
+  &:hover:not(.disabled)
+    outline-width: 2px
+
+    .dropdownHeader::before
+      border-color: white !important
+    
+
+.dropdownHeader
+  max-height: 56px
+  padding: 16px 8px
+  display: flex
+  position: relative
+
+  &::before
+    @include downArrow
+    content: ''
+    position: absolute
+    top: calc(50% - 3px)
+    right: 15px
+    transition: all .1s
+    border-color: $c-disabled
+
+  &:not(.dropdownContainer.disabled .dropdownHeader)::before
+    border-color: $c-additional
+
+
+  &.open:not(.dropdownContainer.disabled .dropdownHeader)::before
+    @include upArrow
+    border-color: $c-additional
+
+.dropdown
+  position: absolute
+  z-index: 1
+  width: 100%
+  overflow: hidden
+  border-radius: 0 0 8px 8px
+  background-color: $c-secondary
+
+.dropdownItem
+  padding: 12px
+
+  transition: background-color .1s
+
+  &:hover
+    background-color: $c-additional
