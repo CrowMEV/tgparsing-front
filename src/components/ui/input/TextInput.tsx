@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC } from 'react';
+import React, { CSSProperties, FC, useRef } from 'react';
 import styles from './textInput.module.sass';
 
 type InputProps = {
@@ -75,13 +75,19 @@ const TextInput = ({
   startIcon,
   endIcon,
 }: InputProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   return (
     <div style={style} className={styles.inputContainer}>
-      <div className={styles.inputWrapper}>
+      <div
+        className={`${styles.inputWrapper} ${
+          errorMessage.length ? styles.error : ''
+        } ${temporaryDisabled ? styles.temporaryDisabled : ''}`}
+        onClick={() => inputRef && inputRef.current?.focus()}
+      >
         <input
-          className={`${styles.input} ${errorMessage.length && styles.error} ${
-            temporaryDisabled && styles.temporaryDisabled
-          }`}
+          className={`${styles.input}`}
+          ref={inputRef}
           type={type}
           defaultValue={defaultValue}
           value={value}
@@ -93,6 +99,7 @@ const TextInput = ({
           onChange={(e) => onChange?.(e)}
           onBlur={onBlur}
           onFocus={onFocus}
+          placeholder=" "
         />
         <Icon
           isError={Boolean(errorMessage.length)}
