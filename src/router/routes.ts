@@ -12,5 +12,4 @@ export enum Routes {
   Tariffs = '/tariffs',
   Documents = '/documents',
   Profile = '/profile',
-
 }
