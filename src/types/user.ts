@@ -1,6 +1,3 @@
-import { Card } from './card';
-import { Operation } from './operation';
-
 //TODO Перечисление ролей
 interface Role {
   name: string;
@@ -18,8 +15,4 @@ export interface User {
   is_superuser: boolean;
   is_verified: boolean;
   role: Role;
-  //TODO: Убрать лишнее
-  balance: number;
-  cards: Card[];
-  operations: Operation[];
 }
