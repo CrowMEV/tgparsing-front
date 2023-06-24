@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useAppSelector } from '../../../hooks/redux';
-import { getCurrentUser } from '../../../store/user-process/selectors';
 
 import styles from './replenishmentBlock.module.sass';
 import { api } from '../../../services/api';
@@ -9,11 +8,15 @@ import Radio from '../../ui/radio/Radio';
 const replenishmentWays = ['Банковская карта', 'Онлайн кошелек'];
 
 const ReplenishmentBlock = () => {
-  const userInfo = useAppSelector(getCurrentUser);
+  const userInfo = useAppSelector((state) => state.UserData.user);
   const [amountReplenishment, setAmountReplenishment] = useState('');
   const [activeWay, setActiveWay] = useState(replenishmentWays[0]);
 
   const submitButtonHandler = async () => {
+    if (!userInfo) {
+      return;
+    }
+
     try {
       await api.post('/profile', {
         userId: userInfo.id,
@@ -28,7 +31,7 @@ const ReplenishmentBlock = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.balance}>
-        <label>{userInfo.balance} ₽</label>
+        <label>2000 ₽</label>
         <span>Текущий баланс</span>
       </div>
       <input

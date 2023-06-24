@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 import styles from './index.module.sass';
 import { ReactElement, useState } from 'react';
 import ReplenishmentModal from '../../ReplenishmentModal/ReplenishmentModal';
-import { useAppSelector } from '../../../hooks/redux';
-import { getCurrentUser } from '../../../store/user-process/selectors';
 import { Routes } from '../../../router/routes';
 import NavTabs from '../../ui/navTabs/navTabs';
 import { MenuCategory, MenuItem } from '../menu-items';
@@ -15,7 +13,6 @@ interface PropTypes {
 
 const Navbar = ({ menuItems, currentPage }: PropTypes) => {
   const [isReplenishmentOpen, setIsReplenishmentOpen] = useState(false);
-  const userInfo = useAppSelector(getCurrentUser);
 
   const currentLinkPosition =
     currentPage.menuCategory === MenuCategory.Navbar
@@ -50,7 +47,7 @@ const Navbar = ({ menuItems, currentPage }: PropTypes) => {
         <div>
           <div className={styles.nav__links__balance}>
             <p className={styles.balance__title}>Ваш баланс:</p>
-            <p className={styles.balance__value}>{userInfo.balance} &#8381;</p>
+            <p className={styles.balance__value}>2000 &#8381;</p>
           </div>
           <button
             className={styles.nav__links__btn}
