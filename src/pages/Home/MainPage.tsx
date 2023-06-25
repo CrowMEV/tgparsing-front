@@ -1,19 +1,17 @@
 import styles from './index.module.sass';
-import Mailing from './MailingBlock/Mailing';
-import History from './HistoryBlock/History';
-import { useAppDispatch } from '../../hooks/redux';
-import { logout } from '../../store/user-slice/apiActions';
-import { historyCardMock } from '../../mocks/historyCard.mock';
-const MainPage = () => {
-  const disptach = useAppDispatch();
+import CompletedTasks from '../../components/CompletedTasks/CompletedTasks';
+import ParserBar from '../../components/ParserBar/ParserBar';
+import Tasks from '../../components/Tasks/Tasks';
 
+const MainPage = () => {
   return (
-    <main>
-      <button onClick={() => disptach(logout())}>Выйти</button>
-      <aside className={styles.info}>
-        <Mailing />
-        <History operations={historyCardMock} />
-      </aside>
+    <main className={styles.wrapper}>
+      <h2 className={styles.title}>Текущее состояние тарифа</h2>
+      <ParserBar />
+      <div className={styles.info}>
+        <Tasks />
+        <CompletedTasks />
+      </div>
     </main>
   );
 };

@@ -4,8 +4,6 @@ export interface LoginData {
 }
 
 export interface RegistrationData {
-  firstname: string;
-  lastname: string;
   email: string;
   password: string;
   passwordCheck?: string;

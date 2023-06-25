@@ -14,6 +14,7 @@ import ReportPage from '../pages/ReportPage/ReportPage';
 import InvitingPage from '../pages/InvitingPage/InvitingPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import DocumentsPage from '../pages/DocumentsPage/DocumentsPage';
+import AuthLayout from '../components/auth-layout/AuthLayout';
 
 export const router = createBrowserRouter([
   //TODO Убрать верхний path. Поменять Home на dashboard. Сделать отделный объект с path для Home.
@@ -68,20 +69,21 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: Routes.Login,
     element: (
       <ProtectedRoute isAuth={false}>
-        <LoginPage />
+        <AuthLayout />
       </ProtectedRoute>
     ),
-  },
-  {
-    path: Routes.Registration,
-    element: (
-      <ProtectedRoute isAuth={false}>
-        <RegistrationPage />
-      </ProtectedRoute>
-    ),
+    children: [
+      {
+        path: Routes.Login,
+        element: <LoginPage />,
+      },
+      {
+        path: Routes.Registration,
+        element: <RegistrationPage />,
+      },
+    ],
   },
   {
     path: '*',
