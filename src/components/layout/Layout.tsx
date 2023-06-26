@@ -17,7 +17,6 @@ const Layout: FC = () => {
     <div className={styles.wrapper}>
       <Header menuItems={NAV_ITEMS} currentPage={currentPage} />
       <Navbar menuItems={MENU_ITEMS} currentPage={currentPage} />
-      <svg></svg>
       <Outlet />
     </div>
   );

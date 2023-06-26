@@ -1,4 +1,5 @@
 @import "/src/assets/styles/mixins.sass"
+@import "/src/assets/styles/variables.sass"
   
 .loginForm
   @include form
@@ -14,15 +15,4 @@
 
 .error
   @include error
-
-.loginButton
-  @include enterButton
-  
-  &:disabled
-    &:hover
-      svg
-        color: $c-light-grey
-
-.registrationLink
-  @include link
     

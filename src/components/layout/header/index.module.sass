@@ -3,48 +3,71 @@
 
 .header
   width: 100%
+  padding-top: 25px
   &__buttons
     display: flex
 
+.header__logoWrapper
+  margin-right: 54px
 
 .header__currentPage
+  font-family: "Toxigenesis", sans-serif
   font-size: 18px
+  font-weight: 700
+  color: #ffffff
+
+  margin-right: auto
 
 .header__blocks
   display: flex
   align-items: center
-  justify-content: space-between
 
 .header__links
   position: relative
   display: flex
 
 .header__link
-  @include nav-link
-  
+  display: flex
+  justify-content: center
+  align-items: center
+  column-gap: 8px
+
+  padding: 10px
+
+  font-size: 18px
+  font-weight: 500
+  color: #ffffff
+
+.header__link:hover
+  opacity: 0.8
+
+.header__icon
   display: flex
   justify-content: center
   align-items: center
 
-  padding: 10px
+  background-color: #ffffff
 
-  font-size: 12px
-  color: $c-light-grey
+  width: 36px
+  height: 36px
 
-.header__icon
+  border-radius: 50%
+
   >svg
-    width: 30px
-    height: 30px
+    width: 28px
+    height: 28px
+    color: $c-main
 
-.header__link_active
-  color: $c-primary-green
+.header__link_logout
+  margin-left: 80px
 
-.underline
-  position: absolute
-  display: block
-  bottom: 0
-  content: ""
-  height: 2px
-  width: 100%
-  background-color: $c-primary-green
-  transition: 0.3s all ease-out
+.header__icon_logout
+
+  >svg
+    color: $c-accent
+
+.header__link_logout:hover
+  opacity: 1
+
+  .header__icon_logout
+    box-shadow: 0 0 20px 5px #ff000e

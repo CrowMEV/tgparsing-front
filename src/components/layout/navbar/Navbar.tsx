@@ -5,6 +5,7 @@ import ReplenishmentModal from '../../ReplenishmentModal/ReplenishmentModal';
 import { Routes } from '../../../router/routes';
 import NavTabs from '../../ui/navTabs/navTabs';
 import { MenuCategory, MenuItem } from '../menu-items';
+import Button from '../../ui/button/Button';
 
 interface PropTypes {
   menuItems: { text: string; link: Routes; icon?: ReactElement }[];
@@ -27,7 +28,10 @@ const Navbar = ({ menuItems, currentPage }: PropTypes) => {
       />
       <nav className={styles.nav__links}>
         <div className={styles.nav__list}>
-          <NavTabs currentElementIndex={currentLinkPosition}>
+          <NavTabs
+            currentElementIndex={currentLinkPosition}
+            underlineClass={styles.nav__underline}
+          >
             {menuItems.map((item, index) => (
               <Link
                 to={item.link}
@@ -49,12 +53,9 @@ const Navbar = ({ menuItems, currentPage }: PropTypes) => {
             <p className={styles.balance__title}>Ваш баланс:</p>
             <p className={styles.balance__value}>2000 &#8381;</p>
           </div>
-          <button
-            className={styles.nav__links__btn}
-            onClick={() => setIsReplenishmentOpen(true)}
-          >
-            <span>Пополнить баланс</span>
-          </button>
+          <Button variant="small" onClick={() => setIsReplenishmentOpen(true)}>
+            Пополнить
+          </Button>
         </div>
       </nav>
     </div>

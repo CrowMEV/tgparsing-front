@@ -1,0 +1,55 @@
+@import "/src/assets/styles/variables.sass"
+@import "src/assets/styles/mixins.sass"
+  
+.toolItem
+  display: grid
+  grid-template-areas: "name name" "characteristics options"
+  justify-content: space-between
+  align-items: center
+  row-gap: 5px
+
+  padding-bottom: 10px
+
+  font-size: 16px
+  border-bottom: 1px solid $c-support-text
+
+.toolItem
+  margin-bottom: 12px
+
+.toolName
+  grid-area: name
+  display: flex
+  align-items: center
+  column-gap: 5px
+
+.toolCharacteristics
+  grid-area: characteristics
+  display: flex
+  column-gap: 30px
+
+  span
+    font-size: 14px
+
+.toolsOptions
+  grid-area: options
+  align-self: flex-end
+  display: flex
+  align-items: center
+  column-gap: 15px
+
+.toolDate,
+.toolMailings,
+.toolDuration
+  display: flex
+  align-items: center
+  column-gap: 5px
+
+  color: #bbb6b6
+
+  svg
+    color: #ffffff
+
+.button
+  @include tool-button
+  display: flex
+  align-items: center

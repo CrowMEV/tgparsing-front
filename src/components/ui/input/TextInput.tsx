@@ -1,27 +1,16 @@
 import React, { CSSProperties, FC, useRef } from 'react';
 import styles from './textInput.module.sass';
 
-type InputProps = {
-  type: React.InputHTMLAttributes<unknown>['type'];
-  value?: string;
-  defaultValue?: string;
-  placeholder?: string;
-  autofocus?: boolean;
-  disabled?: boolean;
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   temporaryDisabled?: boolean;
-  required?: boolean;
-  maxLength?: number;
-  minLength?: number;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => any;
-  onBlur?: React.HTMLAttributes<HTMLDivElement>['onBlur'];
-  onFocus?: React.HTMLAttributes<HTMLDivElement>['onFocus'];
 
   style?: CSSProperties;
+  placeholderStyle?: CSSProperties;
   errorMessage?: string;
   hintMessage?: string;
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
-};
+}
 
 const Icon: FC<{
   isError: boolean;
@@ -59,7 +48,8 @@ const TextInput = ({
   value,
   defaultValue,
   placeholder,
-  autofocus = false,
+  name,
+  autoFocus = false,
   disabled = false,
   temporaryDisabled = false,
   required = false,
@@ -70,6 +60,7 @@ const TextInput = ({
   onFocus,
 
   style,
+  placeholderStyle,
   errorMessage = '',
   hintMessage = '',
   startIcon,
@@ -89,10 +80,11 @@ const TextInput = ({
           className={`${styles.input}`}
           ref={inputRef}
           type={type}
+          name={name}
           defaultValue={defaultValue}
           value={value}
           disabled={temporaryDisabled || disabled}
-          autoFocus={autofocus}
+          autoFocus={autoFocus}
           required={required}
           minLength={minLength}
           maxLength={maxLength}
@@ -106,7 +98,11 @@ const TextInput = ({
           startIcon={startIcon}
           endIcon={endIcon}
         />
-        {placeholder && <div className={styles.placeholder}>{placeholder}</div>}
+        {placeholder && (
+          <div className={styles.placeholder} style={placeholderStyle}>
+            {placeholder}
+          </div>
+        )}
       </div>
       <SupportText errorMessage={errorMessage} hintMessage={hintMessage} />
     </div>

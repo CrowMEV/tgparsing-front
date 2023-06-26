@@ -1,19 +1,23 @@
-import { Link } from 'react-router-dom';
-import { Routes } from '../../router/routes';
 import styles from './registration-form.module.sass';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import { registrationSchema } from './validation-schema';
 import Loader from '../ui/loader/loader';
 import { useState } from 'react';
 import { RegistrationData } from '../../types/auth';
-import { ReactComponent as RegistrationIcon } from '../../assets/images/icons/registration.svg';
 import { useAppDispatch } from '../../hooks/redux';
 import { register } from '../../store/user-slice/apiActions';
+import TextInput from '../ui/input/TextInput';
+import Button from '../ui/button/Button';
+import { ReactComponent as HideIcon } from '../../assets/images/icons/closed-eye.svg';
+import { ReactComponent as ShowIcon } from '../../assets/images/icons/opened-eye.svg';
+import Сonfidentiality from '../../components/confidentiality/Сonfidentiality';
 
 const RegistrationForm = () => {
   const dispatch = useAppDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [passwordIsShown, setPasswordIsShown] = useState(false);
+  const [checkPasswordIsShown, setCheckPasswordIsShown] = useState(false);
 
   const submitHandler = async (values: RegistrationData) => {
     setIsSubmitting(true);
@@ -22,18 +26,20 @@ const RegistrationForm = () => {
 
     dispatch(register(sendedData))
       .unwrap()
+      .then(() => {
+        setErrorMessage('');
+      })
       .catch((error) => {
-        setErrorMessage(error);
+        setErrorMessage('error');
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
-
-    setIsSubmitting(false);
   };
 
   return (
     <Formik
       initialValues={{
-        firstname: '',
-        lastname: '',
         email: '',
         password: '',
         passwordCheck: '',
@@ -41,81 +47,94 @@ const RegistrationForm = () => {
       validationSchema={registrationSchema}
       onSubmit={submitHandler}
     >
-      {({ errors, touched, isValid, dirty }) => (
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        isValid,
+        dirty,
+      }) => (
         <Form className={styles.registrationForm}>
           <h2 className={styles.title}>Регистрация</h2>
           <label>
-            <Field
-              className={styles.input}
-              name="firstname"
-              type="text"
-              placeholder="Введите ваше имя"
-            />
-            {errors.firstname && touched.firstname ? (
-              <p className={styles.error}>{errors.firstname}</p>
-            ) : null}
-          </label>
-          <label>
-            <Field
-              className={styles.input}
-              name="lastname"
-              type="text"
-              placeholder="Введите вашу фамилию"
-            />
-            {errors.lastname && touched.lastname ? (
-              <p className={styles.error}>{errors.lastname}</p>
-            ) : null}
-          </label>
-          <label>
-            <Field
-              className={styles.input}
+            <TextInput
               name="email"
               type="email"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="Введите ваш email"
+              placeholderStyle={{ backgroundColor: '#2B3243' }}
+              errorMessage={errors.email && touched.email ? errors.email : ''}
             />
-            {errors.email && touched.email ? (
-              <p className={styles.error}>{errors.email}</p>
-            ) : null}
           </label>
           <label>
-            <Field
+            <TextInput
               name="password"
-              className={styles.input}
-              type="password"
-              placeholder="Введите пароль"
+              type={passwordIsShown ? 'text' : 'password'}
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder="Придумайте пароль"
+              placeholderStyle={{ backgroundColor: '#2B3243' }}
+              errorMessage={
+                errors.password && touched.password ? errors.password : ''
+              }
+              endIcon={
+                passwordIsShown ? (
+                  <ShowIcon
+                    onClick={() => setPasswordIsShown(!passwordIsShown)}
+                  />
+                ) : (
+                  <HideIcon
+                    onClick={() => setPasswordIsShown(!passwordIsShown)}
+                  />
+                )
+              }
             />
-            {errors.password && touched.password ? (
-              <p className={styles.error}>{errors.password}</p>
-            ) : null}
           </label>
           <label>
-            <Field
+            <TextInput
               name="passwordCheck"
-              className={styles.input}
-              type="password"
-              placeholder="Введите пароль еще раз"
+              type={checkPasswordIsShown ? 'text' : 'password'}
+              value={values.passwordCheck}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder="Повторите пароль"
+              placeholderStyle={{ backgroundColor: '#2B3243' }}
+              errorMessage={
+                errors.passwordCheck && touched.passwordCheck
+                  ? errors.passwordCheck
+                  : ''
+              }
+              endIcon={
+                checkPasswordIsShown ? (
+                  <ShowIcon
+                    onClick={() =>
+                      setCheckPasswordIsShown(!checkPasswordIsShown)
+                    }
+                  />
+                ) : (
+                  <HideIcon
+                    onClick={() =>
+                      setCheckPasswordIsShown(!checkPasswordIsShown)
+                    }
+                  />
+                )
+              }
             />
-            {errors.passwordCheck && touched.passwordCheck ? (
-              <p className={styles.error}>{errors.passwordCheck}</p>
-            ) : null}
           </label>
-          <button
-            className={styles.registrationButton}
+          <Button
+            variant="accent"
             type="submit"
             disabled={!(isValid && dirty) || isSubmitting}
           >
-            {isSubmitting ? (
-              <Loader width={24} height={24} />
-            ) : (
-              <>
-                Зарегистрироваться
-                <RegistrationIcon />
-              </>
-            )}
-          </button>
-          <Link className={styles.loginLink} to={Routes.Login}>
-            Войти
-          </Link>
+            {isSubmitting ? <Loader width={24} height={24} /> : <>Продолжить</>}
+          </Button>
+          {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+          <Сonfidentiality />
         </Form>
       )}
     </Formik>

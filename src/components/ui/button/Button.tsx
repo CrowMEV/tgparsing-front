@@ -3,24 +3,29 @@ import styles from './Button.module.sass';
 
 const VARIANTS = ['small', 'accent', 'additional'] as const;
 
-type ButtonProps = {
-  children: string;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: string | JSX.Element;
   variant: (typeof VARIANTS)[number];
-  disabled?: boolean;
   style?: CSSProperties;
-};
+}
 
 const Button = ({
   children,
+  type = 'button',
+  onClick,
   variant,
   disabled = false,
   style = {},
+  ...rest
 }: ButtonProps) => {
   return (
     <button
+      type={type}
       style={style}
       disabled={disabled}
       className={`${styles.button} ${styles[variant]}`}
+      onClick={onClick}
+      {...rest}
     >
       <span className={styles.innerText}>{children}</span>
     </button>

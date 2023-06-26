@@ -58,7 +58,7 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     position: 2,
-    text: 'Создать рассылку',
+    text: 'Рассылка',
     link: Routes.Mailing,
     icon: <MailingIcon />,
     menuCategory: MenuCategory.Navbar,

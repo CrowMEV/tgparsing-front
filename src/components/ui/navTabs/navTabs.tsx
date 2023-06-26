@@ -4,9 +4,14 @@ import styles from './navTabs.module.sass';
 interface PropTypes {
   children: ReactElement[];
   currentElementIndex: number;
+  underlineClass?: string;
 }
 
-const NavTabs = ({ children, currentElementIndex }: PropTypes) => {
+const NavTabs = ({
+  children,
+  currentElementIndex,
+  underlineClass,
+}: PropTypes) => {
   const tabsRef = useRef<HTMLDivElement[] | null[]>([]);
 
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState(0);
@@ -19,6 +24,10 @@ const NavTabs = ({ children, currentElementIndex }: PropTypes) => {
       setTabUnderlineWidth(currentTab?.clientWidth ?? 0);
     }
     setPosition();
+
+    window.addEventListener('resize', setPosition);
+
+    return () => window.removeEventListener('resize', setPosition);
   }, [currentElementIndex]);
 
   let startKey = 0;
@@ -30,10 +39,12 @@ const NavTabs = ({ children, currentElementIndex }: PropTypes) => {
           {child}
         </div>
       ))}
-      <span
-        className={styles.underline}
-        style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
-      />
+      {currentElementIndex >= 0 && (
+        <span
+          className={`${styles.underline} ${underlineClass}`}
+          style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
+        />
+      )}
     </>
   );
 };

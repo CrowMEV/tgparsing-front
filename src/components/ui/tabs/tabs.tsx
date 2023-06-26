@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Tab } from '../../../types/tab';
+import { Tab } from '../../CompletedTasks/tabs';
 import styles from './tabs.module.sass';
 
 interface TabsProps {
@@ -16,15 +16,16 @@ const Tabs: FC<TabsProps> = ({ tabs, currentValue, setCurrentValue }) => {
           className={`${styles.toolsCategory} ${
             tab.value === currentValue ? styles.toolsCategory__active : ''
           }`}
+          key={tab.title}
           onClick={() => setCurrentValue(tab.value)}
         >
           {tab.icon ? (
             <>
-              <span className="material-icons">{tab.icon}</span>
+              {tab.icon}
               <span className="visually-hidden">{tab.title}</span>
             </>
           ) : (
-            tab.title
+            <span>{tab.title}</span>
           )}
         </li>
       ))}
