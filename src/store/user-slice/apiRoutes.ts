@@ -1,5 +1,5 @@
 export enum ApiRoutes {
-  Register = '/user/register',
+  Register = '/user/',
   Login = '/user/login',
   Logout = '/user/logout',
   Refresh = '/user/refresh',
