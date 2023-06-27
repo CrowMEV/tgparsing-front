@@ -67,13 +67,17 @@ const TextInput = ({
   endIcon,
 }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const inputWrapperRef = useRef<HTMLInputElement>(null);
 
   return (
     <div style={style} className={styles.inputContainer}>
       <div
+        ref={inputWrapperRef}
         className={`${styles.inputWrapper} ${
           errorMessage.length ? styles.error : ''
-        } ${temporaryDisabled ? styles.temporaryDisabled : ''}`}
+        } ${temporaryDisabled ? styles.temporaryDisabled : ''} ${
+          disabled ? styles.disabled : ''
+        }`}
         onClick={() => inputRef && inputRef.current?.focus()}
       >
         <input
@@ -89,8 +93,14 @@ const TextInput = ({
           minLength={minLength}
           maxLength={maxLength}
           onChange={(e) => onChange?.(e)}
-          onBlur={onBlur}
-          onFocus={onFocus}
+          onBlur={(e) => {
+            inputWrapperRef.current?.classList.remove(styles.focus);
+            onBlur?.(e);
+          }}
+          onFocus={(e) => {
+            inputWrapperRef.current?.classList.add(styles.focus);
+            onFocus?.(e);
+          }}
           placeholder=" "
         />
         <Icon
