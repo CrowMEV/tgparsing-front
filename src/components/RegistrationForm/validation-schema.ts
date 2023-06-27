@@ -1,4 +1,5 @@
 import { object, ref, string } from 'yup';
+import { PASS_REGEX } from '../../consts/consts';
 
 export const registrationSchema = object({
   email: string()
@@ -7,7 +8,7 @@ export const registrationSchema = object({
   password: string()
     .required('Обязательное поле')
     .matches(
-      /([0-9]+\S*[A-Z]+|[A-Z]+\S*[0-9]+)\S*([!"`'#%&,:;<>=@{}~$()*+/\\?[\]^|]+)/,
+      PASS_REGEX,
       'Пароль должен содержать в себе заглавную букву, спец. символ и цифру',
     )
     .min(8, 'Пароль должен содержать не менее 8 символов'),

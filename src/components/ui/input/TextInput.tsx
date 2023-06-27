@@ -59,6 +59,7 @@ const TextInput = ({
   onBlur,
   onFocus,
 
+  className,
   style,
   placeholderStyle,
   errorMessage = '',
@@ -70,7 +71,7 @@ const TextInput = ({
   const inputWrapperRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div style={style} className={styles.inputContainer}>
+    <div style={style} className={`${styles.inputContainer} ${className}`}>
       <div
         ref={inputWrapperRef}
         className={`${styles.inputWrapper} ${
