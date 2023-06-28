@@ -15,11 +15,11 @@ import InvitingPage from '../pages/InvitingPage/InvitingPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import DocumentsPage from '../pages/DocumentsPage/DocumentsPage';
 import AuthLayout from '../components/auth-layout/AuthLayout';
+import StartPage from '../pages/StartPage/StartPage';
 
 export const router = createBrowserRouter([
   //TODO Убрать верхний path. Поменять Home на dashboard. Сделать отделный объект с path для Home.
   {
-    path: Routes.Home,
     element: (
       <ProtectedRoute>
         <Layout />
@@ -27,8 +27,9 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: Routes.Home,
+        path: Routes.Dashboard,
         element: <MainPage />,
+        index: true,
       },
       {
         path: Routes.Mailing,
@@ -88,5 +89,13 @@ export const router = createBrowserRouter([
   {
     path: '*',
     element: <div>404</div>,
+  },
+  {
+    element: (
+      <ProtectedRoute isAuth={false}>
+        <StartPage />
+      </ProtectedRoute>
+    ),
+    path: Routes.Home,
   },
 ]);

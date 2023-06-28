@@ -32,7 +32,7 @@ const ProtectedRoute = ({ children, isAuth = true }: ProtectedRouteProps) => {
     return <Navigate to={Routes.Login} replace />;
   } else if (!isAuth && authStatus !== AuthorizationStatus.NoAuth) {
     //TODO Редирект на dashboard
-    return <Navigate to={Routes.Home} replace />;
+    return <Navigate to={Routes.Dashboard} replace />;
   }
 
   return children;

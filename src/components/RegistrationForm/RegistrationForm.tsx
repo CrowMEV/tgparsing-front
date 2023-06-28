@@ -11,8 +11,11 @@ import Button from '../ui/button/Button';
 import { ReactComponent as HideIcon } from '../../assets/images/icons/closed-eye.svg';
 import { ReactComponent as ShowIcon } from '../../assets/images/icons/opened-eye.svg';
 import Сonfidentiality from '../../components/confidentiality/Сonfidentiality';
+import { useNavigate } from 'react-router-dom';
+import { Routes } from '../../router/routes';
 
 const RegistrationForm = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -28,9 +31,10 @@ const RegistrationForm = () => {
       .unwrap()
       .then(() => {
         setErrorMessage('');
+        navigate(Routes.Login);
       })
       .catch((error) => {
-        setErrorMessage('error');
+        setErrorMessage(error.detail);
       })
       .finally(() => {
         setIsSubmitting(false);
