@@ -64,7 +64,7 @@ const Header = ({ menuItems, currentPage }: PropTypes) => {
             >
               <PowerIcon />
             </div>
-            <span className="visually-hidden">Выйти</span>
+            <span>Выйти</span>
           </button>
         </div>
       </div>

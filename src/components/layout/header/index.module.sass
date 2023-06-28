@@ -58,10 +58,8 @@
     height: 28px
     color: $c-main
 
-.header__link_logout
-  margin-left: 80px
-
 .header__icon_logout
+  transition: all 0.15s ease-in
 
   >svg
     color: $c-accent
@@ -69,5 +67,11 @@
 .header__link_logout:hover
   opacity: 1
 
+  >span
+    color: $c-accent
+
   .header__icon_logout
-    box-shadow: 0 0 20px 5px #ff000e
+    background-color: $c-accent
+
+    >svg
+      color: #ffffff

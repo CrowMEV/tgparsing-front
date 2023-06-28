@@ -10,6 +10,7 @@ import Button from '../ui/button/Button';
 import TextInput from '../ui/input/TextInput';
 import { ReactComponent as HideIcon } from '../../assets/images/icons/closed-eye.svg';
 import { ReactComponent as ShowIcon } from '../../assets/images/icons/opened-eye.svg';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();
@@ -86,7 +87,11 @@ const LoginForm = () => {
                 )
               }
             />
+            <Link className={styles.resetPasswordLink} to="/">
+              Забыли пароль?
+            </Link>
           </label>
+          {errorMessage && <p className={styles.error}>{errorMessage}</p>}
           <Button
             type="submit"
             disabled={!(isValid && dirty) || isSubmitting}
@@ -94,7 +99,6 @@ const LoginForm = () => {
           >
             {isSubmitting ? <Loader width={24} height={24} /> : <>Войти</>}
           </Button>
-          {errorMessage && <p className={styles.error}>{errorMessage}</p>}
         </Form>
       )}
     </Formik>

@@ -3,7 +3,10 @@ import { object, ref, string } from 'yup';
 export const registrationSchema = object({
   email: string()
     .required('Обязательное поле')
-    .email('Некорректный адрес электронной почты'),
+    .matches(
+      /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+      'Некорректный адрес электронной почты',
+    ),
   password: string()
     .required('Обязательное поле')
     .matches(
