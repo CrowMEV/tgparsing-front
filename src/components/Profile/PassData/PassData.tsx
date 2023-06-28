@@ -37,6 +37,7 @@ const PassData = () => {
       {({ errors, touched, handleChange, handleBlur, dirty }) => (
         <Form className={sharedStyles.column}>
           <TextInput
+            autoComplete="new-password"
             name="currentPass"
             onChange={handleChange}
             onBlur={handleBlur}
@@ -59,6 +60,7 @@ const PassData = () => {
             }
           />
           <TextInput
+            autoComplete="new-password"
             name="newPass"
             onChange={handleChange}
             onBlur={handleBlur}
@@ -77,6 +79,7 @@ const PassData = () => {
             }
           />
           <TextInput
+            autoComplete="new-password"
             name="newPassConfirm"
             onChange={handleChange}
             onBlur={handleBlur}

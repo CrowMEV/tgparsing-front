@@ -66,6 +66,7 @@ const TextInput = ({
   hintMessage = '',
   startIcon,
   endIcon,
+  ...rest
 }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const inputWrapperRef = useRef<HTMLInputElement>(null);
@@ -103,6 +104,7 @@ const TextInput = ({
             onFocus?.(e);
           }}
           placeholder=" "
+          {...rest}
         />
         <Icon
           isError={Boolean(errorMessage.length)}
