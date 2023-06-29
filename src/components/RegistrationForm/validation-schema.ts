@@ -1,12 +1,10 @@
 import { object, ref, string } from 'yup';
+import { EMAIL_REGEX } from '../../consts/consts';
 
 export const registrationSchema = object({
   email: string()
     .required('Обязательное поле')
-    .matches(
-      /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
-      'Некорректный адрес электронной почты',
-    ),
+    .matches(EMAIL_REGEX, 'Некорректный адрес электронной почты'),
   password: string()
     .required('Обязательное поле')
     .matches(
