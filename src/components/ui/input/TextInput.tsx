@@ -59,18 +59,20 @@ const TextInput = ({
   onBlur,
   onFocus,
 
+  className,
   style,
   placeholderStyle,
   errorMessage = '',
   hintMessage = '',
   startIcon,
   endIcon,
+  ...rest
 }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const inputWrapperRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div style={style} className={styles.inputContainer}>
+    <div style={style} className={`${styles.inputContainer} ${className}`}>
       <div
         ref={inputWrapperRef}
         className={`${styles.inputWrapper} ${
@@ -102,6 +104,7 @@ const TextInput = ({
             onFocus?.(e);
           }}
           placeholder=" "
+          {...rest}
         />
         <Icon
           isError={Boolean(errorMessage.length)}

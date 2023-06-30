@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from './root-reducer';
-import { api } from '../services/api';
+import { api, injectStore } from '../services/api';
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -12,6 +12,7 @@ export const store = configureStore({
     }),
   devTools: process.env.NODE_ENV === 'development',
 });
+injectStore(store);
 
 export type State = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
