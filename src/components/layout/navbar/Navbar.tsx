@@ -1,11 +1,12 @@
-import { Link } from 'react-router-dom';
-import styles from './index.module.sass';
 import { ReactElement, useState } from 'react';
-import ReplenishmentModal from '../../ReplenishmentModal/ReplenishmentModal';
+import { Link } from 'react-router-dom';
 import { Routes } from '../../../router/routes';
-import NavTabs from '../../ui/navTabs/navTabs';
 import { MenuCategory, MenuItem } from '../menu-items';
+import ReplenishmentWindow from '../../ReplenishmentWindow/ReplenishmentWindow';
+import NavTabs from '../../ui/navTabs/navTabs';
 import Button from '../../ui/button/Button';
+
+import styles from './index.module.sass';
 
 interface PropTypes {
   menuItems: { text: string; link: Routes; icon?: ReactElement }[];
@@ -22,9 +23,9 @@ const Navbar = ({ menuItems, currentPage }: PropTypes) => {
 
   return (
     <div className={styles.nav}>
-      <ReplenishmentModal
-        isOpen={isReplenishmentOpen}
-        handleClose={() => setIsReplenishmentOpen(false)}
+      <ReplenishmentWindow
+        isActive={isReplenishmentOpen}
+        setActive={setIsReplenishmentOpen}
       />
       <nav className={styles.nav__links}>
         <div className={styles.nav__list}>
