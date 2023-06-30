@@ -1,8 +1,22 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import styles from './iconButton.module.sass';
 
-const IconButton = ({ children }: PropsWithChildren) => {
-  return <button className={styles.buttonIcon}>{children}</button>;
+type IconButtonProps = {
+  children: JSX.Element;
+  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  isError?: boolean;
+};
+
+const IconButton = ({ children, onClick, isError }: IconButtonProps) => {
+  return (
+    <button
+      type="button"
+      onClick={(e) => onClick(e)}
+      className={`${styles.buttonIcon} ${isError ? styles.error : ''}`}
+    >
+      {children}
+    </button>
+  );
 };
 
 export default IconButton;
