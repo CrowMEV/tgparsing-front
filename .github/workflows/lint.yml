@@ -1,8 +1,7 @@
 name: Test Frontend and Deploy
 
-on: 
-  push:
-    branches: [ main ]
+on:
+   [push]
 
 jobs:
   Lint:
@@ -14,6 +13,7 @@ jobs:
       - name: Run ESLint
         run: npx eslint ./src
   deploy-frontend:
+    if: github.ref_name == 'main'
     runs-on: ubuntu-latest
     needs: Lint
     steps:
