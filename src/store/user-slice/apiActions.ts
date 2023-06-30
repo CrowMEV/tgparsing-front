@@ -1,14 +1,21 @@
 import { ApiRoutes } from './apiRoutes';
-import { LoginData, RegistrationRequestData } from '../../types/auth';
+import {
+  LoginData,
+  RegistrationRequestData,
+  RegistrationResponseData,
+} from '../../types/auth';
 import { createAppAsyncThunk } from '../createAppAsyncThunk';
 import { User } from '../../types/user';
 import { AxiosError } from 'axios';
 
-export const register = createAppAsyncThunk<User, RegistrationRequestData>(
+export const register = createAppAsyncThunk<
+  RegistrationResponseData,
+  RegistrationRequestData
+>(
   ApiRoutes.Register,
   async (registrationData, { rejectWithValue, extra: api }) => {
     try {
-      const { data } = await api.post<User>(
+      const { data } = await api.post<RegistrationResponseData>(
         ApiRoutes.Register,
         registrationData,
       );

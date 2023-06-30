@@ -27,7 +27,12 @@ const RegistrationForm = () => {
     const sendedData = { ...values };
     delete sendedData['passwordCheck'];
 
-    dispatch(register(sendedData))
+    dispatch(
+      register({
+        ...sendedData,
+        timezone: -new Date().getTimezoneOffset() / 60,
+      }),
+    )
       .unwrap()
       .then(() => {
         setErrorMessage('');

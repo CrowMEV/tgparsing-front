@@ -9,4 +9,12 @@ export interface RegistrationData {
   passwordCheck?: string;
 }
 
-export type RegistrationRequestData = Omit<RegistrationData, 'passwordCheck'>;
+export type RegistrationRequestData = {
+  email: string;
+  password: string;
+  timezone: number;
+};
+
+export type RegistrationResponseData = {
+  detail: string;
+};
