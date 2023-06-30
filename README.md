@@ -44,3 +44,18 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Run pre-commit
+
+Без виртуального окружения в общесистемные библиотеки
+```bash
+pip install -U pre-commit
+```
+Установка хуков
+```bash
+pre-commit install
+```
+Для того чтобы прогнать тест по всему коду, а не только по коммиту
+```bash
+pre-commit run --all-files
+```
