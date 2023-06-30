@@ -1,0 +1,56 @@
+@import "/src/assets/styles/variables.sass"
+
+.experience
+  display: grid
+  grid-template-columns: 1fr 1fr 1fr
+  row-gap: 18px
+
+  width: 100%
+
+  font-size: 25px
+  font-weight: 600
+
+.experienceHeader__marketing,
+.value__marketing
+  justify-self: start
+
+.experienceHeader__social,
+.value__social
+  justify-self: center
+  text-align: center
+
+.experienceHeader__articles,
+.value__articles 
+  justify-self: end
+  text-align: right
+
+.experienceValues
+  display: flex
+  justify-content: space-between
+
+.accentText
+  font-family: "Library3AM", sans-serif
+  font-size: 50px
+  color: $c-accent
+
+.experienceHeader__marketing,
+.experienceHeader__articles
+  position: relative
+
+.experienceHeader__marketing::after
+  content: ""
+  position: absolute
+  bottom: -8px
+  left: -100vw
+  right: -260%
+  height: 3px
+  background-color: $c-accent
+
+.experienceHeader__articles::after
+  content: ""
+  position: absolute
+  bottom: -16px
+  left: -225%
+  right: -100vw
+  height: 3px
+  background-color: $c-accent
