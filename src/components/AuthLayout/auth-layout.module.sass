@@ -1,0 +1,29 @@
+@import "/src/assets/styles/mixins.sass"
+@import "/src/assets/styles/variables.sass"
+  
+.wrapper
+  display: flex
+  flex-direction: column
+  align-items: center
+  
+  padding-top: 68px
+
+  min-height: 100vh
+
+.container
+  @include container
+  background: $c-secondary
+  padding: 20px 44px 32px
+
+.tabs
+  position: relative
+  display: flex
+  justify-content: space-around
+
+  margin-bottom: 40px
+
+.link
+  color: rgba(255, 255, 255, 0.7)
+
+.link__active
+  color: #ffffff

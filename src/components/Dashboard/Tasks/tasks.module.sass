@@ -1,0 +1,65 @@
+@import "src/assets/styles/variables.sass"
+@import "src/assets/styles/mixins.sass"
+
+.title
+  font-family: 'Toxigenesis', sans-serif
+  font-size: 20px
+  font-weight: 700
+  line-height: 24px
+
+  margin-bottom: 20px
+
+.container
+  padding: 15px 10px
+  background-color: $c-secondary
+  border-radius: 8px
+
+.tasksContainer
+  width: 100%
+
+  height: 488px
+  overflow-y: auto
+
+.tasksTable
+  width: 100%
+
+  border-collapse: collapse
+
+
+.tasksTable__header
+  font-size: 16px
+  font-weight: 500
+  text-align: left
+
+  th
+    position: sticky
+    top: 0px
+
+    background-color: $c-secondary
+    padding-bottom: 18px
+
+.taskItem
+  td
+    padding: 10px 0
+    border-bottom: 1px solid $c-support-text
+
+.taskDetailLink
+  color: $c-additional
+  text-decoration: underline
+
+.taskDetailLink:hover
+  opacity: 0.8
+
+.taskDetailLink:active
+  opacity: 0.6
+
+.taskControls
+  display: flex
+  align-items: center
+  padding-top: 10px
+  column-gap: 10px
+
+.taskButton
+  @include tool-button
+  display: flex
+  align-items: center

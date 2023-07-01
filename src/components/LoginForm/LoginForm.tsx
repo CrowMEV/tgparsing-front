@@ -11,6 +11,8 @@ import TextInput from '../ui/input/TextInput';
 import { ReactComponent as HideIcon } from '../../assets/images/icons/closed-eye.svg';
 import { ReactComponent as ShowIcon } from '../../assets/images/icons/opened-eye.svg';
 import { Link } from 'react-router-dom';
+import IconButton from '../ui/iconButton/IconButton';
+import { Routes } from '../../router/routes';
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();
@@ -76,18 +78,17 @@ const LoginForm = () => {
                 errors.password && touched.password ? errors.password : ''
               }
               endIcon={
-                passwordIsShown ? (
-                  <ShowIcon
-                    onClick={() => setPasswordIsShown(!passwordIsShown)}
-                  />
-                ) : (
-                  <HideIcon
-                    onClick={() => setPasswordIsShown(!passwordIsShown)}
-                  />
-                )
+                <IconButton
+                  onClick={() => setPasswordIsShown(!passwordIsShown)}
+                  isError={
+                    (dirty && errors.password && touched.password) || false
+                  }
+                >
+                  {passwordIsShown ? <ShowIcon /> : <HideIcon />}
+                </IconButton>
               }
             />
-            <Link className={styles.resetPasswordLink} to="/">
+            <Link className={styles.resetPasswordLink} to={Routes.Recovery}>
               Забыли пароль?
             </Link>
           </label>

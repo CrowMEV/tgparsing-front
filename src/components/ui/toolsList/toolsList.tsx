@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import styles from './toolsList.module.sass';
 import { tools } from '../../../mocks/tools';
 import Tabs from '../tabs/tabs';
-import { ToolTabs } from '../../CompletedTasks/tabs';
+import { ToolTabs } from '../../Dashboard/CompletedTasks/tabs';
 import ToolItem from '../toolItem/taskItem';
 import { filterParsingTools } from '../../../utils/filterParsingTools';
 

@@ -38,7 +38,7 @@ const Navbar = ({ menuItems, currentPage }: PropTypes) => {
                 to={item.link}
                 className={`${styles.nav__link} ${
                   index === currentLinkPosition ? styles.nav__link_active : ''
-                }`}
+                } main-nav__link`}
                 key={item.text}
               >
                 {item.icon && (
@@ -52,7 +52,7 @@ const Navbar = ({ menuItems, currentPage }: PropTypes) => {
         <div>
           <div className={styles.nav__links__balance}>
             <p className={styles.balance__title}>Ваш баланс:</p>
-            <p className={styles.balance__value}>2000 &#8381;</p>
+            <p className={styles.balance__value}>2000.00 &#8381;</p>
           </div>
           <Button variant="small" onClick={() => setIsReplenishmentOpen(true)}>
             Пополнить

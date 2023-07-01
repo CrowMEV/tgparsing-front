@@ -1,0 +1,39 @@
+@import "/src/assets/styles/variables.sass"
+@import "src/assets/styles/mixins.sass"
+
+.title
+  font-family: 'Toxigenesis', sans-serif
+  font-size: 20px
+  font-weight: 700
+  line-height: 24px
+
+  margin-bottom: 20px
+
+.tasksWrapper
+  padding: 10px
+
+  background-color: $c-secondary
+
+  border-radius: 8px
+
+.toolsTabs
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+  font-size: 10px
+
+  border-bottom: 1px solid $c-support-text
+
+  margin-bottom: 20px
+
+
+.button
+  @include tool-button
+
+.toolsItems
+  max-height: 427px
+
+  padding-right: 20px
+
+  overflow-y: scroll

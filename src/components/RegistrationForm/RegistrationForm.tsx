@@ -10,17 +10,17 @@ import TextInput from '../ui/input/TextInput';
 import Button from '../ui/button/Button';
 import { ReactComponent as HideIcon } from '../../assets/images/icons/closed-eye.svg';
 import { ReactComponent as ShowIcon } from '../../assets/images/icons/opened-eye.svg';
-import Сonfidentiality from '../../components/confidentiality/Сonfidentiality';
-import { useNavigate } from 'react-router-dom';
-import { Routes } from '../../router/routes';
+import Сonfidentiality from '../Confidentiality/Сonfidentiality';
+import IconButton from '../ui/iconButton/IconButton';
+import SuccessMessage from './SuccessMessage/SuccessMessage';
 
 const RegistrationForm = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [passwordIsShown, setPasswordIsShown] = useState(false);
   const [checkPasswordIsShown, setCheckPasswordIsShown] = useState(false);
+  const [successMessageIsVisible, setSuccessMessageIsVisible] = useState(false);
 
   const submitHandler = async (values: RegistrationData) => {
     setIsSubmitting(true);
@@ -36,7 +36,7 @@ const RegistrationForm = () => {
       .unwrap()
       .then(() => {
         setErrorMessage('');
-        navigate(Routes.Login);
+        setSuccessMessageIsVisible(true);
       })
       .catch((error) => {
         setErrorMessage(error.detail);
@@ -92,15 +92,14 @@ const RegistrationForm = () => {
                 errors.password && touched.password ? errors.password : ''
               }
               endIcon={
-                passwordIsShown ? (
-                  <ShowIcon
-                    onClick={() => setPasswordIsShown(!passwordIsShown)}
-                  />
-                ) : (
-                  <HideIcon
-                    onClick={() => setPasswordIsShown(!passwordIsShown)}
-                  />
-                )
+                <IconButton
+                  onClick={() => setPasswordIsShown(!passwordIsShown)}
+                  isError={
+                    (dirty && errors.password && touched.password) || false
+                  }
+                >
+                  {passwordIsShown ? <ShowIcon /> : <HideIcon />}
+                </IconButton>
               }
             />
           </label>
@@ -119,19 +118,15 @@ const RegistrationForm = () => {
                   : ''
               }
               endIcon={
-                checkPasswordIsShown ? (
-                  <ShowIcon
-                    onClick={() =>
-                      setCheckPasswordIsShown(!checkPasswordIsShown)
-                    }
-                  />
-                ) : (
-                  <HideIcon
-                    onClick={() =>
-                      setCheckPasswordIsShown(!checkPasswordIsShown)
-                    }
-                  />
-                )
+                <IconButton
+                  onClick={() => setCheckPasswordIsShown(!checkPasswordIsShown)}
+                  isError={
+                    (dirty && errors.passwordCheck && touched.passwordCheck) ||
+                    false
+                  }
+                >
+                  {checkPasswordIsShown ? <ShowIcon /> : <HideIcon />}
+                </IconButton>
               }
             />
           </label>
@@ -144,6 +139,12 @@ const RegistrationForm = () => {
           </Button>
           {errorMessage && <p className={styles.error}>{errorMessage}</p>}
           <Сonfidentiality />
+          {successMessageIsVisible && (
+            <SuccessMessage
+              isActive={successMessageIsVisible}
+              setActive={setSuccessMessageIsVisible}
+            />
+          )}
         </Form>
       )}
     </Formik>

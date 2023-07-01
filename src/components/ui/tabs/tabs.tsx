@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Tab } from '../../CompletedTasks/tabs';
+import { Tab } from '../../Dashboard/CompletedTasks/tabs';
 import styles from './tabs.module.sass';
 
 interface TabsProps {

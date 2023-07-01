@@ -1,0 +1,44 @@
+@import "src/assets/styles/variables.sass"
+@import "src/assets/styles/mixins.sass"
+
+.history_card
+  @include container
+  margin-top: 1rem
+  color: $c-light-grey
+  width: 100%
+  height: 100%
+  display: flex
+  justify-content: space-between
+
+  &__date
+    width: 100%
+
+    > label
+      font-size: 12px
+      display: block
+      margin-bottom: 0.5rem
+
+    > span
+      color: white
+
+  &__write
+    width: 100%
+
+    > label
+      font-size: 12px
+      display: block
+      margin-bottom: 0.5rem
+
+    > span
+      color: $c-primary-red
+
+  &__reason
+    width: 100%
+
+    > label
+      font-size: 12px
+      display: block
+      margin-bottom: 0.5rem
+
+    > span
+      color: white

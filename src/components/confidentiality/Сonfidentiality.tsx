@@ -1,17 +1,24 @@
-import { Link } from 'react-router-dom';
 import styles from './confidentiality.module.sass';
 
 const Сonfidentiality = () => {
   return (
     <p className={styles.text}>
       Нажимая “Продолжить” Вы соглашаетесь с{' '}
-      <Link className={styles.link} to="/">
+      <a
+        className={styles.link}
+        href={require('../../assets/pdfs/personal-data-policy.pdf')}
+        target="_blank"
+      >
         политикой конфиденциальности
-      </Link>{' '}
+      </a>{' '}
       и{' '}
-      <Link className={styles.link} to="/">
+      <a
+        className={styles.link}
+        href={require('../../assets/pdfs/public-offer.pdf')}
+        target="_blank"
+      >
         договором публичной оферты
-      </Link>
+      </a>
     </p>
   );
 };
