@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import { Form, Formik } from 'formik';
+
+import { api } from '../../services/api';
+import { replenishmentSchema } from './replenishment-schema';
 
 import ModalWindow from '../ui/modal-window/ModalWindow';
 import TextInput from '../ui/input/TextInput';
 import Button from '../ui/button/Button';
+import Loader from '../ui/loader/loader';
 
 import styles from './replenishment-window.module.sass';
-import { replenishmentSchema } from './replenishment-schema';
 
 type ReplenishmentWindowProps = {
   isActive: boolean;
@@ -20,8 +24,18 @@ const ReplenishmentWindow = ({
   isActive,
   setActive,
 }: ReplenishmentWindowProps) => {
-  const submitHandler = (data: ReplenishmentRequest) => {
-    console.log(data);
+  const [isFetching, setIsFetching] = useState(false);
+
+  const submitHandler = async (formData: ReplenishmentRequest) => {
+    setIsFetching(true);
+    try {
+      const { data } = await api.post('/payment/', formData);
+      window.location.href = data;
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsFetching(false);
+    }
   };
 
   return (
@@ -40,6 +54,7 @@ const ReplenishmentWindow = ({
           {({ values, errors, touched, handleChange, handleBlur, isValid }) => (
             <Form className={styles.form}>
               <TextInput
+                autoComplete="off"
                 name="amount"
                 placeholder="Сумма пополнения"
                 placeholderStyle={{ backgroundColor: '#2B3243' }}
@@ -54,9 +69,9 @@ const ReplenishmentWindow = ({
               <Button
                 variant="accent"
                 type="submit"
-                disabled={!isValid && touched.amount}
+                disabled={!isValid && touched.amount && !isFetching}
               >
-                Пополнить
+                {isFetching ? <Loader width={24} height={24} /> : 'Пополнить'}
               </Button>
             </Form>
           )}
