@@ -18,7 +18,6 @@ import AuthLayout from '../components/auth-layout/AuthLayout';
 import StartPage from '../pages/StartPage/StartPage';
 
 export const router = createBrowserRouter([
-  //TODO Убрать верхний path. Поменять Home на dashboard. Сделать отделный объект с path для Home.
   {
     element: (
       <ProtectedRoute>
