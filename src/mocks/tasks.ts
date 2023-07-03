@@ -61,34 +61,6 @@ export const tasks: Task[] = [
   },
 
   {
-    id: '4',
-    date: '01.01.2024',
-    title: 'Какое-то название',
-    status: Status.inProcess,
-  },
-
-  {
-    id: '5',
-    date: '01.01.2024',
-    title: 'Какое-то название',
-    status: Status.inProcess,
-  },
-
-  {
-    id: '6',
-    date: '01.01.2024',
-    title: 'Какое-то название',
-    status: Status.inProcess,
-  },
-
-  {
-    id: '7',
-    date: '01.01.2024',
-    title: 'Какое-то название',
-    status: Status.inProcess,
-  },
-
-  {
     id: '8',
     date: '01.01.2024',
     title: 'Какое-то название',
@@ -118,6 +90,34 @@ export const tasks: Task[] = [
 
   {
     id: '12',
+    date: '01.01.2024',
+    title: 'Какое-то название',
+    status: Status.inProcess,
+  },
+
+  {
+    id: '13',
+    date: '01.01.2024',
+    title: 'Какое-то название',
+    status: Status.inProcess,
+  },
+
+  {
+    id: '14',
+    date: '01.01.2024',
+    title: 'Какое-то название',
+    status: Status.inProcess,
+  },
+
+  {
+    id: '15',
+    date: '01.01.2024',
+    title: 'Какое-то название',
+    status: Status.inProcess,
+  },
+
+  {
+    id: '16',
     date: '01.01.2024',
     title: 'Какое-то название',
     status: Status.inProcess,

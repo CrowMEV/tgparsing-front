@@ -18,7 +18,7 @@ const TariffInfo = () => {
         className={styles.infoButton}
         onClick={() => setTariffDetailIsOpened(true)}
       >
-        Подробней о текущем состоянии тарифа
+        Подробнее о текущем состоянии тарифа
       </button>
       <ModalWindow
         isActive={tariffDetailIsOpened}
