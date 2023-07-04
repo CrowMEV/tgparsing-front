@@ -4,6 +4,7 @@ export enum Routes {
   Parsers = '/parsers',
   Login = '/login',
   Registration = '/registration',
+  Recovery = '/recovery',
   Dashboard = '/dashboard',
   Base = '/base',
   Finance = '/finance',

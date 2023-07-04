@@ -15,7 +15,11 @@ const AUTH_ITEMS = [
   },
 ];
 
-const AuthLayout = () => {
+interface AuthLayoutProps {
+  isNavShown?: boolean;
+}
+
+const AuthLayout = ({ isNavShown = true }: AuthLayoutProps) => {
   const location = useLocation();
   const currentPageIndex = AUTH_ITEMS.findIndex(
     (item) => item.link === location.pathname,
@@ -25,21 +29,23 @@ const AuthLayout = () => {
     <div className={styles.wrapper}>
       <Logo />
       <div className={styles.container}>
-        <div className={styles.tabs}>
-          <NavTabs currentElementIndex={currentPageIndex}>
-            {AUTH_ITEMS.map((item, index) => (
-              <Link
-                className={`${styles.link} ${
-                  index === currentPageIndex ? styles.link__active : ''
-                }`}
-                to={item.link}
-                key={item.text}
-              >
-                {item.text}
-              </Link>
-            ))}
-          </NavTabs>
-        </div>
+        {isNavShown && (
+          <div className={styles.tabs}>
+            <NavTabs currentElementIndex={currentPageIndex}>
+              {AUTH_ITEMS.map((item, index) => (
+                <Link
+                  className={`${styles.link} ${
+                    index === currentPageIndex ? styles.link__active : ''
+                  }`}
+                  to={item.link}
+                  key={item.text}
+                >
+                  {item.text}
+                </Link>
+              ))}
+            </NavTabs>
+          </div>
+        )}
         <Outlet />
       </div>
     </div>

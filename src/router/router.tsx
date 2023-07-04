@@ -3,7 +3,7 @@ import { Routes } from './routes';
 import Layout from '../components/layout/Layout';
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
 
-import MainPage from '../pages/Home/MainPage';
+import DashboardPage from '../pages/DashboardPage/DashboardPage';
 import MailingPage from '../pages/Mailing/MailingPage';
 import ParsersPage from '../pages/Parsers/ParsersPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
@@ -14,8 +14,9 @@ import ReportPage from '../pages/ReportPage/ReportPage';
 import InvitingPage from '../pages/InvitingPage/InvitingPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import DocumentsPage from '../pages/DocumentsPage/DocumentsPage';
-import AuthLayout from '../components/auth-layout/AuthLayout';
+import AuthLayout from '../components/AuthLayout/AuthLayout';
 import StartPage from '../pages/StartPage/StartPage';
+import RecoverPasswordPage from '../pages/RecoveryPasswordPage/RecoverPasswordPage';
 
 export const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: Routes.Dashboard,
-        element: <MainPage />,
+        element: <DashboardPage />,
         index: true,
       },
       {
@@ -82,6 +83,19 @@ export const router = createBrowserRouter([
       {
         path: Routes.Registration,
         element: <RegistrationPage />,
+      },
+    ],
+  },
+  {
+    element: (
+      <ProtectedRoute isAuth={false}>
+        <AuthLayout isNavShown={false} />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: Routes.Recovery,
+        element: <RecoverPasswordPage />,
       },
     ],
   },

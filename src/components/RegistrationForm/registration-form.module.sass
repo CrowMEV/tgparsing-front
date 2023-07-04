@@ -6,27 +6,13 @@
 .title
   @include title
 
-.input
-  @include text-input
+.successMessage
+  display: flex
+  flex-direction: column
+  align-items: center
+  row-gap: 15px
 
-.error
-  @include error
+  font-family: "Toxigenesis"
+  font-size: 20px
 
-.registrationButton
-  @include enterButton
-
-  svg
-    stroke: $c-light-grey
-
-  &:hover
-    svg
-      stroke: $c-primary-green
-
-  &:disabled
-    &:hover
-      svg
-        stroke: $c-light-grey
-      
-
-.loginLink
-  @include link
+  padding: 10px 20px

@@ -15,9 +15,13 @@ const Layout: FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Header menuItems={NAV_ITEMS} currentPage={currentPage} />
+      <div className={styles.innerWrapper}>
+        <Header menuItems={NAV_ITEMS} currentPage={currentPage} />
+      </div>
       <Navbar menuItems={MENU_ITEMS} currentPage={currentPage} />
-      <Outlet />
+      <div className={styles.innerWrapper}>
+        <Outlet />
+      </div>
     </div>
   );
 };

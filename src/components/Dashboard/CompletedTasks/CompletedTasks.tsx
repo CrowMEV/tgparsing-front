@@ -1,11 +1,11 @@
 import { FC, useState } from 'react';
 import styles from './completed-tasks.module.sass';
-import { tools } from '../../mocks/tools';
-import Tabs from '../ui/tabs/tabs';
+import { tools } from '../../../mocks/tools';
+import Tabs from '../../ui/tabs/tabs';
 import { ToolTabs } from './tabs';
-import TaskItem from '../ui/toolItem/taskItem';
-import { filterParsingTools } from '../../utils/filterParsingTools';
-import { ReactComponent as SearchIcon } from '../../assets/images/icons/search.svg';
+import TaskItem from '../../ui/toolItem/taskItem';
+import { filterParsingTools } from '../../../utils/filterParsingTools';
+import { ReactComponent as SearchIcon } from '../../../assets/images/icons/search.svg';
 
 const CompletedTasks: FC = () => {
   const [currentCategory, setCurrentCategory] = useState(ToolTabs[0].value);
@@ -14,7 +14,7 @@ const CompletedTasks: FC = () => {
 
   return (
     <section className={styles.tasks}>
-      <h2 className={styles.title}>Текущие задачи</h2>
+      <h2 className={styles.title}>Завершенные задачи</h2>
       <div className={styles.tasksWrapper}>
         <div className={styles.toolsTabs}>
           <Tabs
