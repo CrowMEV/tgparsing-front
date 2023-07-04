@@ -10,7 +10,7 @@ import TextInput from '../ui/input/TextInput';
 import Button from '../ui/button/Button';
 import { ReactComponent as HideIcon } from '../../assets/images/icons/closed-eye.svg';
 import { ReactComponent as ShowIcon } from '../../assets/images/icons/opened-eye.svg';
-import Сonfidentiality from '../Confidentiality/Сonfidentiality';
+import Сonfidentiality from '../confidentiality/Сonfidentiality';
 import IconButton from '../ui/iconButton/IconButton';
 import SuccessMessage from './SuccessMessage/SuccessMessage';
 
