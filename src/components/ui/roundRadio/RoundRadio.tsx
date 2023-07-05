@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { ChangeEvent, FC } from 'react';
 import styles from './roundRadio.module.sass';
 
 interface RadioTypes {
@@ -6,7 +6,7 @@ interface RadioTypes {
   name: string;
   value: string;
   currentValue: string;
-  radioHandler: (value: string) => void;
+  radioHandler: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const RoundRadio: FC<RadioTypes> = ({
@@ -24,7 +24,7 @@ const RoundRadio: FC<RadioTypes> = ({
         name={name}
         value={value}
         checked={value === currentValue}
-        onChange={(evt) => radioHandler(evt.target.value)}
+        onChange={(evt) => radioHandler(evt)}
       />
       <span className={styles.radioMark}></span>
       <span className={styles.radioTitle}>{title}</span>

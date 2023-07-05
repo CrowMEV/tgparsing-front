@@ -1,11 +1,24 @@
 @import '../../../assets/styles/global'
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active
-    -webkit-background-clip: text
-    -webkit-text-fill-color: $c-support-text
+.input
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover, 
+  &:-webkit-autofill:focus, 
+  &:-webkit-autofill:active
+      -webkit-background-clip: text
+      -webkit-text-fill-color: $c-support-text
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button 
+    -webkit-appearance: none
+    margin: 0
+
+  &[type=date]
+    &::-webkit-calendar-picker-indicator 
+      filter: invert(1)
+
+  &[type=number]
+    -moz-appearance: textfield
 
 .inputContainer 
   display: flex
@@ -15,9 +28,10 @@ input:-webkit-autofill:active
   font-size: 16px
   line-height: 24px
   color: $c-support-text
+  max-width: 413px
+  width: 100%
 
 .inputWrapper
-  max-width: 413px
   max-height: 56px
   display: flex
   position: relative
@@ -99,6 +113,7 @@ input:-webkit-autofill:active
     left: 50px
 
 .errorMessage, .hintMessage 
+  font-size: 12px
   margin: 4px 0 0 16px
   align-self: start
 

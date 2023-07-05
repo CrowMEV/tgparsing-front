@@ -5,7 +5,6 @@ import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
 
 import DashboardPage from '../pages/DashboardPage/DashboardPage';
 import MailingPage from '../pages/Mailing/MailingPage';
-import ParsersPage from '../pages/Parsers/ParsersPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
 import BasePage from '../pages/BasePage/BasePage';
@@ -17,6 +16,10 @@ import DocumentsPage from '../pages/DocumentsPage/DocumentsPage';
 import AuthLayout from '../components/AuthLayout/AuthLayout';
 import StartPage from '../pages/StartPage/StartPage';
 import RecoverPasswordPage from '../pages/RecoveryPasswordPage/RecoverPasswordPage';
+import ParsersLayout from '../components/parsers/ParsersLayout/ParsersLayout';
+import Activities from '../components/parsers/activities/Activities';
+import Participants from '../components/parsers/participants/Participants';
+import Geolocation from '../components/parsers/geolocation/Geolocation';
 
 export const router = createBrowserRouter([
   {
@@ -37,7 +40,21 @@ export const router = createBrowserRouter([
       },
       {
         path: Routes.Parsers,
-        element: <ParsersPage />,
+        element: <ParsersLayout />,
+        children: [
+          {
+            path: Routes.ParsersActivities,
+            element: <Activities />,
+          },
+          {
+            path: Routes.ParsersParticipants,
+            element: <Participants />,
+          },
+          {
+            path: Routes.ParsersGeolocation,
+            element: <Geolocation />,
+          },
+        ],
       },
       {
         path: Routes.Base,

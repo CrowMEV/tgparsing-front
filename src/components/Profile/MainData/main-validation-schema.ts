@@ -1,16 +1,18 @@
 import { object, string } from 'yup';
-import { NAME_REGEX } from '../../../consts/consts';
+import {
+  EMAIL_REGEX,
+  NAME_REGEX,
+  PHONE_REGEX,
+  ValidationErrors,
+} from '../../../consts/validation';
 
 export const mainDataValidation = object({
-  email: string().email('Некорректный адрес электронной почты'),
+  email: string().matches(EMAIL_REGEX, ValidationErrors.email),
   firstname: string()
-    .min(2, 'Поле должно содержать не менее 2 символов')
-    .matches(NAME_REGEX, 'Формат: "Иван"'),
+    .min(2, ValidationErrors.min(2))
+    .matches(NAME_REGEX, ValidationErrors.firstName),
   lastname: string()
-    .min(2, 'Поле должно содержать не менее 2 символов')
-    .matches(NAME_REGEX, 'Формат: "Иванов"'),
-  phoneNumber: string().matches(
-    /^[+]?[-\s.]?[0-9]{4,}$/,
-    'Формат: "+79123456789"',
-  ),
+    .min(2, ValidationErrors.min(2))
+    .matches(NAME_REGEX, ValidationErrors.lastName),
+  phoneNumber: string().matches(PHONE_REGEX, ValidationErrors.phoneNumber),
 });

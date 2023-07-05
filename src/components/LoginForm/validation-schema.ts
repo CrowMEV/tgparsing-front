@@ -1,11 +1,9 @@
 import { object, string } from 'yup';
-import { EMAIL_REGEX } from '../../consts/consts';
+import { EMAIL_REGEX, ValidationErrors } from '../../consts/validation';
 
 export const loginSchema = object().shape({
   email: string()
-    .required('Обязательное поле')
-    .matches(EMAIL_REGEX, 'Некорректный адрес электронной почты'),
-  password: string()
-    .required('Обязательное поле')
-    .min(8, 'Пароль должен содержать не менее 8 символов'),
+    .required(ValidationErrors.required)
+    .matches(EMAIL_REGEX, ValidationErrors.email),
+  password: string().required(ValidationErrors.required),
 });
