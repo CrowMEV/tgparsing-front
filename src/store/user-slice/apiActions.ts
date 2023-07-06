@@ -42,7 +42,7 @@ export const logout = createAppAsyncThunk(
   ApiRoutes.Logout,
   async (_, { extra: api, rejectWithValue }) => {
     try {
-      return await api.post(ApiRoutes.Logout);
+      await api.post(ApiRoutes.Logout);
     } catch (error) {
       return rejectWithValue((error as AxiosError).response?.data);
     }

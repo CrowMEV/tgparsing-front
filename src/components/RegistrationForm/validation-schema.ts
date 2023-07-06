@@ -1,20 +1,20 @@
 import { object, ref, string } from 'yup';
 
-import { EMAIL_REGEX } from '../../consts/consts';
-import { PASS_REGEX } from '../../consts/consts';
+import {
+  EMAIL_REGEX,
+  PASS_REGEX,
+  ValidationErrors,
+} from '../../consts/validation';
 
 export const registrationSchema = object({
   email: string()
-    .required('Обязательное поле')
-    .matches(EMAIL_REGEX, 'Некорректный адрес электронной почты'),
+    .required(ValidationErrors.required)
+    .matches(EMAIL_REGEX, ValidationErrors.email),
   password: string()
-    .required('Обязательное поле')
-    .matches(
-      PASS_REGEX,
-      'Пароль должен содержать в себе заглавную букву, спец. символ и цифру',
-    )
-    .min(8, 'Пароль должен содержать не менее 8 символов'),
+    .required(ValidationErrors.required)
+    .matches(PASS_REGEX, ValidationErrors.password)
+    .min(8, ValidationErrors.min(8)),
   passwordCheck: string()
-    .oneOf([ref('password')], 'Пароли должны совпадать')
-    .required('Обязательное поле'),
+    .oneOf([ref('password')], ValidationErrors.passwordCheck)
+    .required(ValidationErrors.required),
 });

@@ -1,123 +1,138 @@
 import React, { useState } from 'react';
 
-import { ParserNames } from '../../../consts/consts';
-
 import sharedStyles from '../index.module.sass';
+import { Form, Formik } from 'formik';
+import { activitiesValidation } from './activities-validation-schema';
+import TextInput from '../../ui/input/TextInput';
+import Button from '../../ui/button/Button';
+
+type FormValues = {
+  groups: string;
+  amountTo: number | null;
+  amountFrom: number | null;
+  startDate: Date | null;
+  endDate: Date | null;
+  name: string;
+};
 
 const Activities = () => {
-  const [formInfo, setFormInfo] = useState({
-    groups: '',
-    groupsAmount: {
-      from: '',
-      to: '',
-    },
-    date: {
-      from: '',
-      to: '',
-    },
-    name: '',
-    parserName: ParserNames.Activities,
-  });
+  const [isFetching, setIsFetching] = useState(false);
+
+  const handleSubmit = (values: FormValues) => {
+    console.log(values);
+  };
 
   return (
     <section>
-      <div className="center">
-        <h3>Активность</h3>
-      </div>
-      <form className={sharedStyles.form} method="post" action="">
-        <div>
-          <h4>Группы</h4>
-          <textarea
-            className={sharedStyles.input}
-            placeholder="Введите группы в отдельной строке, без @"
-            value={formInfo.groups}
-            onChange={(e) => {
-              setFormInfo({ ...formInfo, groups: e.target.value });
-            }}
-          />
-        </div>
-        <div>
-          <h4>Пребывают в группах</h4>
-          <div className={sharedStyles.inputGroup}>
-            <input
-              className={sharedStyles.input}
-              type="text"
-              placeholder="От"
-              value={formInfo.groupsAmount.from}
-              onChange={(e) => {
-                setFormInfo({
-                  ...formInfo,
-                  groupsAmount: {
-                    ...formInfo.groupsAmount,
-                    from: e.target.value,
-                  },
-                });
-              }}
-            />
-            <input
-              className={sharedStyles.input}
-              type="text"
-              placeholder="До (включительно)"
-              value={formInfo.groupsAmount.to}
-              onChange={(e) => {
-                setFormInfo({
-                  ...formInfo,
-                  groupsAmount: {
-                    ...formInfo.groupsAmount,
-                    to: e.target.value,
-                  },
-                });
-              }}
-            />
-          </div>
-        </div>
-        <div>
-          <h4>Период за который учитывать активность</h4>
-          <div className={sharedStyles.inputGroup}>
-            <input
-              className={sharedStyles.input}
-              type="date"
-              value={formInfo.date.from}
-              onChange={(e) =>
-                setFormInfo({
-                  ...formInfo,
-                  date: {
-                    ...formInfo.date,
-                    from: e.target.value,
-                  },
-                })
-              }
-            />
-            <input
-              className={sharedStyles.input}
-              type="date"
-              value={formInfo.date.to}
-              onChange={(e) =>
-                setFormInfo({
-                  ...formInfo,
-                  date: {
-                    ...formInfo.date,
-                    to: e.target.value,
-                  },
-                })
-              }
-            />
-          </div>
-        </div>
-        <div>
-          <h3>Название задачи</h3>
-          <input
-            className={sharedStyles.input}
-            type="text"
-            placeholder="Название задачи"
-            value={formInfo.name}
-            onChange={(e) => setFormInfo({ ...formInfo, name: e.target.value })}
-          />
-        </div>
-        <button type="submit" className={sharedStyles.button}>
-          Создать задачу
-        </button>
-      </form>
+      <Formik
+        initialValues={{
+          groups: '',
+          amountTo: null,
+          amountFrom: null,
+          startDate: null,
+          endDate: null,
+          name: '',
+        }}
+        validationSchema={activitiesValidation}
+        onSubmit={handleSubmit}
+      >
+        {({ errors, touched, handleChange, handleBlur, isValid }) => (
+          <Form className={sharedStyles.form}>
+            <div>
+              <h3 className={sharedStyles.header}>Шаг 1. Название задачи</h3>
+              <TextInput
+                style={{ maxWidth: '610px' }}
+                name="name"
+                type="text"
+                placeholder="Придумайте название задачи"
+                hintMessage="Название будет видно только Вам"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                errorMessage={errors.name && touched.name ? errors.name : ''}
+              />
+            </div>
+            <div>
+              <h3 className={sharedStyles.header}>Шаг 2. Группы для поиска</h3>
+              <TextInput
+                style={{ maxWidth: '610px' }}
+                name="groups"
+                type="text"
+                placeholder="Вставьте ссылку на канал, группу"
+                hintMessage="Каждая ссылка - на отдельной строке или через запятую"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                errorMessage={
+                  errors.groups && touched.groups ? errors.groups : ''
+                }
+              />
+            </div>
+            <div>
+              <h3 className={sharedStyles.header}>
+                Шаг 3. Период, за который учитываются активности
+              </h3>
+              <div className={sharedStyles.inputGroup}>
+                <TextInput
+                  name="startDate"
+                  type="date"
+                  hintMessage="Введите дату начала периода"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  errorMessage={
+                    errors.startDate && touched.startDate
+                      ? errors.startDate
+                      : ''
+                  }
+                />
+                <TextInput
+                  name="endDate"
+                  type="date"
+                  hintMessage="Введите дату окончания периода"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  errorMessage={
+                    errors.endDate && touched.endDate ? errors.endDate : ''
+                  }
+                />
+              </div>
+            </div>
+            <div>
+              <h3 className={sharedStyles.header}>количество активностей</h3>
+              <div className={sharedStyles.inputGroup}>
+                <TextInput
+                  name="amountFrom"
+                  type="number"
+                  placeholder="От"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  errorMessage={
+                    errors.amountFrom && touched.amountFrom
+                      ? errors.amountFrom
+                      : ''
+                  }
+                />
+                <TextInput
+                  name="amountTo"
+                  type="number"
+                  placeholder="До (включительно)"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  errorMessage={
+                    errors.amountTo && touched.amountTo ? errors.amountTo : ''
+                  }
+                />
+              </div>
+            </div>
+            <Button
+              style={{ maxWidth: '610px' }}
+              variant="accent"
+              type="submit"
+              disabled={!isValid || isFetching}
+            >
+              Начать сбор аудитории
+            </Button>
+          </Form>
+        )}
+      </Formik>
     </section>
   );
 };
