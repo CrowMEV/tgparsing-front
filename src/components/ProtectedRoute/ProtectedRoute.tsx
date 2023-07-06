@@ -16,6 +16,7 @@ const ProtectedRoute = ({ children, isAuth = true }: ProtectedRouteProps) => {
 
   if (authStatus === AuthorizationStatus.Unknown) {
     return (
+      //TODO loader page
       <div
         style={{
           width: '100%',
