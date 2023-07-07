@@ -154,9 +154,9 @@ const MailingForm: FC<MailingFormTypes> = ({ formData, setFormData }) => {
         <div className={styles.checkBoxWrapper}>
           <Checkbox
             title="Доотправка по SMS"
-            isChecked={formData.sendingSms}
-            checkboxHandler={(value: boolean) =>
-              setFormData({ ...formData, sendingSms: value })
+            checked={formData.sendingSms}
+            checkboxHandler={(evt) =>
+              setFormData({ ...formData, sendingSms: evt.target.checked })
             }
           />
           <span className={styles.subText}>Описание услуги...</span>
@@ -165,9 +165,12 @@ const MailingForm: FC<MailingFormTypes> = ({ formData, setFormData }) => {
         <div className={styles.checkBoxWrapper}>
           <Checkbox
             title="Отправить тестовое сообщение"
-            isChecked={formData.sendingTestMessage}
-            checkboxHandler={(value: boolean) =>
-              setFormData({ ...formData, sendingTestMessage: value })
+            checked={formData.sendingTestMessage}
+            checkboxHandler={(evt) =>
+              setFormData({
+                ...formData,
+                sendingTestMessage: evt.target.checked,
+              })
             }
           />
           <span className={styles.subText}>Описание услуги...</span>
@@ -186,9 +189,9 @@ const MailingForm: FC<MailingFormTypes> = ({ formData, setFormData }) => {
 
       <Checkbox
         title="Сохранить рассылку как шаблон"
-        isChecked={formData.saveTemplate}
-        checkboxHandler={(value: boolean) =>
-          setFormData({ ...formData, saveTemplate: value })
+        checked={formData.saveTemplate}
+        checkboxHandler={(evt) =>
+          setFormData({ ...formData, saveTemplate: evt.target.checked })
         }
       />
     </>

@@ -1,30 +1,29 @@
-import { FC } from 'react';
+import { ChangeEvent, FC } from 'react';
 import styles from './toggle.module.sass';
 
-interface ToggleTypes {
-  title: string;
-  supTitle?: string;
-  isChecked: boolean;
-  toggleHandler: (value: boolean) => void;
+interface ToggleTypes extends React.InputHTMLAttributes<HTMLInputElement> {
+  title?: string;
+  toggleHandler: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Toggle: FC<ToggleTypes> = ({
   title,
-  supTitle,
-  isChecked,
+  className,
+  checked,
   toggleHandler,
+  ...rest
 }) => {
   return (
-    <label className={styles.label}>
+    <label className={`${styles.label} ${className}`}>
       <input
-        className={styles.input}
+        className={styles.toggleInput}
         type="checkbox"
-        checked={isChecked}
-        onChange={() => toggleHandler(!isChecked)}
+        checked={checked}
+        onChange={(evt) => toggleHandler(evt)}
+        {...rest}
       />
       <span className={styles.toggle}></span>
-      <span className={styles.supTitle}>{supTitle}</span>
-      <span className={styles.title}>{title}</span>
+      {title && <span>{title}</span>}
     </label>
   );
 };
