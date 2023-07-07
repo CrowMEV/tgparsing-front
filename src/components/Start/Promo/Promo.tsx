@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './promo.module.sass';
+import { Routes } from '../../../router/routes';
 
 const Promo = () => {
   return (
@@ -23,7 +24,7 @@ const Promo = () => {
           <p className={styles.tariffsText}>от</p>
           <p className={styles.accentTariffsText}>99₽</p>
         </div>
-        <Link className={styles.infoLink} to="/">
+        <Link className={styles.infoLink} to={Routes.Tariffs}>
           Подробнее
         </Link>
       </div>

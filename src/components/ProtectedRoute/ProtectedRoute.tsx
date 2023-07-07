@@ -29,6 +29,12 @@ const ProtectedRoute = ({ children, isAuth = true }: ProtectedRouteProps) => {
         <Loader width={50} height={50} />
       </div>
     );
+  } else if (
+    location.pathname === Routes.Tariffs &&
+    isAuth &&
+    authStatus !== AuthorizationStatus.Auth
+  ) {
+    return <Navigate to={Routes.HomeTariffs} replace />;
   } else if (isAuth && authStatus !== AuthorizationStatus.Auth) {
     return <Navigate to={Routes.Login} replace />;
   } else if (!isAuth && authStatus !== AuthorizationStatus.NoAuth) {

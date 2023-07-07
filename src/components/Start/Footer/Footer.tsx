@@ -25,7 +25,7 @@ const Footer = () => {
       <nav>
         <ul className={styles.navList}>
           <li>
-            <Link className={styles.link} to="/">
+            <Link className={styles.link} to={Routes.Tariffs}>
               Тарифы
             </Link>
           </li>
