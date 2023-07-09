@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../../consts/consts';
 import { User } from '../../types/user';
-import { login, logout, refresh } from './apiActions';
+import { login, logout, patchUser, refresh } from './apiActions';
 
 type InitialState = {
   user: User | null;
@@ -35,6 +35,12 @@ export const userSlice = createSlice({
       })
       .addCase(refresh.rejected.type, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
-      });
+      })
+      .addCase(
+        patchUser.fulfilled.type,
+        (state, action: PayloadAction<User>) => {
+          state.user = action.payload;
+        },
+      );
   },
 });
