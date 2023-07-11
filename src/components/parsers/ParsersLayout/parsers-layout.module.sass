@@ -1,9 +1,17 @@
 @import "src/assets/styles/global.sass"
 @import "src/assets/styles/mixins.sass"
 
+.pageWrapper
+  padding: 24px 0 77px  
+
 .wrapper
+  margin-top: 25px
+  display: flex
+  gap: 60px
+
+.parsersWrapper
   max-width: 610px  
-  padding: 24px 0 77px
+  flex: 1
 
 .header
   @include header(20px)

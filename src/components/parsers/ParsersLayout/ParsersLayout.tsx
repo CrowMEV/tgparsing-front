@@ -4,6 +4,8 @@ import NavTabs from '../../ui/navTabs/navTabs';
 
 import styles from './parsers-layout.module.sass';
 import { useEffect } from 'react';
+import CompletedTasks from '../CompletedTasks/CompletedTasks';
+import TariffInfo from '../../TariffInfo/TariffInfo';
 
 const PARSERS_ITEMS = [
   {
@@ -34,28 +36,34 @@ const ParsersLayout = () => {
   );
 
   return (
-    <div className={styles.wrapper}>
-      <h3 className={styles.header}>Поиск аудитории</h3>
-      <div className={styles.tabs}>
-        <NavTabs
-          currentElementIndex={currentPageIndex}
-          underlineClass={styles.underline}
-        >
-          {PARSERS_ITEMS.map((item, index) => (
-            <Link
-              className={`${styles.link} ${
-                index === currentPageIndex ? styles.linkActive : ''
-              }`}
-              to={item.link}
-              key={item.text}
+    <section className={styles.pageWrapper}>
+      <TariffInfo />
+      <div className={styles.wrapper}>
+        <div className={styles.parsersWrapper}>
+          <h3 className={styles.header}>Поиск аудитории</h3>
+          <div className={styles.tabs}>
+            <NavTabs
+              currentElementIndex={currentPageIndex}
+              underlineClass={styles.underline}
             >
-              {item.text}
-            </Link>
-          ))}
-        </NavTabs>
+              {PARSERS_ITEMS.map((item, index) => (
+                <Link
+                  className={`${styles.link} ${
+                    index === currentPageIndex ? styles.linkActive : ''
+                  }`}
+                  to={item.link}
+                  key={item.text}
+                >
+                  {item.text}
+                </Link>
+              ))}
+            </NavTabs>
+          </div>
+          <Outlet />
+        </div>
+        <CompletedTasks />
       </div>
-      <Outlet />
-    </div>
+    </section>
   );
 };
 export default ParsersLayout;

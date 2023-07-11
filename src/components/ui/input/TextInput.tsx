@@ -19,13 +19,13 @@ const Icon: FC<{
 }> = ({ isError, startIcon, endIcon }) => {
   if (endIcon)
     return (
-      <span className={`${styles.endIcon} ${isError && styles.error}`}>
+      <span className={`${styles.endIcon} ${isError ? styles.error : ''}`}>
         {endIcon}
       </span>
     );
   if (startIcon)
     return (
-      <span className={`${styles.startIcon} ${isError && styles.error}`}>
+      <span className={`${styles.startIcon} ${isError ? styles.error : ''}`}>
         {startIcon}
       </span>
     );

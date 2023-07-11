@@ -16,6 +16,7 @@ const Button = ({
   variant,
   disabled = false,
   style = {},
+  className = '',
   ...rest
 }: ButtonProps) => {
   return (
@@ -23,7 +24,7 @@ const Button = ({
       type={type}
       style={style}
       disabled={disabled}
-      className={`${styles.button} ${styles[variant]}`}
+      className={`${styles.button} ${styles[variant]} ${className}`}
       onClick={onClick}
       {...rest}
     >

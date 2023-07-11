@@ -1,22 +1,23 @@
 import { FC } from 'react';
 import styles from './checkbox.module.sass';
 
-interface CheckboxTypes {
+interface CheckboxTypes extends React.InputHTMLAttributes<HTMLInputElement> {
   title: string;
-  isChecked: boolean;
-  checkboxHandler: (value: boolean) => void;
+  checkboxHandler: (value: any) => void;
+  name: string;
+  value: any;
 }
 
-const Checkbox: FC<CheckboxTypes> = ({ title, isChecked, checkboxHandler }) => {
+const Checkbox: FC<CheckboxTypes> = ({ title, checkboxHandler, ...rest }) => {
   return (
     <label className={styles.checkBox}>
       <input
         type="checkbox"
-        checked={isChecked}
-        onChange={() => checkboxHandler(!isChecked)}
+        onChange={(evt) => checkboxHandler(evt)}
+        {...rest}
       />
       <span className={styles.checkBoxMark}>
-        {isChecked && <span className="material-icons-outlined">check</span>}
+        {<span className="material-icons-outlined">check</span>}
       </span>
       <span>{title}</span>
     </label>
