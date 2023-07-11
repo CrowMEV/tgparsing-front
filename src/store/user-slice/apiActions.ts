@@ -60,3 +60,15 @@ export const refresh = createAppAsyncThunk<User, void>(
     }
   },
 );
+
+export const patchUser = createAppAsyncThunk<User, FormData>(
+  ApiRoutes.PatchUser,
+  async (updatedUser, { extra: api, rejectWithValue }) => {
+    try {
+      const { data } = await api.patch<User>(ApiRoutes.PatchUser, updatedUser);
+      return data;
+    } catch (error) {
+      return rejectWithValue((error as AxiosError).response?.data);
+    }
+  },
+);

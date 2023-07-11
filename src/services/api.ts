@@ -2,8 +2,8 @@ import axios from 'axios';
 import type { AppStore } from '../store';
 import { logout } from '../store/user-slice/apiActions';
 import { ApiRoutes } from '../store/user-slice/apiRoutes';
+import { BASE_URL } from '../consts/consts';
 
-export const BASE_URL = 'https://api.tgparsing.ru';
 const REQUEST_TIME = 5000;
 let store: AppStore;
 
