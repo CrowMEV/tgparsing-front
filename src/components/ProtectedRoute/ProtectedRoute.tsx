@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks/redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { Routes } from '../../router/routes';
 import { AuthorizationStatus } from '../../consts/consts';
 import Loader from '../ui/loader/loader';
@@ -13,6 +13,8 @@ const ProtectedRoute = ({ children, isAuth = true }: ProtectedRouteProps) => {
   const authStatus = useAppSelector(
     (state) => state.UserData.authorizationStatus,
   );
+
+  const currentLocation = useLocation();
 
   if (authStatus === AuthorizationStatus.Unknown) {
     return (
@@ -30,7 +32,7 @@ const ProtectedRoute = ({ children, isAuth = true }: ProtectedRouteProps) => {
       </div>
     );
   } else if (
-    location.pathname === Routes.Tariffs &&
+    currentLocation.pathname === Routes.Tariffs &&
     isAuth &&
     authStatus !== AuthorizationStatus.Auth
   ) {
