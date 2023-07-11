@@ -20,6 +20,8 @@ import ParsersLayout from '../components/parsers/ParsersLayout/ParsersLayout';
 import Activities from '../components/parsers/activities/Activities';
 import Participants from '../components/parsers/participants/Participants';
 import Geolocation from '../components/parsers/geolocation/Geolocation';
+import TariffsPage from '../pages/TariffsPage/TariffsPage';
+import StartLayout from '../components/StartLayout/StartLayout';
 
 export const router = createBrowserRouter([
   {
@@ -74,7 +76,7 @@ export const router = createBrowserRouter([
       },
       {
         path: Routes.Tariffs,
-        element: <InvitingPage />,
+        element: <TariffsPage />,
       },
       {
         path: Routes.Profile,
@@ -123,9 +125,19 @@ export const router = createBrowserRouter([
   {
     element: (
       <ProtectedRoute isAuth={false}>
-        <StartPage />
+        <StartLayout />
       </ProtectedRoute>
     ),
     path: Routes.Home,
+    children: [
+      {
+        index: true,
+        element: <StartPage />,
+      },
+      {
+        path: Routes.HomeTariffs,
+        element: <TariffsPage />,
+      },
+    ],
   },
 ]);
