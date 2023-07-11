@@ -1,34 +1,32 @@
 @import "/src/assets/styles/variables.sass"
   
 .label
-  position: relative
-
   display: flex
-  flex-direction: column
+  align-items: center
 
-  padding-left: 45px
+  column-gap: 10px
+
+  position: relative
 
   cursor: pointer
 
-.input
+.toggleInput
   opacity: 0
   visibility: hidden
   position: absolute
   
 .toggle
   display: block
-  position: absolute
+  position: relative
 
-  top: 50%
-  left: 0
-  transform: translateY(-50%)
-
-  width: 35px
-  height: 8px
+  width: 52px
+  height: 32px
 
   
-  background-color: $c-primary-red
-  border-radius: 15px
+  background-color: transparent
+
+  border: 1px solid $c-additional
+  border-radius: 100px
 
   &::before
     content: ""
@@ -36,28 +34,30 @@
     display: block
 
     top: 50%
-    left: -5%
+    left: 6%
     transform: translateY(-50%)
   
-    width: 20px
-    height: 20px
+    width: 24px
+    height: 24px
 
-    background: #202020
-    background: linear-gradient(0deg, #202020, #73717B)
+    background: $c-additional
     border-radius: 50%
 
     transition: all 0.2s
 
-.input:checked + .toggle
-  background-color: $c-primary-green
+.toggleInput:checked + .toggle
+  background-color: $c-additional
 
   &::before
-    left: 45%
+    left: 48%
+    background-color: $c-secondary
 
+.toggleInput:hover + .toggle
+  border: 2px solid $c-additional
 
-.supTitle
-  font-size: 10px
-  color: $c-light-grey
-    
-.title
-  font-size: 12px
+.toggleInput:disabled + .toggle
+  background-color: transparent
+  border: 1px solid $c-disabled
+
+  &::before
+    background-color: $c-disabled
