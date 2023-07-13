@@ -138,6 +138,7 @@ const MainData = ({ user }: MainDataProps) => {
                 name="email"
                 type="text"
                 placeholder="Электронная почта"
+                hintMessage="Внимание! Эта почта будет использоваться при входе в аккаунт"
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
