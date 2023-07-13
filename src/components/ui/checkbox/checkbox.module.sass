@@ -1,37 +1,50 @@
 @import "/src/assets/styles/variables.sass"
 @import "/src/assets/styles/mixins.sass"
   
-.checkBox
+.checkbox
   display: flex
   align-items: center
+  column-gap: 10px
+
   font-size: 14px
 
   cursor: pointer
 
-  & input
-    position: absolute
-    z-index: -1
-    opacity: 0
+.checkboxInput
+  position: absolute
+  z-index: -1
+  opacity: 0
 
-  + .subText
-    margin-top: 10px
-  
-
-.checkBoxMark
+.checkboxMark
   position: relative
 
-  display: block
+  display: flex
+  justify-content: center
+  align-items: center
   
-  width: 1.5rem
-  height: 1.5rem
+  width: 18px
+  height: 18px
 
-  margin-right: 10px
+  background-color: transparent
 
-  background-color: $c-light-grey
+  border: 2px solid $c-additional
+  border-radius: 2px
 
-.checkBox input:checked + .checkBoxMark
-  background-color: $c-primary-green
-  color: $c-primary-grey
+  transition: all 0.2s
 
-.checkBox input:focus + .checkBoxMark
-  @include element-focus
+  svg
+    color: #ffffff
+
+.checkboxInput:checked + .checkboxMark
+  background-color: $c-additional
+
+.checkboxInput:hover + .checkboxMark
+  transform: scale(1.2)
+
+.checkboxInput:disabled + .checkboxMark
+  transform: scale(1)
+  background-color: transparent
+  border-color: $c-disabled
+
+  svg
+    color: $c-disabled

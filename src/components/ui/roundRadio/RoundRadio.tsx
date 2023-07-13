@@ -1,23 +1,23 @@
 import { ChangeEvent, FC } from 'react';
 import styles from './roundRadio.module.sass';
 
-interface RadioTypes {
+interface RadioTypes extends React.InputHTMLAttributes<HTMLInputElement> {
   title: string;
-  name: string;
-  value: string;
   currentValue: string;
   radioHandler: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const RoundRadio: FC<RadioTypes> = ({
   title,
+  className,
   name,
   value,
   currentValue,
   radioHandler,
+  ...rest
 }) => {
   return (
-    <label className={styles.roundRadio}>
+    <label className={`${styles.roundRadio} ${className}`}>
       <input
         className={styles.radioInput}
         type="radio"
@@ -25,9 +25,10 @@ const RoundRadio: FC<RadioTypes> = ({
         value={value}
         checked={value === currentValue}
         onChange={(evt) => radioHandler(evt)}
+        {...rest}
       />
       <span className={styles.radioMark}></span>
-      <span className={styles.radioTitle}>{title}</span>
+      <span>{title}</span>
     </label>
   );
 };

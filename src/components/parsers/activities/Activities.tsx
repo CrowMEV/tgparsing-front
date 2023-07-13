@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FieldArray, Form, Formik, getIn } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 
 import { activitiesValidation } from './activities-validation-schema';
 
+import AudienceSelectionWindow from '../AudienceSelectionWindow/AudienceSelectionWindow';
 import IconButton from '../../ui/iconButton/IconButton';
 import TextInput from '../../ui/input/TextInput';
 import Button from '../../ui/button/Button';
+import Checkbox from '../../ui/checkbox/Checkbox';
+import ModalWindow from '../../ui/modal-window/ModalWindow';
 
 import { ReactComponent as PlusIcon } from '../../../assets/images/icons/plus.svg';
 import { ReactComponent as MinusIcon } from '../../../assets/images/icons/minus.svg';
 
 import sharedStyles from '../index.module.sass';
-import Checkbox from '../../ui/checkbox/Checkbox';
-import ModalWindow from '../../ui/modal-window/ModalWindow';
-import Tabs from '../../ui/tabs/tabs';
-import AudienceSelectionWindow from '../AudienceSelectionWindow/AudienceSelectionWindow';
 
 type FormValues = {
   groups: { id: string; value: string }[];

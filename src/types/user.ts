@@ -15,4 +15,5 @@ export interface User {
   is_superuser: boolean;
   is_verified: boolean;
   role: Role;
+  timezone: number;
 }

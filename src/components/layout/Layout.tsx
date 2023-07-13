@@ -8,9 +8,10 @@ import { MENU_ITEMS } from './menu-items';
 
 const Layout: FC = () => {
   const location = useLocation();
+  const path = `/${location.pathname.split('/')[1]}`;
   const currentPage =
-    NAV_ITEMS.find((item) => item.link === location.pathname) ||
-    MENU_ITEMS.find((item) => item.link === location.pathname) ||
+    NAV_ITEMS.find((item) => item.link === path) ||
+    MENU_ITEMS.find((item) => item.link === path) ||
     MENU_ITEMS[0];
 
   return (

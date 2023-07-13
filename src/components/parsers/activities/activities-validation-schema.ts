@@ -5,7 +5,7 @@ export const activitiesValidation = object({
   name: string().required(ValidationErrors.required),
   groups: array().of(
     object({
-      id: number(),
+      id: string(),
       value: string().required(ValidationErrors.required),
     }),
   ),

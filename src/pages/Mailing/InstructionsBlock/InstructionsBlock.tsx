@@ -40,10 +40,10 @@ const InstructionsBlock: FC<InstructionsBlockTypes> = ({
       <div className={styles.checkboxPro}>
         <Toggle
           title="Рассылки PRO"
-          supTitle="Быстрее, проще, эффективнее"
-          isChecked={formData.isPro}
-          toggleHandler={(value: boolean) =>
-            setFormData({ ...formData, isPro: value })
+          className={styles.checkboxToggle}
+          checked={formData.isPro}
+          toggleHandler={(evt) =>
+            setFormData({ ...formData, isPro: evt.target.checked })
           }
         />
       </div>

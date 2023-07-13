@@ -5,7 +5,9 @@
   display: flex
   align-items: center
 
-  font-size: 14px
+  column-gap: 10px
+
+  font-size: 16px
 
   cursor: pointer
 
@@ -19,15 +21,18 @@
 
   display: block
   
-  width: 1.2rem
-  height: 1.2rem
+  width: 20px
+  height: 20px
 
-  margin-right: 8px
-
-  border: 1px solid $c-primary-green
+  border: 2px solid $c-additional
   border-radius: 50%
 
   background-color: transparent
+
+  transition: all 0.2s
+
+.radioInput:hover + .radioMark
+  transform: scale(1.2)
 
 
 .radioInput:checked + .radioMark::before
@@ -39,12 +44,19 @@
   left: 50%
   transform: translateY(-50%) translateX(-50%)
 
-  width: 0.8rem
-  height: 0.8rem
+  width: 10px
+  height: 10px
 
-  background-color: $c-primary-green
+  background-color: $c-additional
 
   border-radius: 50%
+
+.radioInput:disabled + .radioMark
+  transform: scale(1)
+  border-color: $c-disabled
+
+.radioInput:disabled + .radioMark::before
+  background-color: $c-disabled
 
 .radioInput:focus + .radioLabel
   @include element-focus

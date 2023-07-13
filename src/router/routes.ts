@@ -14,6 +14,7 @@ export enum Routes {
   Reports = '/reports',
   Inviting = '/inviting',
   Tariffs = '/tariffs',
+  HomeTariffs = '/home/tariffs',
   Documents = '/documents',
   Profile = '/profile',
 }

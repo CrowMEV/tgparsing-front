@@ -3,4 +3,5 @@ export enum ApiRoutes {
   Login = '/user/login',
   Logout = '/user/logout',
   Refresh = '/user/refresh',
+  PatchUser = '/user/me',
 }

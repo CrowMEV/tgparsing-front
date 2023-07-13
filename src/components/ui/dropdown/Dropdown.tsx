@@ -29,11 +29,13 @@ const Dropdown = ({
   }, [dropdownRef]);
   return (
     <div
-      className={`${styles.dropdownContainer} ${disabled && styles.disabled}`}
+      className={`${styles.dropdownContainer} ${
+        disabled ? styles.disabled : ''
+      }`}
       ref={dropdownRef}
     >
       <div
-        className={`${styles.dropdownHeader} ${isOpen && styles.open}`}
+        className={`${styles.dropdownHeader} ${isOpen ? styles.open : ''}`}
         onClick={() => {
           if (disabled) {
             return;
@@ -48,7 +50,9 @@ const Dropdown = ({
           {options.map((option) => (
             <li
               key={option}
-              className={styles.dropdownItem}
+              className={`${styles.dropdownItem} ${
+                selectedOption === option ? styles.selectedOption : ''
+              }`}
               onClick={() => {
                 onChange(option);
                 setIsOpen(false);
