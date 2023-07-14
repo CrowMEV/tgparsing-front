@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import TariffInfo from '../../components/Dashboard/TariffInfo/TariffInfo';
+import TariffInfo from '../../components/TariffInfo/TariffInfo';
 import TariffItem from '../../components/Tariffs/TariffItem/TariffItem';
 import { AuthorizationStatus } from '../../consts/consts';
 import { useAppSelector } from '../../hooks/redux';

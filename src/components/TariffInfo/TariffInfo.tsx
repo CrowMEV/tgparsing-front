@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import ModalWindow from '../../ui/modal-window/ModalWindow';
+import ModalWindow from '../ui/modal-window/ModalWindow';
 import styles from './tariff-info.module.sass';
-import Button from '../../ui/button/Button';
+import Button from '../ui/button/Button';
 import { useNavigate } from 'react-router-dom';
-import { Routes } from '../../../router/routes';
+import { Routes } from '../../router/routes';
 
 const TariffInfo = () => {
   const [tariffDetailIsOpened, setTariffDetailIsOpened] = useState(false);
