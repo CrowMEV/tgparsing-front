@@ -1,22 +1,23 @@
 @import '../../../assets/styles/global.sass'
 
-.buttonIcon:not(:disabled)
+.buttonIcon
   display: flex
   width: fit-content
   border-radius: 50%
   color: $c-additional
-
   transition: all .1s
-  
-  &:hover
-    color: white
 
-  &:active
-    color: $c-additional
+  &:disabled
+    cursor: default
+    color: $c-additional 
 
+  &:not(:disabled)
+    &:hover
+      color: white
 
-.buttonIcon:disabled
-  cursor: default
+    &:active
+      color: $c-additional
+
 
 .error
   color: $c-error

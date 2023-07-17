@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-
-import sharedStyles from '../index.module.sass';
+import { useState } from 'react';
 import { Form, Formik } from 'formik';
+
 import { activitiesValidation } from './activities-validation-schema';
+
 import TextInput from '../../ui/input/TextInput';
 import Button from '../../ui/button/Button';
+
+import sharedStyles from '../index.module.sass';
 
 type FormValues = {
   groups: string;
@@ -126,7 +128,7 @@ const Activities = () => {
               style={{ maxWidth: '610px' }}
               variant="accent"
               type="submit"
-              disabled={!isValid || isFetching}
+              disabled={isFetching}
             >
               Начать сбор аудитории
             </Button>

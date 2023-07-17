@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { Circle, Popup } from 'react-leaflet';
+import { Form, Formik } from 'formik';
+
+import { geolocationValidation } from './geolocation-validation-schema';
 
 import Map from '../../Map/Map';
 import DraggableCircle from '../../Map/DraggableCircle';
 import SearchControl from '../../Map/SearchControl';
 import RoundRadio from '../../ui/roundRadio/RoundRadio';
+import TextInput from '../../ui/input/TextInput';
+import Button from '../../ui/button/Button';
 
 import styles from './geolocation.module.sass';
 import sharedStyles from '../index.module.sass';
-import { Form, Formik } from 'formik';
-import TextInput from '../../ui/input/TextInput';
-import Button from '../../ui/button/Button';
-import { geolocationValidation } from './geolocation-validation-schema';
 
 const RADIUSES = [500, 1000, 2000, 3000, 5000] as const;
 
@@ -181,7 +182,7 @@ const Geolocation = () => {
               style={{ maxWidth: '610px' }}
               variant="accent"
               type="submit"
-              disabled={!isValid || isFetching}
+              disabled={isFetching}
             >
               Начать сбор аудитории
             </Button>

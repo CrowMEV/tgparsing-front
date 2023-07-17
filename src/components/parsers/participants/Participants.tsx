@@ -66,36 +66,25 @@ const Participants = () => {
             </div>
             <div>
               <h3 className={sharedStyles.header}>пребывают в группах</h3>
-              <div className={sharedStyles.inputGroup}>
-                <TextInput
-                  name="amountFrom"
-                  type="number"
-                  placeholder="От"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  errorMessage={
-                    errors.amountFrom && touched.amountFrom
-                      ? errors.amountFrom
-                      : ''
-                  }
-                />
-                <TextInput
-                  name="amountTo"
-                  type="number"
-                  placeholder="До (включительно)"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  errorMessage={
-                    errors.amountTo && touched.amountTo ? errors.amountTo : ''
-                  }
-                />
-              </div>
+              <TextInput
+                style={{ maxWidth: '305px' }}
+                name="amountFrom"
+                type="number"
+                placeholder="От"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                errorMessage={
+                  errors.amountFrom && touched.amountFrom
+                    ? errors.amountFrom
+                    : ''
+                }
+              />
             </div>
             <Button
               style={{ maxWidth: '610px' }}
               variant="accent"
               type="submit"
-              disabled={!isValid || isFetching}
+              disabled={isFetching}
             >
               Начать сбор аудитории
             </Button>

@@ -1,13 +1,13 @@
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { patchUser } from '../../store/user-slice/apiActions';
+import { TIMEZONES } from '../../consts/consts';
+
 import MainData from '../../components/Profile/MainData/MainData';
 import PassData from '../../components/Profile/PassData/PassData';
 import TextInput from '../../components/ui/input/TextInput';
-import Button from '../../components/ui/button/Button';
+import Dropdown from '../../components/ui/dropdown/Dropdown';
 
 import styles from './profilePage.module.sass';
-import Dropdown from '../../components/ui/dropdown/Dropdown';
-import { TIMEZONES } from '../../consts/consts';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { patchUser } from '../../store/user-slice/apiActions';
 
 const ProfilePage = () => {
   const dispatch = useAppDispatch();
