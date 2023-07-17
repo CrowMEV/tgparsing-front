@@ -1,9 +1,14 @@
-import { date, number, object, ref, string } from 'yup';
+import { array, date, number, object, ref, string } from 'yup';
 import { ValidationErrors } from '../../../consts/validation';
 
 export const activitiesValidation = object({
   name: string().required(ValidationErrors.required),
-  groups: string().required(ValidationErrors.required),
+  groups: array().of(
+    object({
+      id: string(),
+      value: string().required(ValidationErrors.required),
+    }),
+  ),
   amountFrom: number()
     .required(ValidationErrors.required)
     .typeError(ValidationErrors.numberValidation.numberType)

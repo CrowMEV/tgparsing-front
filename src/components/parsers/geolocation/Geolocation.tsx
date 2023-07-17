@@ -48,25 +48,11 @@ const Geolocation = () => {
           touched,
           handleChange,
           handleBlur,
-          isValid,
           setFieldValue,
         }) => (
           <Form className={sharedStyles.form}>
             <div>
-              <h3 className={sharedStyles.header}>Шаг 1. Название задачи</h3>
-              <TextInput
-                style={{ maxWidth: '610px' }}
-                name="name"
-                type="text"
-                placeholder="Придумайте название задачи"
-                hintMessage="Название будет видно только Вам"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                errorMessage={errors.name && touched.name ? errors.name : ''}
-              />
-            </div>
-            <div>
-              <h3 className={sharedStyles.header}>Шаг 2. Геоточка</h3>
+              <h3 className={sharedStyles.header}>Геоточка</h3>
               <div className={styles.mapWrapper}>
                 <Map
                   width="610px"
@@ -163,7 +149,7 @@ const Geolocation = () => {
             </div>
             <div>
               <h3 className={sharedStyles.header}>
-                Шаг 4. Радиус действия геоточки (метры)
+                Радиус действия геоточки (метры)
               </h3>
               <div className={styles.radiusSelect}>
                 {RADIUSES.map((radius) => (
@@ -177,6 +163,19 @@ const Geolocation = () => {
                   />
                 ))}
               </div>
+            </div>
+            <div>
+              <h3 className={sharedStyles.header}>Название задачи</h3>
+              <TextInput
+                style={{ maxWidth: '610px' }}
+                name="name"
+                type="text"
+                placeholder="Придумайте название задачи"
+                hintMessage="Название будет видно только Вам"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                errorMessage={errors.name && touched.name ? errors.name : ''}
+              />
             </div>
             <Button
               style={{ maxWidth: '610px' }}

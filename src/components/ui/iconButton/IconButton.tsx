@@ -12,13 +12,16 @@ const IconButton = ({
   children,
   onClick,
   isError,
+  className,
   ...rest
 }: IconButtonProps) => {
   return (
     <button
       type="button"
       onClick={(e) => onClick(e)}
-      className={`${styles.buttonIcon} ${isError ? styles.error : ''}`}
+      className={`${styles.buttonIcon} ${
+        isError ? styles.error : ''
+      }, ${className}`}
       {...rest}
     >
       {children}
