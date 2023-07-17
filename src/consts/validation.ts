@@ -25,7 +25,7 @@ export const ValidationErrors = {
   },
 
   mapValidation: {
-    noMarkers: 'Не отмечена ни одна точка на карте',
+    noMarkers: 'Необходимо отметить точку на карте',
   },
 };
 

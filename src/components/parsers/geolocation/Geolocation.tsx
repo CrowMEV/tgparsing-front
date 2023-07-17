@@ -19,12 +19,10 @@ const RADIUSES = [500, 1000, 2000, 3000, 5000] as const;
 type FormValues = {
   radius: (typeof RADIUSES)[number];
   name: string;
-  markers: Array<[number, number]>;
+  marker: [number, number] | null;
 };
 
 const Geolocation = () => {
-  const MAX_MARKERS_AMOUNT = 10;
-  const [tempMarker, setTempMarker] = useState<[number, number] | null>(null);
   const [isFetching, setIsFetching] = useState(false);
 
   const handleSubmit = (values: FormValues) => {
@@ -37,7 +35,7 @@ const Geolocation = () => {
         initialValues={{
           radius: RADIUSES[0],
           name: '',
-          markers: [],
+          marker: null,
         }}
         validationSchema={geolocationValidation}
         onSubmit={handleSubmit}
@@ -62,89 +60,26 @@ const Geolocation = () => {
                 >
                   {
                     <>
-                      <SearchControl setMarker={setTempMarker} />
-                      {tempMarker && (
+                      <SearchControl
+                        setMarker={(coordinates) =>
+                          setFieldValue('marker', coordinates)
+                        }
+                      />
+                      {values.marker && (
                         <DraggableCircle
                           radius={values.radius}
-                          center={tempMarker}
-                          setMarker={setTempMarker}
+                          center={values.marker}
+                          setMarker={(coordinates) =>
+                            setFieldValue('marker', coordinates)
+                          }
                         />
                       )}
-                      {values.markers.map((coordinates) => (
-                        <Circle
-                          key={(coordinates as [number, number]).join()}
-                          radius={values.radius}
-                          center={coordinates}
-                        >
-                          <Popup>
-                            <div
-                              style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                              }}
-                            >
-                              <span
-                                style={{
-                                  cursor: 'pointer',
-                                  textDecoration: 'underline',
-                                }}
-                                onClick={() => {
-                                  setFieldValue(
-                                    'markers',
-                                    values.markers.filter(
-                                      (el) => el !== coordinates,
-                                    ),
-                                  );
-                                  setTempMarker(coordinates);
-                                }}
-                              >
-                                Переместить точку
-                              </span>
-                              <span
-                                style={{
-                                  cursor: 'pointer',
-                                  textDecoration: 'underline',
-                                }}
-                                onClick={() =>
-                                  setFieldValue(
-                                    'markers',
-                                    values.markers.filter(
-                                      (el) => el !== coordinates,
-                                    ),
-                                  )
-                                }
-                              >
-                                Удалить точку
-                              </span>
-                            </div>
-                          </Popup>
-                        </Circle>
-                      ))}
                     </>
                   }
                 </Map>
               </div>
-              <Button
-                style={{ maxWidth: '280px' }}
-                variant="additional"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (
-                    tempMarker &&
-                    values.markers.length < MAX_MARKERS_AMOUNT
-                  ) {
-                    setFieldValue('markers', [...values.markers, tempMarker]);
-                    setTempMarker(null);
-                  }
-                }}
-              >
-                {`Сохранить точку ${MAX_MARKERS_AMOUNT - values.markers.length}/
-                ${MAX_MARKERS_AMOUNT}`}
-              </Button>
               <div className={styles.mapError}>
-                {errors.markers && touched.markers ? errors.markers : ''}
+                {errors.marker && touched.marker ? errors.marker : ''}
               </div>
             </div>
             <div>
