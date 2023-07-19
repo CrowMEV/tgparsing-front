@@ -1,9 +1,11 @@
-import { useState } from 'react';
-import { Form, Formik } from 'formik';
+import { useEffect, useState } from 'react';
+import { Form, Formik, useFormikContext } from 'formik';
 
 import { passDataValidation } from './pass-validation-schema';
-import { useAppDispatch } from '../../../hooks/redux';
 import { patchUser } from '../../../store/user-slice/apiActions';
+import { api } from '../../../services/api';
+import { useAppDispatch } from '../../../hooks/redux';
+import { useDebounce } from '../../../hooks/useDebounce';
 
 import TextInput from '../../ui/input/TextInput';
 import Button from '../../ui/button/Button';
@@ -15,13 +17,62 @@ import { ReactComponent as ShowIcon } from '../../../assets/images/icons/opened-
 
 import sharedStyles from '../profile.module.sass';
 
-const PassData = () => {
+type formValues = {
+  currentPassValidity: boolean;
+  currentPass: string;
+  newPass: string;
+  newPassConfirm: string;
+};
+
+const CurrentPass = () => {
+  const { setFieldValue, values } = useFormikContext<formValues>();
   const [currentPassVisibility, setCurrentPassVisibility] = useState(false);
-  const [newPassVisibility, setNewPassVisibility] = useState(false);
+  const [currentPassError, setCurrentPassError] = useState('');
+  const debouncedCurrentPassword = useDebounce(values.currentPass, 1500);
+
+  useEffect(() => {
+    if (debouncedCurrentPassword) {
+      api
+        .post('/user/pass', { password: debouncedCurrentPassword })
+        .then(() => setFieldValue('currentPassValidity', true))
+        .catch((error) => {
+          setCurrentPassError(error.response.data.detail);
+          setFieldValue('currentPassValidity', false);
+        });
+    }
+  }, [debouncedCurrentPassword]);
+
+  return (
+    <TextInput
+      autoComplete="new-password"
+      name="currentPass"
+      value={values.currentPass}
+      onChange={(e) => {
+        setFieldValue('currentPass', e.target.value);
+        setCurrentPassError('');
+      }}
+      errorMessage={currentPassError}
+      type={currentPassVisibility ? 'text' : 'password'}
+      placeholder="Текущий пароль"
+      endIcon={
+        <IconButton
+          isError={Boolean(currentPassError.length)}
+          onClick={() => setCurrentPassVisibility((state) => !state)}
+        >
+          {currentPassVisibility ? <ShowIcon /> : <HideIcon />}
+        </IconButton>
+      }
+    />
+  );
+};
+
+const PassData = () => {
   const dispatch = useAppDispatch();
+  const [newPassVisibility, setNewPassVisibility] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
 
-  const initialValues = {
+  const initialValues: formValues = {
+    currentPassValidity: false,
     currentPass: '',
     newPass: '',
     newPassConfirm: '',
@@ -44,48 +95,30 @@ const PassData = () => {
           });
       }}
     >
-      {({ errors, touched, handleChange, handleBlur, dirty }) => (
+      {({ errors, touched, handleChange, handleBlur, dirty, values }) => (
         <Form>
           <h3 className={sharedStyles.header}>Пароль</h3>
           <div className={sharedStyles.column}>
+            <CurrentPass />
             <TextInput
-              disabled
-              autoComplete="new-password"
-              name="currentPass"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              errorMessage={
-                dirty && errors.currentPass && touched.currentPass
-                  ? errors.currentPass
-                  : ''
-              }
-              type={currentPassVisibility ? 'text' : 'password'}
-              placeholder="Текущий пароль"
-              endIcon={
-                <IconButton
-                  disabled
-                  isError={
-                    (dirty && errors.currentPass && touched.currentPass) ||
-                    false
-                  }
-                  onClick={() => setCurrentPassVisibility((state) => !state)}
-                >
-                  {currentPassVisibility ? <ShowIcon /> : <HideIcon />}
-                </IconButton>
-              }
-            />
-            <TextInput
+              disabled={!values.currentPassValidity}
               autoComplete="new-password"
               name="newPass"
               onChange={handleChange}
               onBlur={handleBlur}
               errorMessage={
-                dirty && errors.newPass && touched.newPass ? errors.newPass : ''
+                values.currentPassValidity &&
+                dirty &&
+                errors.newPass &&
+                touched.newPass
+                  ? errors.newPass
+                  : ''
               }
               type={newPassVisibility ? 'text' : 'password'}
               placeholder="Новый пароль"
               endIcon={
                 <IconButton
+                  disabled={!values.currentPassValidity}
                   isError={
                     (dirty && errors.newPass && touched.newPass) || false
                   }
@@ -96,12 +129,16 @@ const PassData = () => {
               }
             />
             <TextInput
+              disabled={!values.currentPassValidity}
               autoComplete="new-password"
               name="newPassConfirm"
               onChange={handleChange}
               onBlur={handleBlur}
               errorMessage={
-                dirty && errors.newPassConfirm && touched.newPassConfirm
+                values.currentPassValidity &&
+                dirty &&
+                errors.newPassConfirm &&
+                touched.newPassConfirm
                   ? errors.newPassConfirm
                   : ''
               }
@@ -109,6 +146,7 @@ const PassData = () => {
               placeholder="Повторите новый пароль"
               endIcon={
                 <IconButton
+                  disabled={!values.currentPassValidity}
                   isError={
                     (dirty &&
                       errors.newPassConfirm &&
@@ -122,7 +160,7 @@ const PassData = () => {
               }
             />
             <Button
-              disabled={!dirty && !isFetching}
+              disabled={!dirty && !isFetching && !values.currentPassValidity}
               type="submit"
               variant="accent"
             >
