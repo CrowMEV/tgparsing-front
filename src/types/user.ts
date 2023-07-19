@@ -2,18 +2,21 @@
 interface Role {
   name: string;
   is_active: boolean;
-  permissions: object;
+  staff_action: [];
+  payment_action: string[];
+  role_action: [];
 }
 
 export interface User {
   id: number;
-  avatar_url: string;
   firstname: string;
   lastname: string;
   email: string;
+  timezone: number;
+  is_staff: boolean;
   is_active: boolean;
   is_superuser: boolean;
   is_verified: boolean;
+  avatar_url: string;
   role: Role;
-  timezone: number;
 }

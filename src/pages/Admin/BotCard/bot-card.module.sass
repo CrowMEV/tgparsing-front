@@ -1,0 +1,27 @@
+@import "/src/assets/styles/global.sass"
+@import "/src/assets/styles/mixins.sass"
+
+.wrapper
+  display: flex
+
+.header
+  @include header(20px)
+  display: flex
+  align-items: center
+
+.avatar
+  margin-right: 60px
+
+.settings
+  display: flex
+  flex-direction: column
+  gap: 24px
+
+.statuses
+  margin-right: 100px
+
+.status
+  border-bottom: 1px solid $c-additional
+
+.input, .button
+  max-width: 310px

@@ -22,6 +22,8 @@ import Participants from '../components/parsers/participants/Participants';
 import Geolocation from '../components/parsers/geolocation/Geolocation';
 import TariffsPage from '../pages/TariffsPage/TariffsPage';
 import StartLayout from '../components/StartLayout/StartLayout';
+import UserCard from '../pages/Admin/UserCard/UserCard';
+import BotCard from '../pages/Admin/BotCard/BotCard';
 
 export const router = createBrowserRouter([
   {
@@ -137,6 +139,24 @@ export const router = createBrowserRouter([
       {
         path: Routes.HomeTariffs,
         element: <TariffsPage />,
+      },
+    ],
+  },
+  {
+    path: '/admin/user/:userId',
+    children: [
+      {
+        index: true,
+        element: <UserCard />,
+      },
+    ],
+  },
+  {
+    path: '/admin/bot/:botId',
+    children: [
+      {
+        index: true,
+        element: <BotCard />,
       },
     ],
   },

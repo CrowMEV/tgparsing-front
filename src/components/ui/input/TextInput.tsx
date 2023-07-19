@@ -59,7 +59,7 @@ const TextInput = ({
   onBlur,
   onFocus,
 
-  className,
+  className = '',
   style,
   placeholderStyle,
   errorMessage = '',

@@ -12,7 +12,7 @@ const IconButton = ({
   children,
   onClick,
   isError,
-  className,
+  className = '',
   ...rest
 }: IconButtonProps) => {
   return (
@@ -21,7 +21,7 @@ const IconButton = ({
       onClick={(e) => onClick(e)}
       className={`${styles.buttonIcon} ${
         isError ? styles.error : ''
-      }, ${className}`}
+      } ${className}`}
       {...rest}
     >
       {children}
