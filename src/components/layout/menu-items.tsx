@@ -9,6 +9,10 @@ import { ReactComponent as BaseIcon } from '../../assets/images/icons/base.svg';
 import { ReactComponent as ReportIcon } from '../../assets/images/icons/report.svg';
 import { ReactComponent as FinanceIcon } from '../../assets/images/icons/finance.svg';
 import { ReactComponent as TariffIcon } from '../../assets/images/icons/tariffs.svg';
+
+import { ReactComponent as UsersIcon } from '../../assets/images/icons/users-icon.svg';
+import { ReactComponent as BotIcon } from '../../assets/images/icons/bot-icon.svg';
+import { ReactComponent as CoinsIcon } from '../../assets/images/icons/coins-icon.svg';
 import { ReactElement } from 'react';
 
 export enum MenuCategory {
@@ -96,6 +100,37 @@ export const MENU_ITEMS: MenuItem[] = [
     text: 'Тарифы',
     link: Routes.Tariffs,
     icon: <TariffIcon />,
+    menuCategory: MenuCategory.Navbar,
+  },
+];
+
+export const ADMIN_ITEMS: MenuItem[] = [
+  {
+    position: 0,
+    text: 'Пользователи',
+    link: Routes.AdminUsers,
+    icon: <UsersIcon />,
+    menuCategory: MenuCategory.Navbar,
+  },
+  {
+    position: 1,
+    text: 'Боты',
+    link: Routes.AdminBots,
+    icon: <BotIcon />,
+    menuCategory: MenuCategory.Navbar,
+  },
+  {
+    position: 2,
+    text: 'Тарифы',
+    link: Routes.AdminTariff,
+    icon: <TariffIcon />,
+    menuCategory: MenuCategory.Navbar,
+  },
+  {
+    position: 3,
+    text: 'Финансы',
+    link: Routes.AdminFinance,
+    icon: <CoinsIcon />,
     menuCategory: MenuCategory.Navbar,
   },
 ];

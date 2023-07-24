@@ -16,4 +16,6 @@ export interface User {
   is_verified: boolean;
   role: Role;
   timezone: number;
+  created_at: string;
+  phone_number: string;
 }

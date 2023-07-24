@@ -3,7 +3,7 @@ import styles from './toggle.module.sass';
 
 interface ToggleTypes extends React.InputHTMLAttributes<HTMLInputElement> {
   title?: string;
-  toggleHandler: (event: ChangeEvent<HTMLInputElement>) => void;
+  toggleHandler?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Toggle: FC<ToggleTypes> = ({
@@ -19,7 +19,7 @@ const Toggle: FC<ToggleTypes> = ({
         className={styles.toggleInput}
         type="checkbox"
         checked={checked}
-        onChange={(evt) => toggleHandler(evt)}
+        onChange={(evt) => toggleHandler?.(evt)}
         {...rest}
       />
       <span className={styles.toggle}></span>

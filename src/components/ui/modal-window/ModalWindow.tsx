@@ -1,9 +1,10 @@
-import { FC, ReactNode, useEffect } from 'react';
+import { CSSProperties, FC, ReactNode, useEffect } from 'react';
 import styles from './modal-window.module.sass';
 
 type ModalWindowProps = {
   isActive: boolean;
   setActive: (modalIsActive: boolean) => void;
+  style?: CSSProperties;
   children: ReactNode;
 };
 
@@ -11,6 +12,7 @@ const ModalWindow: FC<ModalWindowProps> = ({
   children,
   isActive,
   setActive,
+  style,
 }) => {
   useEffect(() => {
     const handleKeydown = (evt: KeyboardEvent) => {
@@ -37,6 +39,7 @@ const ModalWindow: FC<ModalWindowProps> = ({
         className={`${styles.content} ${
           isActive ? styles.content__active : ''
         }`}
+        style={style}
         onClick={(evt) => evt.stopPropagation()}
       >
         <button

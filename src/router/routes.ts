@@ -17,4 +17,9 @@ export enum Routes {
   HomeTariffs = '/home/tariffs',
   Documents = '/documents',
   Profile = '/profile',
+  Admin = '/admin',
+  AdminUsers = '/admin/users',
+  AdminTariff = '/admin/tariffs',
+  AdminBots = '/admin/bots',
+  AdminFinance = '/admin/finance',
 }

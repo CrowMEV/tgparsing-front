@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../hooks/redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import { Routes } from '../../router/routes';
-import { AuthorizationStatus } from '../../consts/consts';
+import { AuthorizationStatus, Modes, Roles } from '../../consts/consts';
 import Loader from '../ui/loader/loader';
 
 type ProtectedRouteProps = {
@@ -13,6 +13,9 @@ const ProtectedRoute = ({ children, isAuth = true }: ProtectedRouteProps) => {
   const authStatus = useAppSelector(
     (state) => state.UserData.authorizationStatus,
   );
+
+  const role = useAppSelector((state) => state.UserData.user?.role.name);
+  const mode = useAppSelector((state) => state.UserData.mode);
 
   const currentLocation = useLocation();
 
@@ -41,6 +44,19 @@ const ProtectedRoute = ({ children, isAuth = true }: ProtectedRouteProps) => {
     return <Navigate to={Routes.Login} replace />;
   } else if (!isAuth && authStatus !== AuthorizationStatus.NoAuth) {
     return <Navigate to={Routes.Dashboard} replace />;
+  } else if (
+    role !== Roles.Admin &&
+    currentLocation.pathname.split('/')[1] === 'admin'
+  ) {
+    return <Navigate to={Routes.Dashboard} replace />;
+  } else if (
+    isAuth &&
+    mode === Modes.Admin &&
+    currentLocation.pathname.split('/')[1] !== 'admin' &&
+    currentLocation.pathname.split('/')[1] !== 'profile' &&
+    currentLocation.pathname.split('/')[1] !== 'documents'
+  ) {
+    return <Navigate to={Routes.AdminUsers} replace />;
   }
 
   return children;
