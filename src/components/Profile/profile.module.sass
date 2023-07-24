@@ -1,5 +1,13 @@
+@import "/src/assets/styles/mixins.sass"
+  
 .column
   width: 100%
   display: flex
   flex-direction: column
   gap: 40px
+
+.header
+  @include header(20px)
+  display: flex
+  align-items: center
+  margin-bottom: 40px

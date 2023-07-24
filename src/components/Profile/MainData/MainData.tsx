@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../../hooks/redux';
 import { patchUser } from '../../../store/user-slice/apiActions';
 import { mainDataValidation } from './main-validation-schema';
 import { BASE_URL } from '../../../consts/consts';
+import { User } from '../../../types/user';
 
 import Button from '../../ui/button/Button';
 import TextInput from '../../ui/input/TextInput';
@@ -12,7 +13,6 @@ import Loader from '../../ui/loader/loader';
 
 import sharedStyles from '../profile.module.sass';
 import styles from './main-data.module.sass';
-import { User } from '../../../types/user';
 
 type MainDataProps = {
   user: User;
@@ -76,7 +76,7 @@ const MainData = ({ user }: MainDataProps) => {
       }) => (
         <Form className={styles.wrapper}>
           <div className={`${styles.columnWrapper}`}>
-            <h3 className={styles.header}>Аватар</h3>
+            <h3 className={sharedStyles.header}>Аватар</h3>
             <div className={styles.avatarWrapper}>
               <div className={styles.avatar}>
                 <img
@@ -102,11 +102,14 @@ const MainData = ({ user }: MainDataProps) => {
                 <label className={styles.avatarlabel} htmlFor="avatar">
                   Изменить фото
                 </label>
+                <div className={styles.pictureError}>
+                  {errors.picture && touched.picture ? errors.picture : ''}
+                </div>
               </div>
             </div>
           </div>
           <div className={styles.columnWrapper}>
-            <h3 className={styles.header}>Основные данные</h3>
+            <h3 className={sharedStyles.header}>Основные данные</h3>
             <div className={sharedStyles.column}>
               <TextInput
                 name="firstname"

@@ -11,6 +11,7 @@ export const ValidationErrors = {
     `Значение должно быть больше чем ${fieldName}`,
   min: (value: number) => `Поле должно содержать не менее ${value} символов`,
   max: (value: number) => `Поле должно содержать не более ${value} символов`,
+  notImage: 'Неподдерживаемый формат изображения',
 
   numberValidation: {
     positive: 'Значение должно быть больше нуля',
