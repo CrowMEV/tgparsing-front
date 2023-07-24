@@ -12,10 +12,10 @@ import { ReactComponent as MinusIcon } from '../../../assets/images/icons/minus.
 
 import sharedStyles from '../index.module.sass';
 import IconButton from '../../ui/iconButton/IconButton';
+import { api } from '../../../services/api';
 
 type FormValues = {
   groups: { id: string; value: string }[];
-  amountTo: number | null;
   amountFrom: number | null;
   name: string;
 };
@@ -24,7 +24,17 @@ const Participants = () => {
   const [isFetching, setIsFetching] = useState(false);
 
   const handleSubmit = (values: FormValues) => {
-    console.log(values);
+    setIsFetching(true);
+
+    api
+      .post('/telegram/parser/members', {
+        task_name: values.name,
+        parsed_chats: values.groups.map((group) => group.value),
+        groups_count: values.amountFrom,
+      })
+      .then((r) => console.log(r))
+      .catch((error) => console.log(error.response.data.detail))
+      .finally(() => setIsFetching(false));
   };
 
   return (
@@ -32,7 +42,6 @@ const Participants = () => {
       <Formik
         initialValues={{
           groups: [{ id: uuidv4(), value: '' }],
-          amountTo: null,
           amountFrom: null,
           name: '',
         }}

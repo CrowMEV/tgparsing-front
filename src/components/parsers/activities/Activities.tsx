@@ -3,6 +3,7 @@ import { FieldArray, Form, Formik, getIn } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 
 import { activitiesValidation } from './activities-validation-schema';
+import { api } from '../../../services/api';
 
 import AudienceSelectionWindow from '../AudienceSelectionWindow/AudienceSelectionWindow';
 import IconButton from '../../ui/iconButton/IconButton';
@@ -23,9 +24,10 @@ type FormValues = {
   startDate: Date | null;
   endDate: Date | null;
   name: string;
+  activities: string[];
 };
 
-const ACTIVITIES = ['лайки', 'комментарии', 'репосты'];
+const ACTIVITIES = ['комментарии', 'репосты'];
 
 const Activities = () => {
   const [isFetching, setIsFetching] = useState(false);
@@ -33,6 +35,22 @@ const Activities = () => {
 
   const handleSubmit = (values: FormValues) => {
     console.log(values);
+    setIsFetching(true);
+    api
+      .post('/telegram/parser/activemembers', {
+        task_name: values.name,
+        parsed_chats: values.groups.map((group) => group.value),
+        from_date: values.startDate,
+        to_date: values.endDate,
+        activity_count: values.amountFrom,
+        activity: {
+          comments: values.activities.includes('комментарии'),
+          reposts: values.activities.includes('репосты'),
+        },
+      })
+      .then((r) => console.log(r))
+      .catch(console.error)
+      .finally(() => setIsFetching(false));
   };
 
   return (

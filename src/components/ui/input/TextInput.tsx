@@ -104,6 +104,7 @@ const TextInput = ({
             onFocus?.(e);
           }}
           placeholder=" "
+          step={type === 'number' ? 0 : undefined}
           {...rest}
         />
         <Icon

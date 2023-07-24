@@ -13,6 +13,7 @@ import Button from '../../ui/button/Button';
 
 import styles from './geolocation.module.sass';
 import sharedStyles from '../index.module.sass';
+import { api } from '../../../services/api';
 
 const RADIUSES = [500, 1000, 2000, 3000, 5000] as const;
 
@@ -26,7 +27,22 @@ const Geolocation = () => {
   const [isFetching, setIsFetching] = useState(false);
 
   const handleSubmit = (values: FormValues) => {
-    console.log(values);
+    setIsFetching(true);
+
+    api
+      .post('/telegram/parser/geomembers', {
+        task_name: values.name,
+        coordinates: [
+          {
+            latitude: values.marker?.[0],
+            longitude: values.marker?.[1],
+          },
+        ],
+        accuracy_radius: values.radius,
+      })
+      .then((r) => console.log(r))
+      .catch(console.error)
+      .finally(() => setIsFetching(false));
   };
 
   return (
