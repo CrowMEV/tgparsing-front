@@ -1,0 +1,36 @@
+@import "src/assets/styles/variables.sass"
+@import "src/assets/styles/mixins.sass"
+  
+.adminBar
+  height: 100%
+
+  background-color: $c-secondary
+
+  border-radius: 0px 8px 0px 0px
+  
+.adminBar__links
+  position: relative
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: space-between
+  row-gap: 64px
+
+  padding-top: 64px
+  padding-bottom: 154px
+
+.adminBar__link
+  position: relative
+
+.adminBar__underline
+  position: absolute
+  display: block
+
+  width: 100%
+  bottom: -16px
+
+  height: 3px
+
+  background-color: $c-accent
+  border-radius: 5px
+  box-shadow: 0 1px 5px 0 #000000

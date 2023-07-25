@@ -7,3 +7,23 @@
 .innerWrapper
   width: 1440px
   margin: 0 auto
+
+.innerWrapper__admin
+  display: grid
+  grid-template-columns: 228px 1fr
+  grid-template-areas: "header header" "navbar main"
+  row-gap: 34px
+  column-gap: 60px
+
+  height: 100%
+
+.header
+  grid-area: header
+
+  padding-left: 80px
+
+.navbar
+  grid-area: navbar
+
+.main
+  grid-area: main

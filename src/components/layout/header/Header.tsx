@@ -1,5 +1,5 @@
 import styles from './index.module.sass';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as NotificationIcon } from '../../../assets/images/icons/notification.svg';
 import { ReactComponent as PowerIcon } from '../../../assets/images/icons/power-button.svg';
 import { Routes } from '../../../router/routes';
@@ -7,8 +7,11 @@ import NavTabs from '../../ui/navTabs/navTabs';
 import { ReactElement } from 'react';
 import { MenuCategory, MenuItem } from '../menu-items';
 import Logo from '../../ui/logo/Logo';
-import { useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { logout } from '../../../store/user-slice/apiActions';
+import Toggle from '../../ui/toggle/toggle';
+import { Modes, Roles } from '../../../consts/consts';
+import { changeMode } from '../../../store/user-slice/userSlice';
 
 interface PropTypes {
   menuItems: { text: string; link: Routes; icon?: ReactElement }[];
@@ -22,6 +25,19 @@ const Header = ({ menuItems, currentPage }: PropTypes) => {
       : -1;
 
   const dispatch = useAppDispatch();
+  const role = useAppSelector((state) => state.UserData.user?.role.name);
+  const mode = useAppSelector((state) => state.UserData.mode);
+  const navigate = useNavigate();
+
+  const toggleModeHandler = () => {
+    if (mode === Modes.Admin) {
+      dispatch(changeMode(Modes.User));
+      navigate(Routes.Dashboard);
+    } else if (mode === Modes.User) {
+      dispatch(changeMode(Modes.Admin));
+      navigate(Routes.AdminUsers);
+    }
+  };
 
   return (
     <header className={styles.header}>
@@ -29,8 +45,25 @@ const Header = ({ menuItems, currentPage }: PropTypes) => {
         <div className={styles.header__logoWrapper}>
           <Logo />
         </div>
-        <div className={styles.header__currentPage}>{currentPage.text}</div>
+        <div className={styles.header__currentPage}>
+          {mode === Modes.Admin ? (
+            <span>
+              Кабинет
+              <br /> администратора
+            </span>
+          ) : (
+            currentPage.text
+          )}
+        </div>
         <div className={styles.header__links}>
+          {role === Roles.Admin && (
+            <Toggle
+              className={styles.adminToggle}
+              checked={mode === Modes.Admin}
+              toggleHandler={() => toggleModeHandler()}
+              title="Админ"
+            />
+          )}
           <NavTabs currentElementIndex={currentLinkPosition}>
             {menuItems.map((item, index) => (
               <Link
