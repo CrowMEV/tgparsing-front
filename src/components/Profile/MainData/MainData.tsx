@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Formik, Form } from 'formik';
+import { Formik, Form, FormikHelpers } from 'formik';
 
 import { useAppDispatch } from '../../../hooks/redux';
 import { patchUser } from '../../../store/user-slice/apiActions';
@@ -14,16 +14,25 @@ import Loader from '../../ui/loader/loader';
 import sharedStyles from '../profile.module.sass';
 import styles from './main-data.module.sass';
 
-type MainDataProps = {
-  user: User;
+type initialValues = {
+  picture: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  phoneNumber: string;
 };
 
-const MainData = ({ user }: MainDataProps) => {
+type MainDataProps = {
+  user: User;
+  variant?: 'admin' | 'user';
+};
+
+const MainData = ({ user, variant = 'user' }: MainDataProps) => {
   const dispatch = useAppDispatch();
   const [isFetching, setIsFetching] = useState(false);
   const avatarRef = useRef<HTMLImageElement>(null);
 
-  const initialValues = {
+  const initialValues: initialValues = {
     picture: '',
     firstname: user?.firstname || '',
     lastname: user?.lastname || '',
@@ -31,39 +40,51 @@ const MainData = ({ user }: MainDataProps) => {
     phoneNumber: '',
   };
 
+  const handleSubmit = async (
+    values: initialValues,
+    actions: FormikHelpers<initialValues>,
+  ) => {
+    setIsFetching(true);
+    const formData = new FormData();
+    let key: keyof typeof values;
+    for (key in values) {
+      if (!(values[key] === initialValues[key])) {
+        formData.append(key, values[key]);
+      }
+    }
+    let action;
+    if (variant === 'admin') {
+      return;
+    } else if (variant === 'user') {
+      action = dispatch(patchUser(formData));
+    }
+    if (!action) return;
+    await action
+      .unwrap()
+      .then((user) => {
+        actions.resetForm({
+          values: {
+            picture: '',
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            phoneNumber: '',
+          },
+        });
+      })
+      .catch(() => {
+        if (!avatarRef.current) return;
+        avatarRef.current.src = `${BASE_URL}/${user?.avatar_url}`;
+        actions.resetForm();
+      })
+      .finally(() => setIsFetching(false));
+  };
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={mainDataValidation}
-      onSubmit={async (values, actions) => {
-        setIsFetching(true);
-        const formData = new FormData();
-        let key: keyof typeof values;
-        for (key in values) {
-          if (!(values[key] === initialValues[key])) {
-            formData.append(key, values[key]);
-          }
-        }
-        await dispatch(patchUser(formData))
-          .unwrap()
-          .then((user) => {
-            actions.resetForm({
-              values: {
-                picture: '',
-                firstname: user.firstname,
-                lastname: user.lastname,
-                email: user.email,
-                phoneNumber: '',
-              },
-            });
-          })
-          .catch(() => {
-            if (!avatarRef.current) return;
-            avatarRef.current.src = `${BASE_URL}/${user?.avatar_url}`;
-            actions.resetForm();
-          })
-          .finally(() => setIsFetching(false));
-      }}
+      onSubmit={(values, actions) => handleSubmit(values, actions)}
     >
       {({
         values,
@@ -108,7 +129,11 @@ const MainData = ({ user }: MainDataProps) => {
               </div>
             </div>
           </div>
-          <div className={styles.columnWrapper}>
+          <div
+            className={`${styles.columnWrapper} ${
+              variant === 'admin' ? styles.adminColumn : ''
+            }`}
+          >
             <h3 className={sharedStyles.header}>Основные данные</h3>
             <div className={sharedStyles.column}>
               <TextInput

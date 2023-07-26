@@ -1,0 +1,63 @@
+@import "src/assets/styles/variables.sass"
+@import "src/assets/styles/mixins.sass"
+
+.navLink
+  position: relative
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+
+  font-family: 'Toxigenesis', 'Arial Black', Gadget, sans-serif
+  font-weight: 700
+  color: #ffffff
+
+  >span
+    position: relative
+    top: 6px
+
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.5)
+
+.navIcon
+  display: flex
+  justify-content: center
+  align-items: center
+
+  width: 50px
+  height: 50px
+
+  background-color: $c-additional
+  border-radius: 50%
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5)
+
+  transition: 0.2s all
+
+  >svg
+    width: 38px
+    height: 38px
+    color: $c-main
+
+.navLink:hover
+  >span
+    text-shadow: 0 0 5px #ff000e
+  
+  .navIcon
+    transform: scale(1.1)
+
+    box-shadow: 0 0 10px 0 #ff000e
+
+.navLink_active
+  >span
+    top: 12px
+
+  .navIcon
+    transform: scale(1.4)
+
+    background-color: #ffffff
+
+    >svg
+      color: $c-accent-active
+
+.navLink_active:hover
+  .navIcon
+    transform: scale(1.4)

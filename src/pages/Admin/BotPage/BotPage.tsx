@@ -1,24 +1,11 @@
-import React, { useState } from 'react';
+import TextInput from '../../../components/ui/input/TextInput';
+import Button from '../../../components/ui/button/Button';
 
 import BotDefaultAvatar from '../../../assets/images/bot-default-avatar.png';
 
-import styles from './bot-card.module.sass';
-import TextInput from '../../../components/ui/input/TextInput';
-import Button from '../../../components/ui/button/Button';
-import CreateBotWindow from '../CreateBotWindow/CreateBotWindow';
-import SuccessMessage from '../../../components/SuccessMessage/SuccessMessage';
+import styles from './bot-page.module.sass';
 
-const BotCard = () => {
-  const [isActive, setIsActive] = useState(true);
-
-  // return (
-  //   <SuccessMessage
-  //     isActive={isActive}
-  //     setActive={setIsActive}
-  //     text="Бот создан"
-  //   />
-  // );
-  // return <CreateBotWindow />;
+const BotPage = () => {
   return (
     <main>
       <h2 className={styles.header}>Карточка бота</h2>
@@ -28,16 +15,22 @@ const BotCard = () => {
           <img src={BotDefaultAvatar} alt="Bot Avatar" />
         </div>
         <div className={styles.statuses}>
+          <h3 className={styles.header}>Статусы</h3>
           <div>
-            <h4 className={styles.header}>Work status</h4>
+            <h4 className={`${styles.header} ${styles.statusHeader}`}>
+              Work status
+            </h4>
             <p className={styles.status}>work</p>
           </div>
           <div>
-            <h4 className={styles.header}>Block status</h4>
+            <h4 className={`${styles.header} ${styles.statusHeader}`}>
+              Block status
+            </h4>
             <p className={styles.status}>unblock</p>
           </div>
         </div>
         <div className={styles.settings}>
+          <h3 className={styles.header}>Настройки</h3>
           <TextInput placeholder="api id" className={styles.input} />
           <TextInput placeholder="api hash" className={styles.input} />
           <TextInput placeholder="Телефон" className={styles.input} />
@@ -50,4 +43,4 @@ const BotCard = () => {
   );
 };
 
-export default BotCard;
+export default BotPage;

@@ -1,0 +1,21 @@
+@import "src/assets/styles/mixins.sass"
+@import "/src/assets/styles/variables.sass"
+
+.innerWrapper
+  display: flex
+  justify-content: space-between
+
+  margin-bottom: 24px
+
+.title
+  @include header(20)
+
+.csvLink
+  text-decoration: underline
+  color: $c-additional
+
+.csvLink:hover
+  opacity: 0.8
+
+.csvLink:active
+  opacity: 0.6

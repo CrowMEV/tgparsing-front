@@ -22,8 +22,12 @@ import Participants from '../components/parsers/participants/Participants';
 import Geolocation from '../components/parsers/geolocation/Geolocation';
 import TariffsPage from '../pages/TariffsPage/TariffsPage';
 import StartLayout from '../components/StartLayout/StartLayout';
-import UserCard from '../pages/Admin/UserCard/UserCard';
-import BotCard from '../pages/Admin/BotCard/BotCard';
+import TariffAdminPage from '../pages/Admin/TariffPage/TariffAdminPage';
+import UsersAdminPage from '../pages/Admin/UsersPage/UsersAdminPage';
+import BotsAdminPage from '../pages/Admin/BotsPage/BotsAdminPage';
+import FinanceAdminPage from '../pages/Admin/FinancePage/FinanceAdminPage';
+import UserPage from '../pages/Admin/UserPage/UserPage';
+import BotPage from '../pages/Admin/BotPage/BotPage';
 
 export const router = createBrowserRouter([
   {
@@ -143,20 +147,36 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '/admin/user/:userId',
+    element: (
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
+    ),
     children: [
       {
+        path: Routes.AdminUsers,
+        element: <UsersAdminPage />,
         index: true,
-        element: <UserCard />,
       },
-    ],
-  },
-  {
-    path: '/admin/bot/:botId',
-    children: [
       {
-        index: true,
-        element: <BotCard />,
+        path: Routes.AdminUser,
+        element: <UserPage />,
+      },
+      {
+        path: Routes.AdminTariff,
+        element: <TariffAdminPage />,
+      },
+      {
+        path: Routes.AdminBots,
+        element: <BotsAdminPage />,
+      },
+      {
+        path: Routes.AdminBot,
+        element: <BotPage />,
+      },
+      {
+        path: Routes.AdminFinance,
+        element: <FinanceAdminPage />,
       },
     ],
   },

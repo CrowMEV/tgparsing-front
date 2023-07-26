@@ -2,19 +2,17 @@ import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { User } from '../../../types/user';
-import { patchUser } from '../../../store/user-slice/apiActions';
 import { api } from '../../../services/api';
 
 import PassData from '../../../components/Profile/PassData/PassData';
 import TimezonePicker from '../../../components/TimezonePicker/TimezonePicker';
-import TextInput from '../../../components/ui/input/TextInput';
 import MainData from '../../../components/Profile/MainData/MainData';
-
-import styles from './user-card.module.sass';
 import Toggle from '../../../components/ui/toggle/toggle';
 import Dropdown from '../../../components/ui/dropdown/Dropdown';
 
-const UserCard = () => {
+import styles from './user-page.module.sass';
+
+const UserPage = () => {
   const STAFF_MEMBERS = useMemo(
     () => ['Бухгалтер', 'Технический специалист', 'HR-специалист'],
     [],
@@ -44,7 +42,7 @@ const UserCard = () => {
   return (
     <main className={styles.profileWrapper}>
       <div className={styles.wrapper}>
-        <MainData user={user} />
+        <MainData variant="admin" user={user} />
         <div className={styles.columnWrapper}>
           <div>
             <h3 className={`${styles.header} ${styles.balanceHeader}`}>
@@ -56,6 +54,7 @@ const UserCard = () => {
         </div>
       </div>
       <div className={styles.wrapper}>
+        <div className={styles.columnWrapper} />
         <div className={styles.columnWrapper}>
           <div>
             <h3 className={styles.header}>Тариф</h3>
@@ -70,7 +69,8 @@ const UserCard = () => {
             <TimezonePicker
               selectedTimezone={user.timezone}
               onChange={async (timezone) => {
-                const formData = new FormData();
+                console.log(timezone);
+                // const formData = new FormData();
                 // formData.append('timezone', String(timezone));
                 // await dispatch(patchUser(formData));
               }}
@@ -105,4 +105,4 @@ const UserCard = () => {
   );
 };
 
-export default UserCard;
+export default UserPage;

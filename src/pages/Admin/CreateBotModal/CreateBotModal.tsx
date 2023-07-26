@@ -1,35 +1,54 @@
 import { Formik, Form } from 'formik';
+import { useEffect, useRef, useState } from 'react';
 
-import { createBotValidation } from './validation-schema';
+import {
+  createBotValidation,
+  verificationCodeValidation,
+} from './validation-schema';
 
 import TextInput from '../../../components/ui/input/TextInput';
 import Button from '../../../components/ui/button/Button';
-
-import { useEffect, useRef, useState } from 'react';
-
+import Loader from '../../../components/ui/loader/loader';
+import SuccessMessage from '../../../components/ui/SuccessMessage/SuccessMessage';
 import ModalWindow from '../../../components/ui/modal-window/ModalWindow';
 
-import styles from './create-bot-window.module.sass';
+import styles from './create-bot-modal.module.sass';
 
-const CreateBotWindow = () => {
-  const [isActive, setIsActive] = useState(true);
+interface CreateBotModalProps {
+  isActive: boolean;
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+type initialValues = {
+  apiId: string;
+  apiHash: string;
+  phoneNumber: string;
+};
+
+const CreateBotModal = ({ isActive, setIsActive }: CreateBotModalProps) => {
   const [isConnectionOpen, setIsConnectionOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState<string | null>(null);
   const socket = useRef<WebSocket | null>(null);
 
   useEffect(() => {
-    // return () => socket.close();
+    return () => socket.current?.close();
   }, []);
 
-  const handleSubmit = (values: any) => {
+  const handleSubmit = (values: initialValues) => {
+    setIsLoading(true);
     socket.current = new WebSocket(
-      'wss://api.tgparsing.ru/auth?api_id=28227346&api_hash=33dd8bfcaaafd42f308c31f6b01ecbac&phone_number=79121425101',
-      // `ws://api.tgparsing.ru/auth?api_id=${values.apiId}&api_hash=${values.apiHash}&phone_number=${values.phoneNumber}`,
+      `wss://api.tgparsing.ru/auth?api_id=${values.apiId}&api_hash=${values.apiHash}&phone_number=${values.phoneNumber}`,
     );
-    socket.current.onopen = (e) => {
+    socket.current.onopen = () => {
       setIsConnectionOpen(true);
-      console.log('opened', e);
+      setIsLoading(false);
     };
-    socket.current.onclose = (e) => console.log('closed', e);
+    socket.current.onclose = (e) => {
+      console.log('closed', e);
+      setIsConnectionOpen(false);
+      setIsLoading(false);
+    };
     socket.current.onmessage = (e) => console.log('msg', e);
     socket.current.onerror = (e) => console.log('err', e);
   };
@@ -37,9 +56,9 @@ const CreateBotWindow = () => {
   return (
     <ModalWindow isActive={isActive} setActive={setIsActive}>
       <article className={styles.wrapper}>
-        {!isConnectionOpen && (
+        {!isConnectionOpen && !status && (
           <Formik
-            // validationSchema={createBotValidation}
+            validationSchema={createBotValidation}
             onSubmit={handleSubmit}
             initialValues={{ apiId: '', apiHash: '', phoneNumber: '' }}
           >
@@ -85,21 +104,26 @@ const CreateBotWindow = () => {
                   type="submit"
                   className={styles.button}
                   variant="accent"
+                  disabled={isLoading}
                 >
-                  Создать бота
+                  {isLoading ? (
+                    <Loader width={24} height={24} />
+                  ) : (
+                    'Создать бота'
+                  )}
                 </Button>
               </Form>
             )}
           </Formik>
         )}
 
-        {isConnectionOpen && (
+        {isConnectionOpen && !status && (
           <Formik
-            // validationSchema={createBotValidation}
+            validationSchema={verificationCodeValidation}
             onSubmit={(values) => {
-              console.log(values.code);
-              if (!socket.current) return;
-              socket.current.send(values.code);
+              setStatus('1000');
+              setIsLoading(true);
+              socket.current?.send(values.code);
             }}
             initialValues={{ code: '' }}
           >
@@ -121,9 +145,17 @@ const CreateBotWindow = () => {
             )}
           </Formik>
         )}
+
+        {status &&
+          !isConnectionOpen &&
+          (status === '1000' ? (
+            <SuccessMessage text="Бот создан" />
+          ) : (
+            <div>Ошибка</div>
+          ))}
       </article>
     </ModalWindow>
   );
 };
 
-export default CreateBotWindow;
+export default CreateBotModal;

@@ -6,7 +6,7 @@ import Table from '../../ui/table/Table';
 import TableHead from '../../ui/table/tableHead/TableHead';
 import TableRow from '../../ui/table/tableRow/TableRow';
 import TableBody from '../../ui/table/tableBody/TableBody';
-import TableCeil from '../../ui/table/tableCeil/TableCeil';
+import TableCeil from '../../ui/table/tableCell/TableCell';
 import TableContainer from '../../ui/table/tableContainer/TableContainer';
 
 const Tasks = () => {

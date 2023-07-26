@@ -19,4 +19,6 @@ export interface User {
   is_verified: boolean;
   avatar_url: string;
   role: Role;
+  created_at: string;
+  phone_number: string;
 }

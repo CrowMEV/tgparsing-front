@@ -1,26 +1,21 @@
-import { FC } from 'react';
-import ModalWindow from '../modal-window/ModalWindow';
+import { ReactNode } from 'react';
 import { ReactComponent as CheckMarkIcon } from '../../../assets/images/icons/check-mark-icon.svg';
+
 import styles from './success-message.module.sass';
 
 type SuccessMessageProps = {
-  isActive: boolean;
-  setActive: (modalIsActive: boolean) => void;
-  message: string;
+  text: string;
+  children?: ReactNode;
 };
 
-const SuccessMessage: FC<SuccessMessageProps> = ({
-  isActive,
-  setActive,
-  message,
-}) => {
+const SuccessMessage = ({ text, children }: SuccessMessageProps) => {
   return (
-    <ModalWindow isActive={isActive} setActive={setActive}>
-      <div className={styles.wrapper}>
-        <p className={styles.message}>{message}</p>
-        <CheckMarkIcon width="60" height="60" />
-      </div>
-    </ModalWindow>
+    <div className={styles.successMessage}>
+      <div>{text}</div>
+      <CheckMarkIcon width="60" height="60" />
+      {children}
+    </div>
   );
 };
+
 export default SuccessMessage;

@@ -6,3 +6,7 @@ export const createBotValidation = object({
   apiHash: string().required(ValidationErrors.required),
   phoneNumber: string().required(ValidationErrors.required),
 });
+
+export const verificationCodeValidation = object({
+  code: string().required(ValidationErrors.required),
+});

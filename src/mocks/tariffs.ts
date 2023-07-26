@@ -1,31 +1,16 @@
-enum ParsingMethods {
-  Groups = 'участники групп/каналов',
-  Activity = 'активность участников групп/каналов',
-  Geolocation = 'геолокация',
-}
-
-export type Tariff = {
-  id: string;
-  title: string;
-  period: number;
-  price: number;
-  parsersPerDay: number;
-  simultaneousParsing: number;
-  parsingMethods: ParsingMethods[];
-};
+import { Parsers } from '../consts/consts';
+import { Tariff } from '../types/tariff';
 
 export const tariffs: Tariff[] = [
   {
-    id: '1',
-    title: 'Стандарт',
-    period: 1,
+    name: 'Стандарт',
+    description: '',
+    limitation_days: 30,
     price: 99,
-    parsersPerDay: 5,
-    simultaneousParsing: 1,
-    parsingMethods: [
-      ParsingMethods.Groups,
-      ParsingMethods.Activity,
-      ParsingMethods.Geolocation,
-    ],
+    options: {
+      parsersPerDay: 5,
+      simultaneousParsing: 1,
+      methods: [Parsers.Members, Parsers.ActiveMembers, Parsers.GeoMembers],
+    },
   },
 ];

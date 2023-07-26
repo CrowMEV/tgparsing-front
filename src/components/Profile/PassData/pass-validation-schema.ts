@@ -1,9 +1,9 @@
-import { object, ref, string } from 'yup';
+import { boolean, object, ref, string } from 'yup';
 import { PASS_REGEX, ValidationErrors } from '../../../consts/validation';
 
 export const passDataValidation = object({
-  //TODO
-  // currentPass: string().required(ValidationErrors.required),
+  currentPass: string().required(ValidationErrors.required),
+  currentPassValidity: boolean().isTrue(),
   newPass: string()
     .required(ValidationErrors.required)
     .matches(
