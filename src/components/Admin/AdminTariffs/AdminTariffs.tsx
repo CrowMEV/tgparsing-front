@@ -1,17 +1,17 @@
 import { useState } from 'react';
-import Button from '../ui/button/Button';
-import Table from '../ui/table/Table';
-import TableBody from '../ui/table/tableBody/TableBody';
-import TableCell from '../ui/table/tableCell/TableCell';
-import TableContainer from '../ui/table/tableContainer/TableContainer';
-import TableHead from '../ui/table/tableHead/TableHead';
-import TableRow from '../ui/table/tableRow/TableRow';
-import Toggle from '../ui/toggle/toggle';
+import Button from '../../ui/button/Button';
+import Table from '../../ui/table/Table';
+import TableBody from '../../ui/table/tableBody/TableBody';
+import TableCell from '../../ui/table/tableCell/TableCell';
+import TableContainer from '../../ui/table/tableContainer/TableContainer';
+import TableHead from '../../ui/table/tableHead/TableHead';
+import TableRow from '../../ui/table/tableRow/TableRow';
+import Toggle from '../../ui/toggle/toggle';
 import UpdateTariffForm from './UpdateTariffForm/UpdateTariffForm';
 import styles from './admin-tariffs.module.sass';
-import { useAppSelector } from '../../hooks/redux';
-import { ParsersTitles } from '../../consts/tariffs';
-import { TariffResponse } from '../../types/tariff';
+import { useAppSelector } from '../../../hooks/redux';
+import { ParsersTitles } from '../../../consts/tariffs';
+import { TariffResponse } from '../../../types/tariff';
 
 const AdminTariffs = () => {
   const [formIsOpened, setFormIsOpened] = useState(false);

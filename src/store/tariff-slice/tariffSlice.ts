@@ -3,18 +3,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   addTariff,
   deleteTariff,
-  getTariff,
   getTariffs,
   updateTariff,
 } from './apiActions';
 
 type InitialState = {
-  currentTariff: TariffResponse | null;
   tariffs: TariffResponse[];
 };
 
 const initialState: InitialState = {
-  currentTariff: null,
   tariffs: [],
 };
 
@@ -36,9 +33,6 @@ export const tariffSlice = createSlice({
           state.tariffs = [...state.tariffs, action.payload];
         },
       )
-      .addCase(addTariff.rejected.type, (state) => {
-        state.currentTariff = null;
-      })
       .addCase(
         updateTariff.fulfilled.type,
         (state, action: PayloadAction<TariffResponse>) => {
@@ -52,15 +46,6 @@ export const tariffSlice = createSlice({
           ];
         },
       )
-      .addCase(
-        getTariff.fulfilled.type,
-        (state, action: PayloadAction<TariffResponse>) => {
-          state.currentTariff = action.payload;
-        },
-      )
-      .addCase(getTariff.rejected.type, (state) => {
-        state.currentTariff = null;
-      })
       .addCase(
         deleteTariff.fulfilled.type,
         (state, action: PayloadAction<number>) => {

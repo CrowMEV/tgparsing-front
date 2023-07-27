@@ -1,39 +1,47 @@
 import { FC, useState } from 'react';
-import ModalWindow from '../../ui/modal-window/ModalWindow';
-import { Form, Formik } from 'formik';
-import { TariffResponse } from '../../../types/tariff';
+import ModalWindow from '../../../ui/modal-window/ModalWindow';
+import { Form, Formik, FormikState } from 'formik';
+import { Tariff, TariffForm } from '../../../../types/tariff';
 import styles from '../admin-tariffs.module.sass';
-import TextInput from '../../ui/input/TextInput';
-import Checkbox from '../../ui/checkbox/Checkbox';
-import Button from '../../ui/button/Button';
-import { tariffSchema } from '../NewTariffForm/validation-schema';
-import Loader from '../../ui/loader/loader';
-import { Parsers } from '../../../consts/consts';
-import { useAppDispatch } from '../../../hooks/redux';
-import { updateTariff } from '../../../store/tariff-slice/apiActions';
+import TextInput from '../../../ui/input/TextInput';
+import Checkbox from '../../../ui/checkbox/Checkbox';
+import Button from '../../../ui/button/Button';
+import { tariffSchema } from './validation-schema';
+import Loader from '../../../ui/loader/loader';
+import { Parsers } from '../../../../consts/consts';
+import { useAppDispatch } from '../../../../hooks/redux';
+import { addTariff } from '../../../../store/tariff-slice/apiActions';
 
-interface UpdateTariffFormProps {
-  tariff: TariffResponse | null;
+interface NewTariffFormProps {
   isActive: boolean;
   setIsActive: (modalIsActive: boolean) => void;
 }
 
-const UpdateTariffForm: FC<UpdateTariffFormProps> = ({
-  tariff,
-  isActive,
-  setIsActive,
-}) => {
+const NEW_TARIFF_BLANC: TariffForm = {
+  name: '',
+  description: '',
+  limitation_days: '',
+  price: '',
+  options: {
+    parsersPerDay: '',
+    simultaneousParsing: '',
+    methods: [],
+  },
+};
+
+const NewTariffForm: FC<NewTariffFormProps> = ({ isActive, setIsActive }) => {
   const dispatch = useAppDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const submitHandler = (tariff: TariffResponse, resetForm: () => void) => {
+  const submitHandler = (
+    tariff: TariffForm,
+    resetForm: (nextState?: Partial<FormikState<Tariff>> | undefined) => void,
+  ) => {
     setIsSubmitting(true);
-    console.log(tariff);
-    dispatch(updateTariff(tariff))
+    dispatch(addTariff(tariff as Tariff))
       .unwrap()
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         setIsActive(false);
         setErrorMessage('');
         resetForm();
@@ -46,14 +54,14 @@ const UpdateTariffForm: FC<UpdateTariffFormProps> = ({
       });
   };
 
-  if (!tariff) {
-    return null;
-  }
+  const resetHandler = (resetForm: () => void) => {
+    resetForm();
+    setIsActive(false);
+  };
 
   return (
     <Formik
-      enableReinitialize={true}
-      initialValues={tariff}
+      initialValues={NEW_TARIFF_BLANC}
       validationSchema={tariffSchema}
       onSubmit={(values, { resetForm }) => submitHandler(values, resetForm)}
     >
@@ -65,14 +73,15 @@ const UpdateTariffForm: FC<UpdateTariffFormProps> = ({
         handleBlur,
         isValid,
         dirty,
+        resetForm,
       }) => (
         <ModalWindow
           isActive={isActive}
-          setActive={setIsActive}
+          setActive={() => resetHandler(resetForm)}
           style={{ marginTop: '2vh' }}
         >
           <Form className={styles.tariffForm}>
-            <h2 className={styles.tariffForm_title}>Изменение тарифа</h2>
+            <h2 className={styles.tariffForm_title}>Новый тариф</h2>
             <TextInput
               name="name"
               value={values.name}
@@ -85,6 +94,7 @@ const UpdateTariffForm: FC<UpdateTariffFormProps> = ({
             <TextInput
               name="limitation_days"
               value={values.limitation_days}
+              type="number"
               onChange={handleChange}
               onBlur={handleBlur}
               errorMessage={
@@ -92,7 +102,6 @@ const UpdateTariffForm: FC<UpdateTariffFormProps> = ({
                   ? errors.limitation_days
                   : ''
               }
-              type="number"
               placeholder="Срок действия"
               placeholderStyle={{ backgroundColor: '#2B3243' }}
             />
@@ -187,7 +196,7 @@ const UpdateTariffForm: FC<UpdateTariffFormProps> = ({
               {isSubmitting ? (
                 <Loader width={24} height={24} />
               ) : (
-                <>Сохранить изменения</>
+                <>Создать тариф</>
               )}
             </Button>
           </Form>
@@ -196,4 +205,4 @@ const UpdateTariffForm: FC<UpdateTariffFormProps> = ({
     </Formik>
   );
 };
-export default UpdateTariffForm;
+export default NewTariffForm;

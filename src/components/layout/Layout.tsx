@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { useAppSelector } from '../../hooks/redux';
 import { Modes, Roles } from '../../consts/consts';
-import AdminLayout from './AdminLayout';
-import UserLayout from './UserLayout';
+import AdminLayout from './AdminLayout/AdminLayout';
+import UserLayout from './UserLayout/UserLayout';
 
 const Layout: FC = () => {
   const mode = useAppSelector((state) => state.UserData.mode);

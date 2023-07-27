@@ -94,7 +94,7 @@ export const router = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedRoute isAuth={false}>
+      <ProtectedRoute authProtection={false}>
         <AuthLayout />
       </ProtectedRoute>
     ),
@@ -111,7 +111,7 @@ export const router = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedRoute isAuth={false}>
+      <ProtectedRoute authProtection={false}>
         <AuthLayout isNavShown={false} />
       </ProtectedRoute>
     ),
@@ -128,7 +128,7 @@ export const router = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedRoute isAuth={false}>
+      <ProtectedRoute authProtection={false}>
         <StartLayout />
       </ProtectedRoute>
     ),
@@ -167,6 +167,14 @@ export const router = createBrowserRouter([
       {
         path: Routes.AdminFinance,
         element: <FinanceAdminPage />,
+      },
+      {
+        path: Routes.AdminProfile,
+        element: <ProfilePage />,
+      },
+      {
+        path: Routes.AdminDocuments,
+        element: <DocumentsPage />,
       },
     ],
   },

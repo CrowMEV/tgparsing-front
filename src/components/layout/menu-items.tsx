@@ -104,6 +104,23 @@ export const MENU_ITEMS: MenuItem[] = [
   },
 ];
 
+export const ADMIN_NAV_ITEMS: MenuItem[] = [
+  {
+    position: 0,
+    text: 'Профиль',
+    link: Routes.AdminProfile,
+    icon: <ProfileIcon />,
+    menuCategory: MenuCategory.Profile,
+  },
+  {
+    position: 1,
+    text: 'Документы',
+    link: Routes.AdminDocuments,
+    icon: <DocumentIcon />,
+    menuCategory: MenuCategory.Profile,
+  },
+];
+
 export const ADMIN_ITEMS: MenuItem[] = [
   {
     position: 0,
