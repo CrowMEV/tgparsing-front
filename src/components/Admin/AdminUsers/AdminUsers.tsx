@@ -11,6 +11,8 @@ import Toggle from '../../ui/toggle/toggle';
 import { User } from '../../../types/user';
 import { initialUsersFilter } from './filters';
 import { updateFilterReducer } from './reducers';
+import { useNavigate } from 'react-router-dom';
+import { Routes } from '../../../router/routes';
 
 interface AdminUsersProps {
   users: User[];
@@ -22,30 +24,34 @@ const AdminUsers: FC<AdminUsersProps> = ({ users }) => {
     initialUsersFilter,
   );
 
+  const navigate = useNavigate();
+
   return (
     <TableContainer style={{ height: '700px' }}>
       <Table>
         <TableHead>
           <TableRow>
             {filters.map((filter) => (
-              <TableCell variant="head" key={filter.name}>
-                <div className={styles.cellInnerWrapper}>
-                  <TableSearch
-                    title={filter.title}
-                    isActive={filter.isActive}
-                    showSearchHandler={() =>
-                      dispatch({
-                        filter: { ...filter, isActive: !filter.isActive },
-                      })
-                    }
-                    value={filter.value}
-                    onChange={(evt) =>
-                      dispatch({
-                        filter: { ...filter, value: evt.target.value },
-                      })
-                    }
-                  />
-                </div>
+              <TableCell
+                variant="head"
+                key={filter.name}
+                className={styles.userHeadCell}
+              >
+                <TableSearch
+                  title={filter.title}
+                  isActive={filter.isActive}
+                  showSearchHandler={() =>
+                    dispatch({
+                      filter: { ...filter, isActive: !filter.isActive },
+                    })
+                  }
+                  value={filter.value}
+                  onChange={(evt) =>
+                    dispatch({
+                      filter: { ...filter, value: evt.target.value },
+                    })
+                  }
+                />
               </TableCell>
             ))}
             <TableCell variant="head">Блок</TableCell>
@@ -53,7 +59,11 @@ const AdminUsers: FC<AdminUsersProps> = ({ users }) => {
         </TableHead>
         <TableBody>
           {users.map((user) => (
-            <TableRow key={user.id}>
+            <TableRow
+              key={user.id}
+              className={styles.usersRow}
+              onClick={() => navigate(`${Routes.AdminUsers}/${user.id}`)}
+            >
               <TableCell>{user.email}</TableCell>
               <TableCell>{user.lastname}</TableCell>
               <TableCell>{user.firstname}</TableCell>
@@ -61,7 +71,11 @@ const AdminUsers: FC<AdminUsersProps> = ({ users }) => {
                 {new Date(user.created_at).toLocaleDateString('ru-RU')}
               </TableCell>
               <TableCell>{user.phone_number}</TableCell>
-              <TableCell>
+              <TableCell
+                onClick={(evt) => {
+                  evt.stopPropagation();
+                }}
+              >
                 <Toggle />
               </TableCell>
             </TableRow>

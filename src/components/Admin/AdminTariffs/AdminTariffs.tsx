@@ -48,16 +48,23 @@ const AdminTariffs = () => {
               <TableCell>
                 <div className={styles.tariffDescription}>
                   <p>
-                    Одновременный парсинг - {tariff.options.simultaneousParsing}
+                    Одновременный парсинг -{' '}
+                    {tariff.options.simultaneous_parsing}
                     <br />
-                    Парсингов в день - {tariff.options.parsersPerDay}
+                    Парсингов в день - {tariff.options.parsers_per_day}
                   </p>
                   <div>
                     <p>Способы парсинга:</p>
                     <ul className={styles.tariffMethods}>
-                      {tariff.options.methods.map((method) => (
-                        <li key={method}>{ParsersTitles[method][1]}</li>
-                      ))}
+                      {tariff.options.members && (
+                        <li>{ParsersTitles.members[1]}</li>
+                      )}
+                      {tariff.options.activity && (
+                        <li>{ParsersTitles.activemembers[1]}</li>
+                      )}
+                      {tariff.options.geo && (
+                        <li>{ParsersTitles.geomembers[1]}</li>
+                      )}
                     </ul>
                   </div>
                 </div>

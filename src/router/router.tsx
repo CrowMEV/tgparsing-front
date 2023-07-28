@@ -26,6 +26,7 @@ import TariffAdminPage from '../pages/Admin/TariffPage/TariffAdminPage';
 import UsersAdminPage from '../pages/Admin/UsersPage/UsersAdminPage';
 import BotsAdminPage from '../pages/Admin/BotsPage/BotsAdminPage';
 import FinanceAdminPage from '../pages/Admin/FinancePage/FinanceAdminPage';
+import UserCard from '../components/Admin/AdminUsers/UserCard/UserCard';
 
 export const router = createBrowserRouter([
   {
@@ -155,6 +156,10 @@ export const router = createBrowserRouter([
         path: Routes.AdminUsers,
         element: <UsersAdminPage />,
         index: true,
+      },
+      {
+        path: Routes.UserCard,
+        element: <UserCard />,
       },
       {
         path: Routes.AdminTariff,

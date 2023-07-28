@@ -12,11 +12,11 @@ export const tariffSchema = object().shape({
     .integer(ValidationErrors.numberValidation.integerNumber)
     .required(ValidationErrors.required),
   options: object({
-    simultaneousParsing: number()
+    simultaneous_parsing: number()
       .positive(ValidationErrors.numberValidation.positive)
       .integer(ValidationErrors.numberValidation.integerNumber)
       .required(ValidationErrors.required),
-    parsersPerDay: number()
+    parsers_per_day: number()
       .positive(ValidationErrors.numberValidation.positive)
       .integer(ValidationErrors.numberValidation.integerNumber)
       .required(ValidationErrors.required),

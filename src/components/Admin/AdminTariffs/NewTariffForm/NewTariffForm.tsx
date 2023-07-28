@@ -8,7 +8,6 @@ import Checkbox from '../../../ui/checkbox/Checkbox';
 import Button from '../../../ui/button/Button';
 import { tariffSchema } from './validation-schema';
 import Loader from '../../../ui/loader/loader';
-import { Parsers } from '../../../../consts/consts';
 import { useAppDispatch } from '../../../../hooks/redux';
 import { addTariff } from '../../../../store/tariff-slice/apiActions';
 
@@ -23,9 +22,11 @@ const NEW_TARIFF_BLANC: TariffForm = {
   limitation_days: '',
   price: '',
   options: {
-    parsersPerDay: '',
-    simultaneousParsing: '',
-    methods: [],
+    parsers_per_day: '',
+    simultaneous_parsing: '',
+    geo: false,
+    members: false,
+    activity: false,
   },
 };
 
@@ -79,6 +80,7 @@ const NewTariffForm: FC<NewTariffFormProps> = ({ isActive, setIsActive }) => {
           isActive={isActive}
           setActive={() => resetHandler(resetForm)}
           style={{ marginTop: '2vh' }}
+          clickByOut={false}
         >
           <Form className={styles.tariffForm}>
             <h2 className={styles.tariffForm_title}>Новый тариф</h2>
@@ -119,15 +121,15 @@ const NewTariffForm: FC<NewTariffFormProps> = ({ isActive, setIsActive }) => {
               <h3 className={styles.tariffForm_subTitle}>Предусматривает</h3>
               <div className={styles.tariffForm_parsers}>
                 <TextInput
-                  name="options.simultaneousParsing"
-                  value={values.options.simultaneousParsing}
+                  name="options.simultaneous_parsing"
+                  value={values.options.simultaneous_parsing}
                   type="number"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   errorMessage={
-                    errors.options?.simultaneousParsing &&
-                    touched.options?.simultaneousParsing
-                      ? errors.options?.simultaneousParsing
+                    errors.options?.simultaneous_parsing &&
+                    touched.options?.simultaneous_parsing
+                      ? errors.options?.simultaneous_parsing
                       : ''
                   }
                   placeholder="Одновременный парсинг"
@@ -137,15 +139,15 @@ const NewTariffForm: FC<NewTariffFormProps> = ({ isActive, setIsActive }) => {
                   }}
                 />
                 <TextInput
-                  name="options.parsersPerDay"
-                  value={values.options.parsersPerDay}
+                  name="options.parsers_per_day"
+                  value={values.options.parsers_per_day}
                   type="number"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   errorMessage={
-                    errors.options?.parsersPerDay &&
-                    touched.options?.parsersPerDay
-                      ? errors.options?.parsersPerDay
+                    errors.options?.parsers_per_day &&
+                    touched.options?.parsers_per_day
+                      ? errors.options?.parsers_per_day
                       : ''
                   }
                   placeholder="Парсингов в день"
@@ -162,25 +164,22 @@ const NewTariffForm: FC<NewTariffFormProps> = ({ isActive, setIsActive }) => {
               </h3>
               <Checkbox
                 className={styles.tariffForm_checkbox}
-                name="options.methods"
-                value={Parsers.Members}
-                checked={values.options.methods.includes(Parsers.Members)}
+                name="options.members"
+                checked={values.options.members}
                 title="Участники групп/каналов"
                 checkboxHandler={handleChange}
               />
               <Checkbox
                 className={styles.tariffForm_checkbox}
-                name="options.methods"
-                value={Parsers.ActiveMembers}
-                checked={values.options.methods.includes(Parsers.ActiveMembers)}
+                name="options.activity"
+                checked={values.options.activity}
                 title="Активность участников групп/каналов"
                 checkboxHandler={handleChange}
               />
               <Checkbox
                 className={styles.tariffForm_checkbox}
-                name="options.methods"
-                value={Parsers.GeoMembers}
-                checked={values.options.methods.includes(Parsers.GeoMembers)}
+                name="options.geo"
+                checked={values.options.geo}
                 title="Геолокация"
                 checkboxHandler={handleChange}
               />

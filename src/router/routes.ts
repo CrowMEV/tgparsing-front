@@ -19,6 +19,7 @@ export enum Routes {
   Profile = '/profile',
   Admin = '/admin',
   AdminUsers = '/admin/users',
+  UserCard = '/admin/users/:id',
   AdminTariff = '/admin/tariffs',
   AdminBots = '/admin/bots',
   AdminFinance = '/admin/finance',
