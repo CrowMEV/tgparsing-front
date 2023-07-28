@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
-import { ReactComponent as CheckMarkIcon } from '../../../assets/images/icons/check-mark-icon.svg';
+import { ReactComponent as CheckMarkIcon } from '../../../../assets/images/icons/check-mark-icon.svg';
 
-import styles from './success-message.module.sass';
+import sharedStyles from '../message.module.sass';
 
 type SuccessMessageProps = {
   text: string;
@@ -10,7 +10,7 @@ type SuccessMessageProps = {
 
 const SuccessMessage = ({ text, children }: SuccessMessageProps) => {
   return (
-    <div className={styles.successMessage}>
+    <div className={sharedStyles.botMessageWrapper}>
       <div>{text}</div>
       <CheckMarkIcon width="60" height="60" />
       {children}

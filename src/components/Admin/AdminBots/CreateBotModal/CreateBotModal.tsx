@@ -4,15 +4,16 @@ import { useEffect, useRef, useState } from 'react';
 import {
   createBotValidation,
   verificationCodeValidation,
-} from './validation-schema';
+} from '../validation-schema';
 
-import TextInput from '../../../components/ui/input/TextInput';
-import Button from '../../../components/ui/button/Button';
-import Loader from '../../../components/ui/loader/loader';
-import SuccessMessage from '../../../components/ui/SuccessMessage/SuccessMessage';
-import ModalWindow from '../../../components/ui/modal-window/ModalWindow';
+import TextInput from '../../../ui/input/TextInput';
+import Button from '../../../ui/button/Button';
+import Loader from '../../../ui/loader/loader';
+import SuccessMessage from '../../../ui/messages/SuccessMessage/SuccessMessage';
+import ModalWindow from '../../../ui/modal-window/ModalWindow';
 
 import styles from './create-bot-modal.module.sass';
+import ErrorMessage from '../../../ui/messages/ErrorMessage/ErrorMessage';
 
 interface CreateBotModalProps {
   isActive: boolean;
@@ -148,10 +149,10 @@ const CreateBotModal = ({ isActive, setIsActive }: CreateBotModalProps) => {
 
         {status &&
           !isConnectionOpen &&
-          (status === '1000' ? (
+          (status === '1001' ? (
             <SuccessMessage text="Бот создан" />
           ) : (
-            <div>Ошибка</div>
+            <ErrorMessage text="Ошибка при создании бота" />
           ))}
       </article>
     </ModalWindow>

@@ -21,20 +21,26 @@ const TariffItem: FC<TariffItemProps> = ({ tariff, buttonHandler }) => {
         <h4 className={styles.subTitle}>Включает:</h4>
         <ul className={styles.infoList}>
           <li className={styles.infoItem}>
-            одновременный парсинг - {tariff.options.simultaneousParsing}
+            одновременный парсинг - {tariff.options.simultaneous_parsing}
           </li>
           <li className={styles.infoItem}>
-            количество парсингов в день - {tariff.options.parsersPerDay}
+            количество парсингов в день - {tariff.options.parsers_per_day}
           </li>
         </ul>
         <div>
           <h5>Способы сбора аудитории:</h5>
           <ul className={styles.infoList}>
-            {tariff.options.methods.map((method) => (
-              <li className={styles.infoItem} key={method}>
-                {ParsersTitles[method][0]}
+            {tariff.options.members && (
+              <li className={styles.infoItem}>{ParsersTitles.members[0]}</li>
+            )}
+            {tariff.options.activity && (
+              <li className={styles.infoItem}>
+                {ParsersTitles.activemembers[0]}
               </li>
-            ))}
+            )}
+            {tariff.options.geo && (
+              <li className={styles.infoItem}>{ParsersTitles.geomembers[0]}</li>
+            )}
           </ul>
         </div>
       </div>

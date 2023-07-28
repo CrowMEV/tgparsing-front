@@ -1,46 +1,31 @@
-import TextInput from '../../../components/ui/input/TextInput';
-import Button from '../../../components/ui/button/Button';
-
-import BotDefaultAvatar from '../../../assets/images/bot-default-avatar.png';
-
-import styles from './bot-page.module.sass';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import AdminBotCard from '../../../components/Admin/AdminBotCard/AdminBotCard';
+import { api } from '../../../services/api';
+import { User } from '../../../types/user';
+import { bots } from '../../../mocks/bots';
 
 const BotPage = () => {
-  return (
-    <main>
-      <h2 className={styles.header}>Карточка бота</h2>
-      <div className={styles.wrapper}>
-        <div className={styles.avatar}>
-          <h3 className={styles.header}>Аватар</h3>
-          <img src={BotDefaultAvatar} alt="Bot Avatar" />
-        </div>
-        <div className={styles.statuses}>
-          <h3 className={styles.header}>Статусы</h3>
-          <div>
-            <h4 className={`${styles.header} ${styles.statusHeader}`}>
-              Work status
-            </h4>
-            <p className={styles.status}>work</p>
-          </div>
-          <div>
-            <h4 className={`${styles.header} ${styles.statusHeader}`}>
-              Block status
-            </h4>
-            <p className={styles.status}>unblock</p>
-          </div>
-        </div>
-        <div className={styles.settings}>
-          <h3 className={styles.header}>Настройки</h3>
-          <TextInput placeholder="api id" className={styles.input} />
-          <TextInput placeholder="api hash" className={styles.input} />
-          <TextInput placeholder="Телефон" className={styles.input} />
-          <Button className={styles.button} variant="accent">
-            Сохранить изменения
-          </Button>
-        </div>
-      </div>
-    </main>
-  );
+  const { botId } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
+  const [bot, setBot] = useState<User | undefined>();
+
+  useEffect(() => {
+    // setIsLoading(true);
+    // api
+    //   .get(`/bot/${botId}`)
+    //   .then((response) => {
+    //     setBot(response.data);
+    //   })
+    //   .catch((e) => console.error(e))
+    //   .finally(() => {
+    //     setIsLoading(false);
+    //   });
+  }, []);
+
+  // if (isLoading) return <div>Loading...</div>;
+  // if (!bot) return <div>Не удалось получить данные о пользователе</div>;
+  return <AdminBotCard bot={bots[0]} />;
 };
 
 export default BotPage;

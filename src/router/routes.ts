@@ -24,4 +24,6 @@ export enum Routes {
   AdminBots = '/admin/bots',
   AdminBot = '/admin/bots/:botId',
   AdminFinance = '/admin/finance',
+  AdminProfile = '/admin/profile',
+  AdminDocuments = '/admin/documents',
 }

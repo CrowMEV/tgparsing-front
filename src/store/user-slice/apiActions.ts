@@ -72,15 +72,3 @@ export const patchUser = createAppAsyncThunk<User, FormData>(
     }
   },
 );
-
-export const getAllUsers = createAppAsyncThunk<User[], void>(
-  'users/getAll',
-  async (_, { extra: api, rejectWithValue }) => {
-    try {
-      const { data } = await api.get<User[]>(ApiRoutes.AllUsers);
-      return data;
-    } catch (error) {
-      return rejectWithValue((error as AxiosError).response?.data);
-    }
-  },
-);

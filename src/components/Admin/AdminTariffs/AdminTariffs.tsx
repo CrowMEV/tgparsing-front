@@ -1,17 +1,17 @@
 import { useState } from 'react';
-import Button from '../ui/button/Button';
-import Table from '../ui/table/Table';
-import TableBody from '../ui/table/tableBody/TableBody';
-import TableCell from '../ui/table/tableCell/TableCell';
-import TableContainer from '../ui/table/tableContainer/TableContainer';
-import TableHead from '../ui/table/tableHead/TableHead';
-import TableRow from '../ui/table/tableRow/TableRow';
-import Toggle from '../ui/toggle/toggle';
+import Button from '../../ui/button/Button';
+import Table from '../../ui/table/Table';
+import TableBody from '../../ui/table/tableBody/TableBody';
+import TableCell from '../../ui/table/tableCell/TableCell';
+import TableContainer from '../../ui/table/tableContainer/TableContainer';
+import TableHead from '../../ui/table/tableHead/TableHead';
+import TableRow from '../../ui/table/tableRow/TableRow';
+import Toggle from '../../ui/toggle/toggle';
 import UpdateTariffForm from './UpdateTariffForm/UpdateTariffForm';
 import styles from './admin-tariffs.module.sass';
-import { useAppSelector } from '../../hooks/redux';
-import { ParsersTitles } from '../../consts/tariffs';
-import { TariffResponse } from '../../types/tariff';
+import { useAppSelector } from '../../../hooks/redux';
+import { ParsersTitles } from '../../../consts/tariffs';
+import { TariffResponse } from '../../../types/tariff';
 
 const AdminTariffs = () => {
   const [formIsOpened, setFormIsOpened] = useState(false);
@@ -48,16 +48,23 @@ const AdminTariffs = () => {
               <TableCell>
                 <div className={styles.tariffDescription}>
                   <p>
-                    Одновременный парсинг - {tariff.options.simultaneousParsing}
+                    Одновременный парсинг -{' '}
+                    {tariff.options.simultaneous_parsing}
                     <br />
-                    Парсингов в день - {tariff.options.parsersPerDay}
+                    Парсингов в день - {tariff.options.parsers_per_day}
                   </p>
                   <div>
                     <p>Способы парсинга:</p>
                     <ul className={styles.tariffMethods}>
-                      {tariff.options.methods.map((method) => (
-                        <li key={method}>{ParsersTitles[method][1]}</li>
-                      ))}
+                      {tariff.options.members && (
+                        <li>{ParsersTitles.members[1]}</li>
+                      )}
+                      {tariff.options.activity && (
+                        <li>{ParsersTitles.activemembers[1]}</li>
+                      )}
+                      {tariff.options.geo && (
+                        <li>{ParsersTitles.geomembers[1]}</li>
+                      )}
                     </ul>
                   </div>
                 </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import AdminTariffs from '../../../components/AdminTariffs/AdminTariffs';
-import NewTariffForm from '../../../components/AdminTariffs/NewTariffForm/NewTariffForm';
+import AdminTariffs from '../../../components/Admin/AdminTariffs/AdminTariffs';
+import NewTariffForm from '../../../components/Admin/AdminTariffs/NewTariffForm/NewTariffForm';
 import Button from '../../../components/ui/button/Button';
 import styles from './tariff-page.module.sass';
 import { useAppDispatch } from '../../../hooks/redux';

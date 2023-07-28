@@ -1,11 +1,14 @@
 import { FC, ReactNode } from 'react';
-import styles from '../table.module.sass';
 
-interface TableRow {
+interface TableRow extends React.TableHTMLAttributes<HTMLTableRowElement> {
   children: ReactNode;
 }
 
-const TableRow: FC<TableRow> = ({ children }) => {
-  return <tr className={styles.table__row}>{children}</tr>;
+const TableRow: FC<TableRow> = ({ children, className, onClick }) => {
+  return (
+    <tr className={className ? className : ''} onClick={onClick}>
+      {children}
+    </tr>
+  );
 };
 export default TableRow;
