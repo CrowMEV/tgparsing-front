@@ -10,10 +10,10 @@ import TextInput from '../../../ui/input/TextInput';
 import Button from '../../../ui/button/Button';
 import Loader from '../../../ui/loader/loader';
 import SuccessMessage from '../../../ui/messages/SuccessMessage/SuccessMessage';
+import ErrorMessage from '../../../ui/messages/ErrorMessage/ErrorMessage';
 import ModalWindow from '../../../ui/modal-window/ModalWindow';
 
 import styles from './create-bot-modal.module.sass';
-import ErrorMessage from '../../../ui/messages/ErrorMessage/ErrorMessage';
 
 interface CreateBotModalProps {
   isActive: boolean;
