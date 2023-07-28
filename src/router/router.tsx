@@ -28,6 +28,7 @@ import BotsAdminPage from '../pages/Admin/BotsPage/BotsAdminPage';
 import FinanceAdminPage from '../pages/Admin/FinancePage/FinanceAdminPage';
 import UserPage from '../pages/Admin/UserPage/UserPage';
 import BotPage from '../pages/Admin/BotPage/BotPage';
+import AdminProfilePage from '../pages/Admin/AdminProfilePage/AdminProfilePage';
 
 export const router = createBrowserRouter([
   {
@@ -96,7 +97,7 @@ export const router = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedRoute isAuth={false}>
+      <ProtectedRoute authProtection={false}>
         <AuthLayout />
       </ProtectedRoute>
     ),
@@ -113,7 +114,7 @@ export const router = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedRoute isAuth={false}>
+      <ProtectedRoute authProtection={false}>
         <AuthLayout isNavShown={false} />
       </ProtectedRoute>
     ),
@@ -130,7 +131,7 @@ export const router = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedRoute isAuth={false}>
+      <ProtectedRoute authProtection={false}>
         <StartLayout />
       </ProtectedRoute>
     ),
@@ -177,6 +178,14 @@ export const router = createBrowserRouter([
       {
         path: Routes.AdminFinance,
         element: <FinanceAdminPage />,
+      },
+      {
+        path: Routes.AdminProfile,
+        element: <AdminProfilePage />,
+      },
+      {
+        path: Routes.AdminDocuments,
+        element: <DocumentsPage />,
       },
     ],
   },

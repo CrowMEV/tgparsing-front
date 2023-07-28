@@ -1,15 +1,19 @@
-import { Parsers } from '../consts/consts';
+export interface Options {
+  parsers_per_day: number;
+  simultaneous_parsing: number;
+  geo: boolean;
+  members: boolean;
+  activity: boolean;
+}
 
 export interface Tariff {
   name: string;
   description: string;
   limitation_days: number;
   price: number;
-  options: {
-    parsersPerDay: number;
-    simultaneousParsing: number;
-    methods: Parsers[];
-  };
+  active: boolean;
+  archive: boolean;
+  options: Options;
 }
 
 export interface TariffResponse extends Tariff {
@@ -22,8 +26,10 @@ export interface TariffForm {
   limitation_days: number | '';
   price: number | '';
   options: {
-    parsersPerDay: number | '';
-    simultaneousParsing: number | '';
-    methods: Parsers[];
+    parsers_per_day: number | '';
+    simultaneous_parsing: number | '';
+    geo: boolean;
+    members: boolean;
+    activity: boolean;
   };
 }

@@ -1,13 +1,14 @@
-import { useEffect } from 'react';
-import AdminUsers from '../../../components/AdminUsers/AdminUsers';
-import { useAppDispatch } from '../../../hooks/redux';
-import { getAllUsers } from '../../../store/user-slice/apiActions';
+import { useEffect, useState } from 'react';
+import AdminUsers from '../../../components/Admin/AdminUsers/AdminUsers';
 import styles from './users-page.module.sass';
+import { User } from '../../../types/user';
+import { fetchUsers } from '../../../services/fetch-users';
 
 const UsersAdminPage = () => {
-  const dispatch = useAppDispatch();
+  const [users, setUsers] = useState<User[]>([]);
+
   useEffect(() => {
-    dispatch(getAllUsers());
+    fetchUsers().then((userData) => setUsers(userData));
   }, []);
 
   return (
@@ -16,7 +17,7 @@ const UsersAdminPage = () => {
         <h2 className={styles.title}>Список пользователей</h2>
         <button className={styles.csvLink}>Выгрузить в CSV</button>
       </div>
-      <AdminUsers />
+      <AdminUsers users={users} />
     </div>
   );
 };

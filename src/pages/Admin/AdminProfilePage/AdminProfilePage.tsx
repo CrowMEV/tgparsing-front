@@ -5,11 +5,12 @@ import { User } from '../../../types/user';
 import { api } from '../../../services/api';
 
 import AdminUserCard from '../../../components/Admin/AdminUserCard/AdminUserCard';
+import { useAppSelector } from '../../../hooks/redux';
 
-const UserPage = () => {
-  const { userId } = useParams();
+const AdminProfilePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<User | undefined>();
+  const userId = useAppSelector((state) => state.UserData.user?.id);
 
   useEffect(() => {
     setIsLoading(true);
@@ -22,11 +23,11 @@ const UserPage = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [userId]);
 
   if (isLoading) return <div>Loading...</div>;
   if (!user) return <div>Не удалось получить данные о пользователе</div>;
   return <AdminUserCard user={user} />;
 };
 
-export default UserPage;
+export default AdminProfilePage;

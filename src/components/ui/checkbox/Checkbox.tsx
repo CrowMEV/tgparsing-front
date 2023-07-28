@@ -14,7 +14,7 @@ const Checkbox: FC<CheckboxTypes> = ({
   ...rest
 }) => {
   return (
-    <label className={`${styles.checkbox} ${className}`}>
+    <label className={`${styles.checkbox} ${className ? className : ''}`}>
       <input
         className={styles.checkboxInput}
         type="checkbox"
