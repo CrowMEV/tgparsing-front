@@ -1,0 +1,39 @@
+@import "/src/assets/styles/mixins.sass"
+@import "/src/assets/styles/global.sass"
+  
+.profileWrapper
+  padding-bottom: 115px
+  display: flex
+  flex-direction: column
+  gap: 60px
+  
+.header
+  @include header(20px)
+  display: flex
+  align-items: center
+  margin-bottom: 40px
+
+.wrapper
+  display: flex
+  gap: 60px
+  justify-content: flex-end
+
+.columnWrapper
+  display: flex
+  flex-direction: column
+  gap: 35px
+  max-width: 310px
+  width: 100%
+
+.toggleColumn
+  justify-content: space-around
+
+.balanceHeader
+  margin-bottom: 17px
+
+.balance
+  @include header(28px)
+  color: $c-additional
+
+.toggleLabel
+  margin-bottom: 0

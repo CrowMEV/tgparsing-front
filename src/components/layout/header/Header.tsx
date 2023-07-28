@@ -12,6 +12,7 @@ import { logout } from '../../../store/user-slice/apiActions';
 import Toggle from '../../ui/toggle/toggle';
 import { Modes, Roles } from '../../../consts/consts';
 import { changeMode } from '../../../store/user-slice/userSlice';
+import { logoutChannel } from '../../../services/logout-channel';
 
 interface PropTypes {
   menuItems: { text: string; link: Routes; icon?: ReactElement }[];
@@ -90,7 +91,10 @@ const Header = ({ menuItems, currentPage }: PropTypes) => {
           </button>
           <button
             className={`${styles.header__link} ${styles.header__link_logout}`}
-            onClick={() => dispatch(logout())}
+            onClick={() => {
+              dispatch(logout());
+              logoutChannel.postMessage('logout');
+            }}
           >
             <div
               className={`${styles.header__icon} ${styles.header__icon_logout}`}

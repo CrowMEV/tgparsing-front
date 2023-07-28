@@ -8,7 +8,7 @@ interface TableSearchProps {
   isActive: boolean;
   value: string;
   showSearchHandler: (value: boolean) => void;
-  searchHandler: (value: string) => void;
+  onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TableSearch: FC<TableSearchProps> = ({
@@ -16,7 +16,7 @@ const TableSearch: FC<TableSearchProps> = ({
   isActive,
   value,
   showSearchHandler,
-  searchHandler,
+  onChange,
 }) => {
   return (
     <div className={styles.searchWrapper}>
@@ -32,7 +32,7 @@ const TableSearch: FC<TableSearchProps> = ({
           className={styles.searchInput}
           type="text"
           value={value}
-          onChange={(evt) => searchHandler(evt.target.value)}
+          onChange={onChange}
         />
       )}
     </div>

@@ -1,15 +1,19 @@
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { getTariffs } from '../../store/tariff-slice/apiActions';
+import { AuthorizationStatus } from '../../consts/consts';
+import { Routes } from '../../router/routes';
+
 import TariffInfo from '../../components/TariffInfo/TariffInfo';
 import TariffItem from '../../components/Tariffs/TariffItem/TariffItem';
-import { AuthorizationStatus } from '../../consts/consts';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import styles from './tariff-page.module.sass';
-import { Routes } from '../../router/routes';
-import { ReactComponent as ArrowIcon } from '../../assets/images/icons/arrow.svg';
-import { useEffect, useState } from 'react';
-import SuccessMessage from '../../components/ui/successMessage/SuccessMessage';
 import TariffFailMessage from '../../components/Tariffs/TariffFailMessage/TariffFailMessage';
-import { getTariffs } from '../../store/tariff-slice/apiActions';
+import SuccessMessageModal from '../../components/ui/SuccessMessageModal/SuccessMessageModal';
+
+import { ReactComponent as ArrowIcon } from '../../assets/images/icons/arrow.svg';
+
+import styles from './tariff-page.module.sass';
 
 const TariffsPage = () => {
   const authStatus = useAppSelector(
@@ -62,7 +66,7 @@ const TariffsPage = () => {
           </li>
         ))}
       </ul>
-      <SuccessMessage
+      <SuccessMessageModal
         isActive={successMessageIsShown}
         setActive={setSuccessMessageIsShown}
         message="Оплата тарифа произведена успешно"

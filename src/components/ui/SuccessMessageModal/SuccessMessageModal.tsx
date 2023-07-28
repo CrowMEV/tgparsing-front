@@ -1,15 +1,18 @@
 import { FC } from 'react';
-import ModalWindow from '../modal-window/ModalWindow';
-import { ReactComponent as CheckMarkIcon } from '../../../assets/images/icons/check-mark-icon.svg';
-import styles from './success-message.module.sass';
 
-type SuccessMessageProps = {
+import ModalWindow from '../modal-window/ModalWindow';
+
+import { ReactComponent as CheckMarkIcon } from '../../../assets/images/icons/check-mark-icon.svg';
+
+import styles from './success-message-modal.module.sass';
+
+type SuccessMessageModalProps = {
   isActive: boolean;
   setActive: (modalIsActive: boolean) => void;
   message: string;
 };
 
-const SuccessMessage: FC<SuccessMessageProps> = ({
+const SuccessMessageModal: FC<SuccessMessageModalProps> = ({
   isActive,
   setActive,
   message,
@@ -23,4 +26,4 @@ const SuccessMessage: FC<SuccessMessageProps> = ({
     </ModalWindow>
   );
 };
-export default SuccessMessage;
+export default SuccessMessageModal;
