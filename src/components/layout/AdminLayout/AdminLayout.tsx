@@ -6,7 +6,7 @@ import styles from '../layout.module.sass';
 
 const AdminLayout = () => {
   const location = useLocation();
-  const path = location.pathname;
+  const path = `/admin/${location.pathname.split('/')[2]}`;
   const currentPage =
     ADMIN_NAV_ITEMS.find((item) => item.link === path) ||
     ADMIN_ITEMS.find((item) => item.link === path) ||

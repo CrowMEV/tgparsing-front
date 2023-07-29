@@ -9,11 +9,13 @@ import TableRow from '../../ui/table/tableRow/TableRow';
 import Toggle from '../../ui/toggle/toggle';
 import UpdateTariffForm from './UpdateTariffForm/UpdateTariffForm';
 import styles from './admin-tariffs.module.sass';
-import { useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { ParsersTitles } from '../../../consts/tariffs';
 import { TariffResponse } from '../../../types/tariff';
+import { updateTariff } from '../../../store/tariff-slice/apiActions';
 
 const AdminTariffs = () => {
+  const dispatch = useAppDispatch();
   const [formIsOpened, setFormIsOpened] = useState(false);
   const tariffs = useAppSelector((state) => state.Tariff.tariffs);
   const [currentTariff, setCurrentTariff] = useState<TariffResponse | null>(
@@ -25,16 +27,30 @@ const AdminTariffs = () => {
     setFormIsOpened(true);
   };
 
+  const tariffStatusHandler = (tariff: TariffResponse) => {
+    dispatch(updateTariff(tariff))
+      .unwrap()
+      .catch((err) => console.error(err));
+  };
+
   return (
     <TableContainer style={{ height: '550px' }}>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell variant="head">Название</TableCell>
-            <TableCell variant="head">Описание</TableCell>
-            <TableCell variant="head">Стоимость</TableCell>
-            <TableCell variant="head">Статус</TableCell>
-            <TableCell variant="head">
+            <TableCell className={styles.headCell} variant="head">
+              Название
+            </TableCell>
+            <TableCell className={styles.headCell} variant="head">
+              Описание
+            </TableCell>
+            <TableCell className={styles.headCell} variant="head">
+              Стоимость
+            </TableCell>
+            <TableCell className={styles.headCell} variant="head">
+              Статус
+            </TableCell>
+            <TableCell className={styles.headCell} variant="head">
               <span className="visually-hidden">Управление</span>
             </TableCell>
           </TableRow>
@@ -45,7 +61,7 @@ const AdminTariffs = () => {
               <TableCell>
                 <span className={styles.tariffTitle}>{tariff.name}</span>
               </TableCell>
-              <TableCell>
+              <TableCell className={styles.descriptionCell}>
                 <div className={styles.tariffDescription}>
                   <p>
                     Одновременный парсинг -{' '}
@@ -73,7 +89,10 @@ const AdminTariffs = () => {
               <TableCell>
                 <Toggle
                   className={styles.toggle}
-                  toggleHandler={() => console.log('hello')}
+                  checked={tariff.active}
+                  toggleHandler={() =>
+                    tariffStatusHandler({ ...tariff, active: !tariff.active })
+                  }
                 />
               </TableCell>
               <TableCell>

@@ -20,7 +20,11 @@ const SuccessMessage = ({ isActive, setActive }: SuccessMessageProps) => {
   return (
     <ModalWindow isActive={isActive} setActive={onClickHandler}>
       <div className={styles.successMessage}>
-        <div>Вы успешно зарегистрировались!</div>
+        <div>
+          Регистрация произведена
+          <br />
+          успешно
+        </div>
         <CheckMarkIcon width="60" height="60" />
         <Button variant="accent" onClick={onClickHandler}>
           Продолжить

@@ -28,7 +28,10 @@ const Experience = () => {
         <span className={styles.accentText}>10</span>лет
       </div>
       <div className={`${styles.value} ${styles.value__articles}`}>
-        более<span className={styles.accentText}>30</span>
+        более
+        <span className={`${styles.accentText} ${styles.accentText__articles}`}>
+          30
+        </span>
       </div>
     </div>
   );

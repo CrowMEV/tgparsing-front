@@ -25,6 +25,8 @@ export interface TariffForm {
   description: string;
   limitation_days: number | '';
   price: number | '';
+  active: boolean;
+  archive: boolean;
   options: {
     parsers_per_day: number | '';
     simultaneous_parsing: number | '';

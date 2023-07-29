@@ -6,19 +6,20 @@ import Loader from '../ui/loader/loader';
 
 type ProtectedRouteProps = {
   children: JSX.Element;
-  authProtection?: boolean;
+  authRequired?: boolean;
 };
 
 const ProtectedRoute = ({
   children,
-  authProtection = true,
+  authRequired = true,
 }: ProtectedRouteProps) => {
   const authStatus = useAppSelector(
     (state) => state.UserData.authorizationStatus,
   );
 
-  const roleAdminProtection =
+  const adminProtection =
     useAppSelector((state) => state.UserData.user?.role.name) === Roles.Admin;
+
   const mode = useAppSelector((state) => state.UserData.mode);
 
   const currentLocation = useLocation();
@@ -40,21 +41,22 @@ const ProtectedRoute = ({
     );
   } else if (
     currentLocation.pathname === Routes.Tariffs &&
-    authProtection &&
+    authRequired &&
     authStatus !== AuthorizationStatus.Auth
   ) {
     return <Navigate to={Routes.HomeTariffs} replace />;
-  } else if (authProtection && authStatus !== AuthorizationStatus.Auth) {
+  } else if (authRequired && authStatus !== AuthorizationStatus.Auth) {
     return <Navigate to={Routes.Login} replace />;
-  } else if (!authProtection && authStatus !== AuthorizationStatus.NoAuth) {
+  } else if (!authRequired && authStatus !== AuthorizationStatus.NoAuth) {
     return <Navigate to={Routes.Dashboard} replace />;
   } else if (authStatus === AuthorizationStatus.Auth) {
     if (
-      (!roleAdminProtection || mode === Modes.User) &&
+      (!adminProtection || mode === Modes.User) &&
       currentLocation.pathname.split('/')[1] === 'admin'
     ) {
       return <Navigate to={Routes.Dashboard} replace />;
     } else if (
+      adminProtection &&
       mode === Modes.Admin &&
       currentLocation.pathname.split('/')[1] !== 'admin'
     ) {

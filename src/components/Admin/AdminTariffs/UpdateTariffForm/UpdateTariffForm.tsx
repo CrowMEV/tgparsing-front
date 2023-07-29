@@ -28,11 +28,9 @@ const UpdateTariffForm: FC<UpdateTariffFormProps> = ({
 
   const submitHandler = (tariff: TariffResponse, resetForm: () => void) => {
     setIsSubmitting(true);
-    console.log(tariff);
     dispatch(updateTariff(tariff))
       .unwrap()
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         setIsActive(false);
         setErrorMessage('');
         resetForm();

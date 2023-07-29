@@ -47,7 +47,7 @@ const Header = ({ menuItems, currentPage }: PropTypes) => {
           <Logo />
         </div>
         <div className={styles.header__currentPage}>
-          {mode === Modes.Admin ? (
+          {mode === Modes.Admin && role === Roles.Admin ? (
             <span>
               Кабинет
               <br /> администратора

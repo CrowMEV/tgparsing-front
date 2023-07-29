@@ -15,14 +15,14 @@ const TableCell: FC<TableCellProps> = ({
 }) => {
   if (variant === 'head') {
     return (
-      <th className={`${styles.table__headCeil} ${className ? className : ''}`}>
+      <th className={`${styles.table__headCell} ${className ? className : ''}`}>
         {children}
       </th>
     );
   }
   return (
     <td
-      className={`${styles.table__ceil} ${className ? className : ''}`}
+      className={`${styles.table__cell} ${className ? className : ''}`}
       onClick={onClick}
     >
       {children}
