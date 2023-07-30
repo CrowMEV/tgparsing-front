@@ -1,26 +1,18 @@
 @import "/src/assets/styles/mixins.sass"
 @import "/src/assets/styles/global.sass"
   
-.profileWrapper
-  padding: 60px 80px 115px
-  display: flex
-  flex-direction: column
-  gap: 60px
-  
-.header
-  @include header(20px)
-  display: flex
-  align-items: center
-  margin-bottom: 40px
-
 .wrapper
   display: flex
+  justify-content: flex-end
   gap: 60px
   width: 100%
 
 .columnWrapper
   max-width: 386px
   width: 100%
+
+.adminColumn
+  max-width: 310px
 
 .avatarWrapper
   display: flex
@@ -51,3 +43,11 @@
 
   &:active
     color: $c-additional
+
+.pictureError
+  font-size: 12px
+  font-family: Roboto
+  font-style: normal
+  font-weight: 400
+  line-height: 16px
+  color: $c-error

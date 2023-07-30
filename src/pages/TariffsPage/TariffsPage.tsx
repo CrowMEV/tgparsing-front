@@ -1,23 +1,33 @@
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { getTariffs } from '../../store/tariff-slice/apiActions';
+import { AuthorizationStatus } from '../../consts/consts';
+import { Routes } from '../../router/routes';
+
 import TariffInfo from '../../components/TariffInfo/TariffInfo';
 import TariffItem from '../../components/Tariffs/TariffItem/TariffItem';
-import { AuthorizationStatus } from '../../consts/consts';
-import { useAppSelector } from '../../hooks/redux';
-import { tariffs } from '../../mocks/tariffs';
-import styles from './tariff-page.module.sass';
-import { Routes } from '../../router/routes';
+import TariffFailMessage from '../../components/Tariffs/TariffFailMessage/TariffFailMessage';
+import SuccessMessageModal from '../../components/ui/SuccessMessageModal/SuccessMessageModal';
+
 import { ReactComponent as ArrowIcon } from '../../assets/images/icons/arrow.svg';
 
-import { useState } from 'react';
-import SuccessMessage from '../../components/ui/successMessage/SuccessMessage';
-import TariffFailMessage from '../../components/Tariffs/TariffFailMessage/TariffFailMessage';
+import styles from './tariff-page.module.sass';
 
 const TariffsPage = () => {
   const authStatus = useAppSelector(
     (state) => state.UserData.authorizationStatus,
   );
 
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const tariffs = useAppSelector((state) => state.Tariff.tariffs);
+
+  useEffect(() => {
+    dispatch(getTariffs());
+  }, []);
 
   const [successMessageIsShown, setSuccessMessageIsShown] = useState(false);
   const [failMessageIsShown, setFailMessageIsShown] = useState(false);
@@ -44,7 +54,7 @@ const TariffsPage = () => {
       )}
       <ul className={styles.tariffList}>
         {tariffs.map((tariff) => (
-          <li key={tariff.id}>
+          <li key={tariff.name}>
             <TariffItem
               tariff={tariff}
               buttonHandler={
@@ -56,7 +66,7 @@ const TariffsPage = () => {
           </li>
         ))}
       </ul>
-      <SuccessMessage
+      <SuccessMessageModal
         isActive={successMessageIsShown}
         setActive={setSuccessMessageIsShown}
         message="Оплата тарифа произведена успешно"

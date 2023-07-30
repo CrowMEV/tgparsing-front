@@ -20,3 +20,19 @@ export const TIMEZONES = [
   { value: 11, text: '(GMT +11) Магадан' },
   { value: 12, text: '(GMT +12) Анадырь, Камчатка' },
 ];
+
+export enum Modes {
+  Admin = 'Admin',
+  User = 'User',
+}
+
+export enum Roles {
+  Admin = 'admin',
+  User = 'user',
+}
+
+export enum Parsers {
+  Members = 'members',
+  ActiveMembers = 'activemembers',
+  GeoMembers = 'geomembers',
+}

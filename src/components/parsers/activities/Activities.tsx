@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FieldArray, Form, Formik, getIn } from 'formik';
+import { FieldArray, Form, Formik, FormikHelpers, getIn } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 
 import { activitiesValidation } from './activities-validation-schema';
@@ -33,8 +33,20 @@ const Activities = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [isSelectionActive, setIsSelectionActive] = useState(false);
 
-  const handleSubmit = (values: FormValues) => {
-    console.log(values);
+  const initialValues: FormValues = {
+    groups: [{ id: uuidv4(), value: '' }],
+    amountTo: null,
+    amountFrom: null,
+    startDate: null,
+    endDate: null,
+    name: '',
+    activities: [],
+  };
+
+  const handleSubmit = (
+    values: FormValues,
+    actions: FormikHelpers<FormValues>,
+  ) => {
     setIsFetching(true);
     api
       .post('/telegram/parser/activemembers', {
@@ -48,23 +60,18 @@ const Activities = () => {
           reposts: values.activities.includes('репосты'),
         },
       })
-      .then((r) => console.log(r))
-      .catch(console.error)
+      .then(() => actions.resetForm())
+      .catch((error) => {
+        alert(error?.response?.data?.detail);
+        console.error(error);
+      })
       .finally(() => setIsFetching(false));
   };
 
   return (
     <section>
       <Formik
-        initialValues={{
-          groups: [{ id: uuidv4(), value: '' }],
-          amountTo: null,
-          amountFrom: null,
-          startDate: null,
-          endDate: null,
-          name: '',
-          activities: [],
-        }}
+        initialValues={initialValues}
         validationSchema={activitiesValidation}
         onSubmit={handleSubmit}
       >
@@ -208,9 +215,10 @@ const Activities = () => {
                 <AudienceSelectionWindow />
               </ModalWindow>
               <Button
+                disabled
                 style={{ maxWidth: '610px' }}
                 variant="additional"
-                onClick={() => setIsSelectionActive(true)}
+                // onClick={() => setIsSelectionActive(true)}
               >
                 Выбрать аудиторию
               </Button>

@@ -29,13 +29,18 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+  },
+  "lint-staged": {
+    "*.{js,jsx}": "eslint",
+    "*": "prettier --ignore-unknown --write"
   },
   "browserslist": {
     "production": [
@@ -57,6 +62,8 @@
     "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.3",
     "sass": "^1.62.1"
   }
 }

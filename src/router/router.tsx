@@ -22,6 +22,13 @@ import Participants from '../components/parsers/participants/Participants';
 import Geolocation from '../components/parsers/geolocation/Geolocation';
 import TariffsPage from '../pages/TariffsPage/TariffsPage';
 import StartLayout from '../components/StartLayout/StartLayout';
+import TariffAdminPage from '../pages/Admin/TariffPage/TariffAdminPage';
+import UsersAdminPage from '../pages/Admin/UsersPage/UsersAdminPage';
+import BotsAdminPage from '../pages/Admin/BotsPage/BotsAdminPage';
+import FinanceAdminPage from '../pages/Admin/FinancePage/FinanceAdminPage';
+import UserPage from '../pages/Admin/UserPage/UserPage';
+import BotPage from '../pages/Admin/BotPage/BotPage';
+import AdminProfilePage from '../pages/Admin/AdminProfilePage/AdminProfilePage';
 
 export const router = createBrowserRouter([
   {
@@ -90,7 +97,7 @@ export const router = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedRoute isAuth={false}>
+      <ProtectedRoute authProtection={false}>
         <AuthLayout />
       </ProtectedRoute>
     ),
@@ -107,7 +114,7 @@ export const router = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedRoute isAuth={false}>
+      <ProtectedRoute authProtection={false}>
         <AuthLayout isNavShown={false} />
       </ProtectedRoute>
     ),
@@ -124,7 +131,7 @@ export const router = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedRoute isAuth={false}>
+      <ProtectedRoute authProtection={false}>
         <StartLayout />
       </ProtectedRoute>
     ),
@@ -137,6 +144,48 @@ export const router = createBrowserRouter([
       {
         path: Routes.HomeTariffs,
         element: <TariffsPage />,
+      },
+    ],
+  },
+  {
+    element: (
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: Routes.AdminUsers,
+        element: <UsersAdminPage />,
+        index: true,
+      },
+      {
+        path: Routes.AdminUser,
+        element: <UserPage />,
+      },
+      {
+        path: Routes.AdminTariff,
+        element: <TariffAdminPage />,
+      },
+      {
+        path: Routes.AdminBots,
+        element: <BotsAdminPage />,
+      },
+      {
+        path: Routes.AdminBot,
+        element: <BotPage />,
+      },
+      {
+        path: Routes.AdminFinance,
+        element: <FinanceAdminPage />,
+      },
+      {
+        path: Routes.AdminProfile,
+        element: <AdminProfilePage />,
+      },
+      {
+        path: Routes.AdminDocuments,
+        element: <DocumentsPage />,
       },
     ],
   },

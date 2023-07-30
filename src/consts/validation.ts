@@ -11,12 +11,14 @@ export const ValidationErrors = {
     `Значение должно быть больше чем ${fieldName}`,
   min: (value: number) => `Поле должно содержать не менее ${value} символов`,
   max: (value: number) => `Поле должно содержать не более ${value} символов`,
+  notImage: 'Неподдерживаемый формат изображения',
 
   numberValidation: {
     positive: 'Значение должно быть больше нуля',
     numberType: 'Поле должно содержать в себе только цифры',
     minNumber: (value: number) => `Значение должно быть больше ${value}`,
     maxNumber: (value: number) => `Значение должно быть меньше ${value}`,
+    integerNumber: 'Значение должно быть целым числом',
   },
 
   dateValidation: {
@@ -38,3 +40,5 @@ export const PASS_REGEX =
 export const NAME_REGEX = /^([А-Я]{0,1}[а-яё]+|[A-Z]{0,1}[a-z]+)$/;
 
 export const PHONE_REGEX = /^[+]?[-\s.]?[0-9]{4,}$/;
+
+export const NUMBER_ONLY_REGEX = /^\d+$/;

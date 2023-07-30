@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Circle, Popup } from 'react-leaflet';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 
 import { geolocationValidation } from './geolocation-validation-schema';
 
@@ -14,6 +14,7 @@ import Button from '../../ui/button/Button';
 import styles from './geolocation.module.sass';
 import sharedStyles from '../index.module.sass';
 import { api } from '../../../services/api';
+import { error } from 'console';
 
 const RADIUSES = [500, 1000, 2000, 3000, 5000] as const;
 
@@ -26,9 +27,17 @@ type FormValues = {
 const Geolocation = () => {
   const [isFetching, setIsFetching] = useState(false);
 
-  const handleSubmit = (values: FormValues) => {
-    setIsFetching(true);
+  const initialValues: FormValues = {
+    radius: RADIUSES[0],
+    name: '',
+    marker: null,
+  };
 
+  const handleSubmit = (
+    values: FormValues,
+    actions: FormikHelpers<FormValues>,
+  ) => {
+    setIsFetching(true);
     api
       .post('/telegram/parser/geomembers', {
         task_name: values.name,
@@ -40,19 +49,18 @@ const Geolocation = () => {
         ],
         accuracy_radius: values.radius,
       })
-      .then((r) => console.log(r))
-      .catch(console.error)
+      .then(() => actions.resetForm())
+      .catch((error) => {
+        alert(error?.response?.data?.detail);
+        console.error(error);
+      })
       .finally(() => setIsFetching(false));
   };
 
   return (
     <section>
       <Formik
-        initialValues={{
-          radius: RADIUSES[0],
-          name: '',
-          marker: null,
-        }}
+        initialValues={initialValues}
         validationSchema={geolocationValidation}
         onSubmit={handleSubmit}
       >

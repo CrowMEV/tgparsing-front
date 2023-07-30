@@ -1,5 +1,4 @@
 import { ReactElement, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Routes } from '../../../router/routes';
 import { MenuCategory, MenuItem } from '../menu-items';
 import ReplenishmentWindow from '../../ReplenishmentWindow/ReplenishmentWindow';
@@ -7,6 +6,7 @@ import NavTabs from '../../ui/navTabs/navTabs';
 import Button from '../../ui/button/Button';
 
 import styles from './index.module.sass';
+import NavLink from '../../ui/navLink/NavLink';
 
 interface PropTypes {
   menuItems: { text: string; link: Routes; icon?: ReactElement }[];
@@ -35,18 +35,13 @@ const Navbar = ({ menuItems, currentPage }: PropTypes) => {
               underlineClass={styles.nav__underline}
             >
               {menuItems.map((item, index) => (
-                <Link
-                  to={item.link}
-                  className={`${styles.nav__link} ${
-                    index === currentLinkPosition ? styles.nav__link_active : ''
-                  } main-nav__link`}
+                <NavLink
+                  link={item.link}
+                  text={item.text}
+                  icon={item.icon}
+                  isActive={index === currentLinkPosition}
                   key={item.text}
-                >
-                  {item.icon && (
-                    <div className={styles.nav__icon}>{item.icon}</div>
-                  )}
-                  <span>{item.text}</span>
-                </Link>
+                />
               ))}
             </NavTabs>
           </div>

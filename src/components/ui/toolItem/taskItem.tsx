@@ -9,6 +9,7 @@ import { ReactComponent as StarIcon } from '../../../assets/images/icons/star.sv
 import { ReactComponent as SettingIcon } from '../../../assets/images/icons/settings.svg';
 import { ReactComponent as RepeatIcon } from '../../../assets/images/icons/repeat.svg';
 import { ReactComponent as TrashIcon } from '../../../assets/images/icons/trash.svg';
+import { ReactComponent as DownloadIcon } from '../../../assets/images/icons/download.svg';
 
 interface TaskItemProps {
   tool: ParsingTool;
@@ -37,6 +38,10 @@ const TaskItem: FC<TaskItemProps> = ({ tool }) => {
       </div>
 
       <div className={styles.toolsOptions}>
+        <button className={styles.button}>
+          <DownloadIcon />
+          <span className="visually-hidden">Загрузить результат</span>
+        </button>
         <button className={styles.button}>
           <StarIcon />
           <span className="visually-hidden">Добавить в избранное</span>

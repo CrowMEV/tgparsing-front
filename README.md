@@ -47,15 +47,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Run pre-commit
 
-Без виртуального окружения в общесистемные библиотеки
-```bash
-pip install -U pre-commit
-```
 Установка хуков
 ```bash
-pre-commit install
-```
-Для того чтобы прогнать тест по всему коду, а не только по коммиту
-```bash
-pre-commit run --all-files
+npm run prepare
+ npx husky add .husky/pre-commit "npx lint-staged"
 ```

@@ -20,7 +20,7 @@ const RegistrationForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [passwordIsShown, setPasswordIsShown] = useState(false);
   const [checkPasswordIsShown, setCheckPasswordIsShown] = useState(false);
-  const [successMessageIsVisible, setSuccessMessageIsVisible] = useState(false);
+  const [successMessageIsVisible, setSuccessMessageIsVisible] = useState(true);
 
   const submitHandler = async (values: RegistrationData) => {
     setIsSubmitting(true);

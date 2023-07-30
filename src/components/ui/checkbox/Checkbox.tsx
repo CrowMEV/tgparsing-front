@@ -1,6 +1,5 @@
 import { ChangeEvent, FC } from 'react';
 import styles from './checkbox.module.sass';
-import { ReactComponent as CheckIcon } from '../../../assets/images/icons/input-check-icon.svg';
 
 interface CheckboxTypes extends React.InputHTMLAttributes<HTMLInputElement> {
   title: string;
@@ -15,7 +14,7 @@ const Checkbox: FC<CheckboxTypes> = ({
   ...rest
 }) => {
   return (
-    <label className={`${styles.checkbox} ${className}`}>
+    <label className={`${styles.checkbox} ${className ? className : ''}`}>
       <input
         className={styles.checkboxInput}
         type="checkbox"
@@ -23,7 +22,7 @@ const Checkbox: FC<CheckboxTypes> = ({
         onChange={(evt) => checkboxHandler(evt)}
         {...rest}
       />
-      <span className={styles.checkboxMark}>{checked && <CheckIcon />}</span>
+      <span className={styles.checkboxMark}></span>
       <span>{title}</span>
     </label>
   );
