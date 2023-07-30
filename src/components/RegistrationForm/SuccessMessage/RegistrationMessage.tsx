@@ -5,12 +5,15 @@ import { ReactComponent as CheckMarkIcon } from '../../../assets/images/icons/ch
 import { Routes } from '../../../router/routes';
 import styles from '../registration-form.module.sass';
 
-type SuccessMessageProps = {
+type RegistrationMessageProps = {
   isActive: boolean;
   setActive: (modalIsActive: boolean) => void;
 };
 
-const SuccessMessage = ({ isActive, setActive }: SuccessMessageProps) => {
+const RegistrationMessage = ({
+  isActive,
+  setActive,
+}: RegistrationMessageProps) => {
   const navigate = useNavigate();
 
   const onClickHandler = () => {
@@ -33,4 +36,4 @@ const SuccessMessage = ({ isActive, setActive }: SuccessMessageProps) => {
     </ModalWindow>
   );
 };
-export default SuccessMessage;
+export default RegistrationMessage;

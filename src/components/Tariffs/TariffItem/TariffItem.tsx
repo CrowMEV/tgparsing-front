@@ -3,6 +3,7 @@ import { Tariff } from '../../../types/tariff';
 import Button from '../../ui/button/Button';
 import styles from './tariff-item.module.sass';
 import { ParsersTitles } from '../../../consts/tariffs';
+import { DAY_ENDINGS, getWordEnding } from '../../../utils/getWordEnding';
 
 interface TariffItemProps {
   tariff: Tariff;
@@ -48,7 +49,8 @@ const TariffItem: FC<TariffItemProps> = ({ tariff, buttonHandler }) => {
         <div className={styles.dealInfoItem}>
           <p className={styles.subTitle}>Срок действия</p>
           <p>
-            <span className={styles.accent}>{tariff.limitation_days}</span>дней
+            <span className={styles.accent}>{tariff.limitation_days}</span>
+            {getWordEnding(tariff.limitation_days, DAY_ENDINGS)}
           </p>
         </div>
         <div className={styles.dealInfoItem}>
