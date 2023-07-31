@@ -15,7 +15,7 @@ export const mainDataValidation = object({
   lastname: string()
     .min(2, ValidationErrors.min(2))
     .matches(NAME_REGEX, ValidationErrors.lastName),
-  phoneNumber: string().matches(PHONE_REGEX, ValidationErrors.phoneNumber),
+  phone_number: string().matches(PHONE_REGEX, ValidationErrors.phoneNumber),
   picture: mixed().test({
     test: (file) => isTypesCorrect(file as File, ['image/png', 'image/jpeg']),
     message: ValidationErrors.notImage,

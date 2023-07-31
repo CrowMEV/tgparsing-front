@@ -19,7 +19,7 @@ type initialValues = {
   firstname: string;
   lastname: string;
   email: string;
-  phoneNumber: string;
+  phone_number: string;
 };
 
 type MainDataProps = {
@@ -34,10 +34,10 @@ const MainData = ({ user, variant = 'user' }: MainDataProps) => {
 
   const initialValues: initialValues = {
     picture: '',
-    firstname: user?.firstname || '',
-    lastname: user?.lastname || '',
-    email: user?.email || '',
-    phoneNumber: '',
+    firstname: user.firstname || '',
+    lastname: user.lastname || '',
+    email: user.email || '',
+    phone_number: user.phone_number || '',
   };
 
   const handleSubmit = async (
@@ -68,7 +68,7 @@ const MainData = ({ user, variant = 'user' }: MainDataProps) => {
             firstname: user.firstname,
             lastname: user.lastname,
             email: user.email,
-            phoneNumber: '',
+            phone_number: user.phone_number,
           },
         });
       })
@@ -175,15 +175,15 @@ const MainData = ({ user, variant = 'user' }: MainDataProps) => {
                 }
               />
               <TextInput
-                name="phoneNumber"
+                name="phone_number"
                 type="text"
                 placeholder="Телефон"
-                value={values.phoneNumber}
+                value={values.phone_number}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 errorMessage={
-                  errors.phoneNumber && touched.phoneNumber
-                    ? errors.phoneNumber
+                  errors.phone_number && touched.phone_number
+                    ? errors.phone_number
                     : ''
                 }
               />
