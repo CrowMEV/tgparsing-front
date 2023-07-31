@@ -29,29 +29,32 @@ type initialValues = {
 const CreateBotModal = ({ isActive, setIsActive }: CreateBotModalProps) => {
   const [isConnectionOpen, setIsConnectionOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [status, setStatus] = useState<string | null>(null);
+  const [status, setStatus] = useState<{ code: number; reason: string } | null>(
+    null,
+  );
   const socket = useRef<WebSocket | null>(null);
 
   useEffect(() => {
+    if (isActive) {
+      setStatus(null);
+    }
     return () => socket.current?.close();
-  }, []);
+  }, [isActive]);
 
   const handleSubmit = (values: initialValues) => {
     setIsLoading(true);
     socket.current = new WebSocket(
       `wss://api.tgparsing.ru/auth?api_id=${values.apiId}&api_hash=${values.apiHash}&phone_number=${values.phoneNumber}`,
     );
-    socket.current.onopen = () => {
-      setIsConnectionOpen(true);
-      setIsLoading(false);
-    };
     socket.current.onclose = (e) => {
-      console.log('closed', e);
+      setStatus({ code: e.code, reason: e.reason });
       setIsConnectionOpen(false);
       setIsLoading(false);
     };
-    socket.current.onmessage = (e) => console.log('msg', e);
-    socket.current.onerror = (e) => console.log('err', e);
+    socket.current.onmessage = () => {
+      setIsLoading(false);
+      setIsConnectionOpen(true);
+    };
   };
 
   return (
@@ -122,7 +125,6 @@ const CreateBotModal = ({ isActive, setIsActive }: CreateBotModalProps) => {
           <Formik
             validationSchema={verificationCodeValidation}
             onSubmit={(values) => {
-              setStatus('1000');
               setIsLoading(true);
               socket.current?.send(values.code);
             }}
@@ -149,10 +151,12 @@ const CreateBotModal = ({ isActive, setIsActive }: CreateBotModalProps) => {
 
         {status &&
           !isConnectionOpen &&
-          (status === '1001' ? (
+          (status.code === 1000 ? (
             <SuccessMessage text="Бот создан" />
           ) : (
-            <ErrorMessage text="Ошибка при создании бота" />
+            <ErrorMessage text="Ошибка при создании бота">
+              <div>{status.reason}</div>
+            </ErrorMessage>
           ))}
       </article>
     </ModalWindow>
