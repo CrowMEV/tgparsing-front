@@ -17,8 +17,8 @@ const ProtectedRoute = ({
     (state) => state.UserData.authorizationStatus,
   );
 
-  const adminProtection =
-    useAppSelector((state) => state.UserData.user?.role.name) === Roles.Admin;
+  const role = useAppSelector((state) => state.UserData.user?.role.name);
+  const adminProtection = role === Roles.Admin || role === Roles.SuperUser;
 
   const mode = useAppSelector((state) => state.UserData.mode);
 

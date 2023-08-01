@@ -29,6 +29,7 @@ export enum Modes {
 export enum Roles {
   Admin = 'admin',
   User = 'user',
+  SuperUser = 'superuser',
 }
 
 export enum Parsers {

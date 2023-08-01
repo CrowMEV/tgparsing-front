@@ -47,7 +47,8 @@ const Header = ({ menuItems, currentPage }: PropTypes) => {
           <Logo />
         </div>
         <div className={styles.header__currentPage}>
-          {mode === Modes.Admin && role === Roles.Admin ? (
+          {mode === Modes.Admin &&
+          (role === Roles.Admin || role === Roles.SuperUser) ? (
             <span>
               Кабинет
               <br /> администратора
@@ -57,7 +58,7 @@ const Header = ({ menuItems, currentPage }: PropTypes) => {
           )}
         </div>
         <div className={styles.header__links}>
-          {role === Roles.Admin && (
+          {(role === Roles.Admin || role === Roles.SuperUser) && (
             <Toggle
               className={styles.adminToggle}
               checked={mode === Modes.Admin}

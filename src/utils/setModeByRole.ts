@@ -6,6 +6,8 @@ export const setModeByRole = (role: string): Modes => {
       return Modes.Admin;
     case Roles.User:
       return Modes.User;
+    case Roles.SuperUser:
+      return Modes.Admin;
     default:
       return Modes.User;
   }
