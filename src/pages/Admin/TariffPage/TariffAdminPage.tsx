@@ -22,7 +22,17 @@ const TariffAdminPage = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.title}>Тарифы</h2>
+      <div className={styles.innerWrapper}>
+        <h2 className={styles.title}>Тарифы</h2>
+        <Button
+          className={styles.createButton}
+          variant="accent"
+          onClick={() => setFormIsOpened(true)}
+        >
+          Создать новый тариф
+        </Button>
+        <button className={styles.csvLink}>Выгрузить в CSV</button>
+      </div>
       {isLoading ? (
         <div className={styles.loaderWrapper}>
           <Loader />
@@ -32,9 +42,6 @@ const TariffAdminPage = () => {
           <div className={styles.tableWrapper}>
             <AdminTariffs />
           </div>
-          <Button variant="accent" onClick={() => setFormIsOpened(true)}>
-            Создать новый тариф
-          </Button>
         </>
       )}
       <NewTariffForm isActive={formIsOpened} setIsActive={setFormIsOpened} />
