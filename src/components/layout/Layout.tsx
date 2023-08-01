@@ -8,7 +8,10 @@ const Layout: FC = () => {
   const mode = useAppSelector((state) => state.UserData.mode);
   const userRole = useAppSelector((state) => state.UserData.user?.role.name);
 
-  if (mode === Modes.Admin && userRole === Roles.Admin) {
+  if (
+    mode === Modes.Admin &&
+    (userRole === Roles.Admin || userRole === Roles.SuperUser)
+  ) {
     return <AdminLayout />;
   } else {
     return <UserLayout />;
