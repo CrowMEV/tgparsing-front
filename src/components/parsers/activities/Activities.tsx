@@ -21,8 +21,8 @@ type FormValues = {
   groups: { id: string; value: string }[];
   amountTo: number | null;
   amountFrom: number | null;
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate: string | null;
+  endDate: string | null;
   name: string;
   activities: string[];
 };
@@ -47,6 +47,7 @@ const Activities = () => {
     values: FormValues,
     actions: FormikHelpers<FormValues>,
   ) => {
+    // actions.resetForm();
     setIsFetching(true);
     api
       .post('/telegram/parser/activemembers', {
@@ -105,6 +106,7 @@ const Activities = () => {
                             type="text"
                             placeholder="Вставьте ссылку на канал, группу"
                             onBlur={handleBlur}
+                            value={values.groups[index].value}
                             onChange={handleChange}
                             errorMessage={(() => {
                               if (typeof errors.groups !== 'object') return '';
@@ -144,8 +146,14 @@ const Activities = () => {
                     title={activity}
                     value={activity}
                     checkboxHandler={handleChange}
+                    checked={values.activities.includes(activity)}
                   />
                 ))}
+              </div>
+              <div className={sharedStyles.errorMessage}>
+                {errors.activities && touched.activities
+                  ? errors.activities
+                  : null}
               </div>
             </div>
             <div>
@@ -157,6 +165,7 @@ const Activities = () => {
                   name="startDate"
                   type="date"
                   hintMessage="Введите дату начала периода"
+                  value={values.startDate || ''}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   errorMessage={
@@ -169,6 +178,7 @@ const Activities = () => {
                   name="endDate"
                   type="date"
                   hintMessage="Введите дату окончания периода"
+                  value={values.endDate || ''}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   errorMessage={
@@ -183,7 +193,8 @@ const Activities = () => {
                 <TextInput
                   name="amountFrom"
                   type="number"
-                  placeholder="От"
+                  // placeholder="От"
+                  value={values.amountFrom || ''}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   errorMessage={
@@ -192,16 +203,17 @@ const Activities = () => {
                       : ''
                   }
                 />
-                <TextInput
+                {/* <TextInput
                   name="amountTo"
                   type="number"
                   placeholder="До (включительно)"
+                  value={values.amountTo || ''}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   errorMessage={
                     errors.amountTo && touched.amountTo ? errors.amountTo : ''
                   }
-                />
+                /> */}
               </div>
             </div>
             <div>
@@ -232,6 +244,7 @@ const Activities = () => {
                 type="text"
                 placeholder="Придумайте название задачи"
                 hintMessage="Название будет видно только Вам"
+                value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 errorMessage={errors.name && touched.name ? errors.name : ''}

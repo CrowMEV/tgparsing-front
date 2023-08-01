@@ -2,7 +2,7 @@ export const ValidationErrors = {
   email: 'Некорректный адрес электронной почты',
   required: 'Обязательное поле',
   password:
-    'Пароль должен содержать в себе заглавную букву, спец. символ и цифру',
+    'Пароль должен содержать в себе не менее 8 символов, заглавную букву, спец. символ и цифру',
   passwordCheck: 'Пароли должны совпадать',
   phoneNumber: 'Формат: "+79123456789"',
   lastName: 'Формат: "Иванов"',
@@ -12,6 +12,7 @@ export const ValidationErrors = {
   min: (value: number) => `Поле должно содержать не менее ${value} символов`,
   max: (value: number) => `Поле должно содержать не более ${value} символов`,
   notImage: 'Неподдерживаемый формат изображения',
+  chooseOne: 'Необходимо выбрать хотя бы одно значение',
 
   numberValidation: {
     positive: 'Значение должно быть больше нуля',
@@ -37,7 +38,7 @@ export const EMAIL_REGEX =
 export const PASS_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]|.*[_]).{8,}/;
 
-export const NAME_REGEX = /^([А-Я]{0,1}[а-яё]+|[A-Z]{0,1}[a-z]+)$/;
+export const NAME_REGEX = /^([А-ЯЁ]{0,1}[а-яё-]+|[A-Z]{0,1}[a-z-]+)$/;
 
 export const PHONE_REGEX = /^\+[0-9+][0-9()-]{4,14}\d$/;
 

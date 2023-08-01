@@ -102,7 +102,7 @@ const Geolocation = () => {
                   }
                 </Map>
               </div>
-              <div className={styles.mapError}>
+              <div className={sharedStyles.errorMessage}>
                 {errors.marker && touched.marker ? errors.marker : ''}
               </div>
             </div>
@@ -131,6 +131,7 @@ const Geolocation = () => {
                 type="text"
                 placeholder="Придумайте название задачи"
                 hintMessage="Название будет видно только Вам"
+                value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 errorMessage={errors.name && touched.name ? errors.name : ''}

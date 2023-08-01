@@ -32,9 +32,7 @@ const CompletedTasks: FC = () => {
         <div className={styles.toolsItems}>
           <ul className={styles.toolsList}>
             {filteredTools.map((tool) => (
-              <li key={tool.id}>
-                <TaskItem tool={tool} />
-              </li>
+              <li key={tool.id}>{/* <TaskItem tool={tool} /> */}</li>
             ))}
           </ul>
         </div>

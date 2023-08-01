@@ -3,9 +3,11 @@ import { Routes } from '../../../router/routes';
 import NavTabs from '../../ui/navTabs/navTabs';
 
 import styles from './parsers-layout.module.sass';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import CompletedTasks from '../CompletedTasks/CompletedTasks';
 import TariffInfo from '../../TariffInfo/TariffInfo';
+import { api } from '../../../services/api';
+import { ParserTask } from '../../../types/parserTask';
 
 const PARSERS_ITEMS = [
   {
@@ -25,11 +27,30 @@ const PARSERS_ITEMS = [
 const ParsersLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [tasks, setTasks] = useState<ParserTask[] | null>(null);
+  const [isLoadingTasks, setIsLoadingTasks] = useState(false);
+
   useEffect(() => {
     if (location.pathname === Routes.Parsers) {
       navigate(Routes.ParsersParticipants);
     }
   }, [location]);
+
+  useEffect(() => {
+    setIsLoadingTasks(false);
+    api
+      .get('/telegram/tasks/me')
+      .then((r) =>
+        setTasks(
+          r.data.filter(
+            (task: ParserTask) =>
+              task.work_status === 'failed' || task.work_status === 'success',
+          ),
+        ),
+      )
+      .catch((e) => console.error(e))
+      .finally(() => setIsLoadingTasks(false));
+  }, []);
 
   const currentPageIndex = PARSERS_ITEMS.findIndex(
     (item) => item.link === location.pathname,
@@ -61,7 +82,7 @@ const ParsersLayout = () => {
           </div>
           <Outlet />
         </div>
-        <CompletedTasks />
+        <CompletedTasks tasks={tasks} isLoading={isLoadingTasks} />
       </div>
     </section>
   );

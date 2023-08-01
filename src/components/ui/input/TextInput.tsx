@@ -104,6 +104,13 @@ const TextInput = ({
             onFocus?.(e);
           }}
           placeholder=" "
+          onWheel={
+            type === 'number'
+              ? () => {
+                  if (inputRef.current) inputRef.current.blur();
+                }
+              : undefined
+          }
           step={type === 'number' ? 0 : undefined}
           {...rest}
         />

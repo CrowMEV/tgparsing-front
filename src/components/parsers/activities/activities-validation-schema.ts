@@ -13,16 +13,17 @@ export const activitiesValidation = object({
     .required(ValidationErrors.required)
     .typeError(ValidationErrors.numberValidation.numberType)
     .min(1, ValidationErrors.numberValidation.minNumber(1)),
-  amountTo: number()
-    .required(ValidationErrors.required)
-    .typeError(ValidationErrors.numberValidation.numberType)
-    .min(1, ValidationErrors.numberValidation.minNumber(1))
-    .when('amountFrom', (from, schema) => {
-      return schema.test({
-        test: (to) => to > from[0],
-        message: ValidationErrors.moreThan('от'),
-      });
-    }),
+  // amountTo: number()
+  //   .required(ValidationErrors.required)
+  //   .typeError(ValidationErrors.numberValidation.numberType)
+  //   .min(1, ValidationErrors.numberValidation.minNumber(1))
+  //   .when('amountFrom', (from, schema) => {
+  //     return schema.test({
+  //       test: (to) => to > from[0],
+  //       message: ValidationErrors.moreThan('от'),
+  //     });
+  //   }),
+  activities: array().min(1, ValidationErrors.chooseOne),
   startDate: date()
     .required(ValidationErrors.required)
     .max(new Date(), ValidationErrors.dateValidation.futureDate),
