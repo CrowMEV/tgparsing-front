@@ -12,7 +12,7 @@ import { ReactComponent as HideIcon } from '../../assets/images/icons/closed-eye
 import { ReactComponent as ShowIcon } from '../../assets/images/icons/opened-eye.svg';
 import Сonfidentiality from '../confidentiality/Сonfidentiality';
 import IconButton from '../ui/iconButton/IconButton';
-import SuccessMessage from './SuccessMessage/SuccessMessage';
+import RegistrationMessage from './SuccessMessage/RegistrationMessage';
 
 const RegistrationForm = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ const RegistrationForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [passwordIsShown, setPasswordIsShown] = useState(false);
   const [checkPasswordIsShown, setCheckPasswordIsShown] = useState(false);
-  const [successMessageIsVisible, setSuccessMessageIsVisible] = useState(true);
+  const [successMessageIsVisible, setSuccessMessageIsVisible] = useState(false);
 
   const submitHandler = async (values: RegistrationData) => {
     setIsSubmitting(true);
@@ -140,7 +140,7 @@ const RegistrationForm = () => {
           {errorMessage && <p className={styles.error}>{errorMessage}</p>}
           <Сonfidentiality />
           {successMessageIsVisible && (
-            <SuccessMessage
+            <RegistrationMessage
               isActive={successMessageIsVisible}
               setActive={setSuccessMessageIsVisible}
             />

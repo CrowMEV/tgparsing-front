@@ -22,8 +22,8 @@ export const TIMEZONES = [
 ];
 
 export enum Modes {
-  Admin = 'Admin',
-  User = 'User',
+  Admin = 'admin',
+  User = 'user',
 }
 
 export enum Roles {

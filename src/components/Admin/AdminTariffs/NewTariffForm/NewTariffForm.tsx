@@ -21,6 +21,8 @@ const NEW_TARIFF_BLANC: TariffForm = {
   description: '',
   limitation_days: '',
   price: '',
+  active: false,
+  archive: false,
   options: {
     parsers_per_day: '',
     simultaneous_parsing: '',
@@ -39,6 +41,7 @@ const NewTariffForm: FC<NewTariffFormProps> = ({ isActive, setIsActive }) => {
     tariff: TariffForm,
     resetForm: (nextState?: Partial<FormikState<Tariff>> | undefined) => void,
   ) => {
+    console.log(tariff);
     setIsSubmitting(true);
     dispatch(addTariff(tariff as Tariff))
       .unwrap()

@@ -33,6 +33,9 @@ export const userSlice = createSlice({
     builder
       .addCase(login.fulfilled.type, (state, action: PayloadAction<User>) => {
         state.user = action.payload;
+        if (action.payload.role.name === Modes.User) {
+          saveModeToLocalStorage(Modes.User);
+        }
         state.mode =
           getModeFromLocalStorage() ?? setModeByRole(action.payload.role.name);
         state.authorizationStatus = AuthorizationStatus.Auth;

@@ -23,7 +23,9 @@ const TariffsPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const tariffs = useAppSelector((state) => state.Tariff.tariffs);
+  const activeTariffs = useAppSelector((state) => state.Tariff.tariffs).filter(
+    (tariff) => tariff.active,
+  );
 
   useEffect(() => {
     dispatch(getTariffs());
@@ -53,7 +55,7 @@ const TariffsPage = () => {
         </Link>
       )}
       <ul className={styles.tariffList}>
-        {tariffs.map((tariff) => (
+        {activeTariffs.map((tariff) => (
           <li key={tariff.name}>
             <TariffItem
               tariff={tariff}

@@ -97,7 +97,7 @@ export const router = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedRoute authProtection={false}>
+      <ProtectedRoute authRequired={false}>
         <AuthLayout />
       </ProtectedRoute>
     ),
@@ -114,7 +114,7 @@ export const router = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedRoute authProtection={false}>
+      <ProtectedRoute authRequired={false}>
         <AuthLayout isNavShown={false} />
       </ProtectedRoute>
     ),
@@ -131,7 +131,7 @@ export const router = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedRoute authProtection={false}>
+      <ProtectedRoute authRequired={false}>
         <StartLayout />
       </ProtectedRoute>
     ),
