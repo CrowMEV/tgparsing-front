@@ -21,7 +21,9 @@ const AdminBots: FC<AdminBotsProps> = ({ bots }) => {
   const [filterValue, setFilterValue] = useState('');
 
   const deleteBotHandler = (botId: number) => {
-    api.delete(`telegram/tgaccount/${botId}`);
+    api
+      .delete(`telegram/tgaccount/${botId}`)
+      .catch((error) => console.error(error));
   };
 
   return (
