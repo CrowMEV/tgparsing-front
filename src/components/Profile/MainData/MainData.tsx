@@ -14,7 +14,7 @@ import Loader from '../../ui/loader/loader';
 import sharedStyles from '../profile.module.sass';
 import styles from './main-data.module.sass';
 
-type initialValues = {
+type InitialValues = {
   picture: string;
   firstname: string;
   lastname: string;
@@ -32,7 +32,7 @@ const MainData = ({ user, variant = 'user' }: MainDataProps) => {
   const [isFetching, setIsFetching] = useState(false);
   const avatarRef = useRef<HTMLImageElement>(null);
 
-  const initialValues: initialValues = {
+  const initialValues: InitialValues = {
     picture: '',
     firstname: user.firstname || '',
     lastname: user.lastname || '',
@@ -41,8 +41,8 @@ const MainData = ({ user, variant = 'user' }: MainDataProps) => {
   };
 
   const handleSubmit = async (
-    values: initialValues,
-    actions: FormikHelpers<initialValues>,
+    values: InitialValues,
+    actions: FormikHelpers<InitialValues>,
   ) => {
     setIsFetching(true);
     const formData = new FormData();
@@ -73,9 +73,9 @@ const MainData = ({ user, variant = 'user' }: MainDataProps) => {
         });
       })
       .catch(() => {
+        actions.resetForm();
         if (!avatarRef.current) return;
         avatarRef.current.src = `${BASE_URL}/${user?.avatar_url}`;
-        actions.resetForm();
       })
       .finally(() => setIsFetching(false));
   };
@@ -84,7 +84,7 @@ const MainData = ({ user, variant = 'user' }: MainDataProps) => {
     <Formik
       initialValues={initialValues}
       validationSchema={mainDataValidation}
-      onSubmit={(values, actions) => handleSubmit(values, actions)}
+      onSubmit={handleSubmit}
     >
       {({
         values,

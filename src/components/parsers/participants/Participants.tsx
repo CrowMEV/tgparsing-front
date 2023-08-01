@@ -1,21 +1,21 @@
 import { useState } from 'react';
-import { FieldArray, Form, Formik, getIn } from 'formik';
+import { FieldArray, Form, Formik, FormikHelpers, getIn } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 
 import { participantsValidation } from './participants-validation-schema';
+import { api } from '../../../services/api';
 
 import TextInput from '../../ui/input/TextInput';
 import Button from '../../ui/button/Button';
+import IconButton from '../../ui/iconButton/IconButton';
 
 import { ReactComponent as PlusIcon } from '../../../assets/images/icons/plus.svg';
 import { ReactComponent as MinusIcon } from '../../../assets/images/icons/minus.svg';
 
 import sharedStyles from '../index.module.sass';
-import IconButton from '../../ui/iconButton/IconButton';
 
 type FormValues = {
   groups: { id: string; value: string }[];
-  amountTo: number | null;
   amountFrom: number | null;
   name: string;
 };
@@ -23,19 +23,35 @@ type FormValues = {
 const Participants = () => {
   const [isFetching, setIsFetching] = useState(false);
 
-  const handleSubmit = (values: FormValues) => {
-    console.log(values);
+  const initialValues: FormValues = {
+    groups: [{ id: uuidv4(), value: '' }],
+    amountFrom: null,
+    name: '',
+  };
+
+  const handleSubmit = (
+    values: FormValues,
+    actions: FormikHelpers<FormValues>,
+  ) => {
+    setIsFetching(true);
+    api
+      .post('/telegram/parser/members', {
+        task_name: values.name,
+        parsed_chats: values.groups.map((group) => group.value),
+        groups_count: values.amountFrom,
+      })
+      .then(() => actions.resetForm())
+      .catch((error) => {
+        alert(error?.response?.data?.detail);
+        console.error(error);
+      })
+      .finally(() => setIsFetching(false));
   };
 
   return (
     <section>
       <Formik
-        initialValues={{
-          groups: [{ id: uuidv4(), value: '' }],
-          amountTo: null,
-          amountFrom: null,
-          name: '',
-        }}
+        initialValues={initialValues}
         validationSchema={participantsValidation}
         onSubmit={handleSubmit}
       >
@@ -67,6 +83,7 @@ const Participants = () => {
                             style={{ maxWidth: '565px' }}
                             name={`groups.${index}.value`}
                             type="text"
+                            value={values.groups[index].value}
                             placeholder="Вставьте ссылку на канал, группу"
                             onBlur={handleBlur}
                             onChange={handleChange}
@@ -103,6 +120,7 @@ const Participants = () => {
                 name="amountFrom"
                 type="number"
                 placeholder="От"
+                value={values.amountFrom || ''}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 errorMessage={
@@ -120,6 +138,7 @@ const Participants = () => {
                 type="text"
                 placeholder="Придумайте название задачи"
                 hintMessage="Название будет видно только Вам"
+                value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 errorMessage={errors.name && touched.name ? errors.name : ''}
