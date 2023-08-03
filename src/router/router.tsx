@@ -172,10 +172,6 @@ export const router = createBrowserRouter([
         element: <BotsAdminPage />,
       },
       {
-        path: Routes.AdminBot,
-        element: <BotPage />,
-      },
-      {
         path: Routes.AdminFinance,
         element: <FinanceAdminPage />,
       },
