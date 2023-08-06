@@ -7,7 +7,7 @@ export enum AuthorizationStatus {
 export const BASE_URL = 'https://api.tgparsing.ru';
 
 export const TIMEZONES = [
-  { value: 1, text: '(GMT +1) Стокгольм, Амстердам, Рим, Берлин' },
+  { value: 1, text: '(GMT +1) Амстердам, Рим, Берлин' },
   { value: 2, text: '(GMT +2) Киев' },
   { value: 3, text: '(GMT +3) Москва, Санкт-Петербург' },
   { value: 4, text: '(GMT +4) Самара, Саратов, Ереван' },

@@ -9,7 +9,7 @@ import AdminUserCard from '../../../components/Admin/AdminUserCard/AdminUserCard
 const UserPage = () => {
   const { userId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState<User | undefined>();
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
     setIsLoading(true);
@@ -26,7 +26,7 @@ const UserPage = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (!user) return <div>Не удалось получить данные о пользователе</div>;
-  return <AdminUserCard user={user} />;
+  return <AdminUserCard user={user} setUser={setUser} />;
 };
 
 export default UserPage;

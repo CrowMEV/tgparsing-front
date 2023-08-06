@@ -17,7 +17,10 @@ const ProfilePage = () => {
   return (
     <main className={styles.profileWrapper}>
       <div className={styles.wrapper}>
-        <MainData user={user} />
+        <MainData
+          onSubmit={(formData) => dispatch(patchUser(formData)).unwrap()}
+          user={user}
+        />
         <div className={styles.columnWrapper}>
           <PassData />
         </div>
@@ -27,10 +30,10 @@ const ProfilePage = () => {
           <h3 className={styles.header}>Часовой пояс</h3>
           <TimezonePicker
             selectedTimezone={user.timezone}
-            onChange={async (timezone) => {
+            onChange={(timezone) => {
               const formData = new FormData();
               formData.append('timezone', String(timezone));
-              await dispatch(patchUser(formData));
+              dispatch(patchUser(formData));
             }}
           />
         </div>

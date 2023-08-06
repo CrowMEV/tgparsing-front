@@ -1,6 +1,9 @@
 import { useMemo } from 'react';
 
 import { User } from '../../../types/user';
+import { api } from '../../../services/api';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { patchUser } from '../../../store/user-slice/apiActions';
 
 import PassData from '../../../components/Profile/PassData/PassData';
 import TimezonePicker from '../../../components/TimezonePicker/TimezonePicker';
@@ -12,9 +15,13 @@ import styles from './admin-user-card.module.sass';
 
 interface AdminUserCardProps {
   user: User;
+  setUser: (user: User) => void;
 }
 
-const AdminUserCard = ({ user }: AdminUserCardProps) => {
+const AdminUserCard = ({ user, setUser }: AdminUserCardProps) => {
+  const dispatch = useAppDispatch();
+  const adminId = useAppSelector((state) => state.UserData.user?.id);
+
   const STAFF_MEMBERS = useMemo(
     () => ['Бухгалтер', 'Технический специалист', 'HR-специалист'],
     [],
@@ -24,7 +31,22 @@ const AdminUserCard = ({ user }: AdminUserCardProps) => {
   return (
     <main className={styles.profileWrapper}>
       <div className={styles.wrapper}>
-        <MainData variant="admin" user={user} />
+        <MainData
+          onSubmit={(formData) => {
+            if (adminId === user.id) {
+              return dispatch(patchUser(formData)).unwrap();
+            } else {
+              return api
+                .patch(`/user/${user.id}`, formData)
+                .then((response) => {
+                  setUser(response.data);
+                  return response.data;
+                });
+            }
+          }}
+          variant="admin"
+          user={user}
+        />
         <div className={styles.columnWrapper}>
           <div>
             <h3 className={`${styles.header} ${styles.balanceHeader}`}>
@@ -32,7 +54,7 @@ const AdminUserCard = ({ user }: AdminUserCardProps) => {
             </h3>
             <p className={styles.balance}>250,00 ₽</p>
           </div>
-          <PassData />
+          <PassData disabled={adminId !== user.id} />
         </div>
       </div>
       <div className={styles.wrapper}>
@@ -51,10 +73,18 @@ const AdminUserCard = ({ user }: AdminUserCardProps) => {
             <TimezonePicker
               selectedTimezone={user.timezone}
               onChange={async (timezone) => {
-                console.log(timezone);
-                // const formData = new FormData();
-                // formData.append('timezone', String(timezone));
-                // await dispatch(patchUser(formData));
+                const formData = new FormData();
+                formData.append('timezone', String(timezone));
+                if (adminId === user.id) {
+                  dispatch(patchUser(formData));
+                } else {
+                  api
+                    .patch(`/user/${user.id}`, formData)
+                    .then((r) =>
+                      setUser({ ...user, timezone: r.data.timezone }),
+                    )
+                    .catch((e) => console.error(e));
+                }
               }}
             />
           </div>
