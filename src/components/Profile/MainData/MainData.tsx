@@ -1,8 +1,6 @@
 import { useRef, useState } from 'react';
 import { Formik, Form, FormikHelpers } from 'formik';
 
-import { useAppDispatch } from '../../../hooks/redux';
-import { patchUser } from '../../../store/user-slice/apiActions';
 import { mainDataValidation } from './main-validation-schema';
 import { BASE_URL } from '../../../consts/consts';
 import { User } from '../../../types/user';
@@ -25,10 +23,10 @@ type InitialValues = {
 type MainDataProps = {
   user: User;
   variant?: 'admin' | 'user';
+  onSubmit: (formData: FormData) => Promise<User>;
 };
 
-const MainData = ({ user, variant = 'user' }: MainDataProps) => {
-  const dispatch = useAppDispatch();
+const MainData = ({ user, variant = 'user', onSubmit }: MainDataProps) => {
   const [isFetching, setIsFetching] = useState(false);
   const avatarRef = useRef<HTMLImageElement>(null);
 
@@ -52,23 +50,15 @@ const MainData = ({ user, variant = 'user' }: MainDataProps) => {
         formData.append(key, values[key]);
       }
     }
-    let action;
-    if (variant === 'admin') {
-      return;
-    } else if (variant === 'user') {
-      action = dispatch(patchUser(formData));
-    }
-    if (!action) return;
-    await action
-      .unwrap()
-      .then((user) => {
+    await onSubmit(formData)
+      .then((updatedUser) => {
         actions.resetForm({
           values: {
             picture: '',
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email,
-            phone_number: user.phone_number,
+            firstname: updatedUser.firstname,
+            lastname: updatedUser.lastname,
+            email: updatedUser.email,
+            phone_number: updatedUser.phone_number,
           },
         });
       })

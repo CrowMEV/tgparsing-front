@@ -24,7 +24,7 @@ type formValues = {
   newPassConfirm: string;
 };
 
-const CurrentPass = () => {
+const CurrentPass = ({ disabled }: { disabled: boolean }) => {
   const { setFieldValue, values } = useFormikContext<formValues>();
   const [currentPassVisibility, setCurrentPassVisibility] = useState(false);
   const [currentPassError, setCurrentPassError] = useState('');
@@ -44,6 +44,7 @@ const CurrentPass = () => {
 
   return (
     <TextInput
+      disabled={disabled}
       autoComplete="new-password"
       name="currentPass"
       value={values.currentPass}
@@ -56,6 +57,7 @@ const CurrentPass = () => {
       placeholder="Текущий пароль"
       endIcon={
         <IconButton
+          disabled={disabled}
           isError={Boolean(currentPassError.length)}
           onClick={() => setCurrentPassVisibility((state) => !state)}
         >
@@ -66,7 +68,7 @@ const CurrentPass = () => {
   );
 };
 
-const PassData = () => {
+const PassData = ({ disabled = false }: { disabled?: boolean }) => {
   const dispatch = useAppDispatch();
   const [newPassVisibility, setNewPassVisibility] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
@@ -99,7 +101,7 @@ const PassData = () => {
         <Form>
           <h3 className={sharedStyles.header}>Пароль</h3>
           <div className={sharedStyles.column}>
-            <CurrentPass />
+            <CurrentPass disabled={disabled} />
             <TextInput
               disabled={!values.currentPassValidity}
               autoComplete="new-password"

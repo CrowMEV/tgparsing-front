@@ -28,6 +28,9 @@ export const userSlice = createSlice({
       saveModeToLocalStorage(action.payload);
       state.mode = action.payload;
     },
+    editUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -65,4 +68,4 @@ export const userSlice = createSlice({
   },
 });
 
-export const { changeMode } = userSlice.actions;
+export const { changeMode, editUser } = userSlice.actions;
