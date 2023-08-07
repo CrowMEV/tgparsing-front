@@ -31,6 +31,10 @@ export const userSlice = createSlice({
     editUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
     },
+    localLogout: (state) => {
+      state.user = null;
+      state.authorizationStatus = AuthorizationStatus.NoAuth;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -68,4 +72,4 @@ export const userSlice = createSlice({
   },
 });
 
-export const { changeMode, editUser } = userSlice.actions;
+export const { changeMode, editUser, localLogout } = userSlice.actions;

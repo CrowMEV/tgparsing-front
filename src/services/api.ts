@@ -1,7 +1,8 @@
 import axios from 'axios';
 import type { AppStore } from '../store';
-import { logout } from '../store/user-slice/apiActions';
 import { ApiRoutes } from '../store/user-slice/apiRoutes';
+import { localLogout } from '../store/user-slice/userSlice';
+import { logout } from '../store/user-slice/apiActions';
 import { BASE_URL } from '../consts/consts';
 
 const REQUEST_TIME = 5000;
@@ -18,12 +19,8 @@ export const api = axios.create({
 api.interceptors.response.use(
   (config) => config,
   async (error) => {
-    if (
-      error.response.status === 401 &&
-      error.config.url !== ApiRoutes.Refresh &&
-      error.config.url !== ApiRoutes.Logout
-    ) {
-      store.dispatch(logout());
+    if (error.response.status === 401) {
+      store.dispatch(localLogout());
     }
     throw error;
   },
