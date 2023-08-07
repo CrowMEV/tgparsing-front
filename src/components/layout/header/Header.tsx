@@ -92,9 +92,10 @@ const Header = ({ menuItems, currentPage }: PropTypes) => {
           </button>
           <button
             className={`${styles.header__link} ${styles.header__link_logout}`}
-            onClick={() => {
-              dispatch(logout());
+            onClick={async () => {
+              await dispatch(logout());
               logoutChannel.postMessage('logout');
+              navigate(Routes.Home);
             }}
           >
             <div
