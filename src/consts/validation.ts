@@ -4,7 +4,7 @@ export const ValidationErrors = {
   password:
     'Пароль должен содержать в себе не менее 8 символов, заглавную букву, спец. символ и цифру',
   passwordCheck: 'Пароли должны совпадать',
-  phoneNumber: 'Формат: "+79123456789"',
+  phoneNumber: 'Номер должен начинаться с "+" и содержать от 4 до 14 символов',
   lastName: 'Формат: "Иванов"',
   firstName: 'Формат: "Иван"',
   moreThan: (fieldName: string) =>
