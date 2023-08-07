@@ -39,7 +39,7 @@
     ]
   },
   "lint-staged": {
-    "*.{js,jsx}": "eslint",
+    "*.{js,jsx,ts,tsx}": "eslint",
     "*": "prettier --ignore-unknown --write"
   },
   "browserslist": {
