@@ -15,10 +15,10 @@ export interface User {
   timezone: number;
   is_staff: boolean;
   is_active: boolean;
-  is_superuser: boolean;
   is_verified: boolean;
   avatar_url: string;
   role: Role;
-  created_at: string;
   phone_number: string;
+  created_at: string;
+  balance: number;
 }

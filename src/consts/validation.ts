@@ -17,9 +17,11 @@ export const ValidationErrors = {
   numberValidation: {
     positive: 'Значение должно быть больше нуля',
     numberType: 'Поле должно содержать в себе только цифры',
+    integerNumber: 'Значение должно быть целым числом',
     minNumber: (value: number) => `Значение должно быть больше ${value}`,
     maxNumber: (value: number) => `Значение должно быть меньше ${value}`,
-    integerNumber: 'Значение должно быть целым числом',
+    range: (min: number, max: number) =>
+      `Значение должно быть не менее ${min} и не более ${max}`,
   },
 
   dateValidation: {
