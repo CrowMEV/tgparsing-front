@@ -1,12 +1,15 @@
 import { ReactElement, useState } from 'react';
 import { Routes } from '../../../router/routes';
+
 import { MenuCategory, MenuItem } from '../menu-items';
+import { useAppSelector } from '../../../hooks/redux';
+
 import ReplenishmentWindow from '../../ReplenishmentWindow/ReplenishmentWindow';
+import NavLink from '../../ui/navLink/NavLink';
 import NavTabs from '../../ui/navTabs/navTabs';
 import Button from '../../ui/button/Button';
 
 import styles from './index.module.sass';
-import NavLink from '../../ui/navLink/NavLink';
 
 interface PropTypes {
   menuItems: { text: string; link: Routes; icon?: ReactElement }[];
@@ -14,6 +17,7 @@ interface PropTypes {
 }
 
 const Navbar = ({ menuItems, currentPage }: PropTypes) => {
+  const userBalance = useAppSelector((state) => state.UserData.user?.balance);
   const [isReplenishmentOpen, setIsReplenishmentOpen] = useState(false);
 
   const currentLinkPosition =
@@ -48,7 +52,7 @@ const Navbar = ({ menuItems, currentPage }: PropTypes) => {
           <div>
             <div className={styles.nav__links__balance}>
               <p className={styles.balance__title}>Ваш баланс:</p>
-              <p className={styles.balance__value}>2000.00 &#8381;</p>
+              <p className={styles.balance__value}>{userBalance} &#8381;</p>
             </div>
             <Button
               variant="small"

@@ -1,11 +1,12 @@
 import { object, string } from 'yup';
+import { NUMBER_ONLY_REGEX, ValidationErrors } from '../../consts/validation';
 
 export const replenishmentSchema = object().shape({
   amount: string()
-    .required('Обязательное поле')
-    .matches(/^[0-9]*$/, 'Поле должно содержать только число')
+    .required(ValidationErrors.required)
+    .matches(NUMBER_ONLY_REGEX, ValidationErrors.numberValidation.numberType)
     .test({
-      message: 'Сумма должна быть не меньше 1 и не больше 50000',
-      test: (value) => 0 < Number(value) && Number(value) <= 50000,
+      message: ValidationErrors.numberValidation.minNumber(1),
+      test: (value) => 0 < Number(value),
     }),
 });

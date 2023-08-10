@@ -3,6 +3,7 @@ import { Form, Formik } from 'formik';
 
 import { api } from '../../services/api';
 import { replenishmentSchema } from './replenishment-schema';
+import { useAppSelector } from '../../hooks/redux';
 
 import ModalWindow from '../ui/modal-window/ModalWindow';
 import TextInput from '../ui/input/TextInput';
@@ -17,19 +18,21 @@ type ReplenishmentWindowProps = {
 };
 
 type ReplenishmentRequest = {
-  amount: number | string;
+  amount: string;
+  email: string;
 };
 
 const ReplenishmentWindow = ({
   isActive,
   setActive,
 }: ReplenishmentWindowProps) => {
+  const user = useAppSelector((state) => state.UserData.user);
   const [isFetching, setIsFetching] = useState(false);
 
   const submitHandler = async (formData: ReplenishmentRequest) => {
     setIsFetching(true);
     try {
-      const { data } = await api.post('/payment/', formData);
+      const { data } = await api.post('/payment/create', formData);
       window.location.href = data;
     } catch (error) {
       console.error(error);
@@ -38,18 +41,25 @@ const ReplenishmentWindow = ({
     }
   };
 
+  if (!user) return null;
+
   return (
-    <ModalWindow isActive={isActive} setActive={setActive}>
+    <ModalWindow clickByOut={false} isActive={isActive} setActive={setActive}>
       <article className={styles.wrapper}>
         <h2 className={styles.header}>Пополнение баланса</h2>
         <div className={styles.balance}>
-          <p>250.00 ₽</p>
+          <p>{user?.balance} ₽</p>
           <p className={styles.balanceHint}>Текущий баланс</p>
         </div>
         <Formik
           initialValues={{ amount: '' }}
           validationSchema={replenishmentSchema}
-          onSubmit={(values) => submitHandler(values)}
+          onSubmit={({ amount }) =>
+            submitHandler({
+              email: user.email,
+              amount,
+            })
+          }
         >
           {({ values, errors, touched, handleChange, handleBlur, isValid }) => (
             <Form className={styles.form}>
