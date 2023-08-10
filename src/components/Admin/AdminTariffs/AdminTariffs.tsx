@@ -13,11 +13,14 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { ParsersTitles } from '../../../consts/tariffs';
 import { TariffResponse } from '../../../types/tariff';
 import { updateTariff } from '../../../store/tariff-slice/apiActions';
+import { Roles } from '../../../consts/consts';
 
 const AdminTariffs = () => {
   const dispatch = useAppDispatch();
   const [formIsOpened, setFormIsOpened] = useState(false);
   const tariffs = useAppSelector((state) => state.Tariff.tariffs);
+  const role = useAppSelector((state) => state.UserData.user)?.role.name;
+
   const [currentTariff, setCurrentTariff] = useState<TariffResponse | null>(
     null,
   );
@@ -50,9 +53,11 @@ const AdminTariffs = () => {
             <TableCell className={styles.headCell} variant="head">
               Статус
             </TableCell>
-            <TableCell className={styles.headCell} variant="head">
-              <span className="visually-hidden">Управление</span>
-            </TableCell>
+            {role === Roles.SuperUser && (
+              <TableCell className={styles.headCell} variant="head">
+                <span className="visually-hidden">Управление</span>
+              </TableCell>
+            )}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -87,23 +92,29 @@ const AdminTariffs = () => {
               </TableCell>
               <TableCell>{tariff.price} руб.</TableCell>
               <TableCell>
-                <Toggle
-                  className={styles.toggle}
-                  checked={tariff.active}
-                  toggleHandler={() =>
-                    tariffStatusHandler({ ...tariff, active: !tariff.active })
-                  }
-                />
+                {role === Roles.SuperUser ? (
+                  <Toggle
+                    className={styles.toggle}
+                    checked={tariff.active}
+                    toggleHandler={() =>
+                      tariffStatusHandler({ ...tariff, active: !tariff.active })
+                    }
+                  />
+                ) : (
+                  <span>{tariff.active ? 'активный' : 'неактивный'}</span>
+                )}
               </TableCell>
-              <TableCell>
-                <Button
-                  className={styles.updateButton}
-                  onClick={() => openFormHandler(tariff)}
-                  variant="small"
-                >
-                  Изменить тариф
-                </Button>
-              </TableCell>
+              {role === Roles.SuperUser && (
+                <TableCell>
+                  <Button
+                    className={styles.updateButton}
+                    onClick={() => openFormHandler(tariff)}
+                    variant="small"
+                  >
+                    Изменить тариф
+                  </Button>
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>

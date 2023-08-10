@@ -14,6 +14,7 @@ import SuccessMessageModal from '../../components/ui/SuccessMessageModal/Success
 import { ReactComponent as ArrowIcon } from '../../assets/images/icons/arrow.svg';
 
 import styles from './tariff-page.module.sass';
+import { api } from '../../services/api';
 
 const TariffsPage = () => {
   const authStatus = useAppSelector(
@@ -33,9 +34,17 @@ const TariffsPage = () => {
 
   const [successMessageIsShown, setSuccessMessageIsShown] = useState(false);
   const [failMessageIsShown, setFailMessageIsShown] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const payTariffHandler = () => {
-    console.log('payment of the tariff');
+  const payTariffHandler = (tariffId: number) => {
+    setIsSubmitting(true);
+    api
+      .post(`/tariff/purchase/${tariffId}`)
+      .then(() => {
+        setSuccessMessageIsShown(true);
+      })
+      .catch(() => setFailMessageIsShown(true))
+      .finally(() => setIsSubmitting(false));
   };
 
   const returnHandler = () => {
@@ -59,9 +68,10 @@ const TariffsPage = () => {
           <li key={tariff.name}>
             <TariffItem
               tariff={tariff}
+              isSubmitting={isSubmitting}
               buttonHandler={
                 authStatus === AuthorizationStatus.Auth
-                  ? () => payTariffHandler()
+                  ? () => payTariffHandler(tariff.id)
                   : returnHandler
               }
             />
@@ -69,6 +79,7 @@ const TariffsPage = () => {
         ))}
       </ul>
       <SuccessMessageModal
+        className={styles.successMessage}
         isActive={successMessageIsShown}
         setActive={setSuccessMessageIsShown}
         message="Оплата тарифа произведена успешно"

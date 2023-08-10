@@ -4,13 +4,21 @@ import Button from '../../ui/button/Button';
 import styles from './tariff-item.module.sass';
 import { ParsersTitles } from '../../../consts/tariffs';
 import { DAY_ENDINGS, getWordEnding } from '../../../utils/getWordEnding';
+import { ReactComponent as CheckIcon } from '../../../assets/images/icons/check-mark-icon.svg';
 
 interface TariffItemProps {
   tariff: Tariff;
   buttonHandler: () => void;
+  isSubmitting?: boolean;
+  isCurrentUserTariff?: boolean;
 }
 
-const TariffItem: FC<TariffItemProps> = ({ tariff, buttonHandler }) => {
+const TariffItem: FC<TariffItemProps> = ({
+  tariff,
+  buttonHandler,
+  isSubmitting = false,
+  isCurrentUserTariff = false,
+}) => {
   return (
     <article className={styles.wrapper}>
       <h3 className={styles.title}>
@@ -59,9 +67,19 @@ const TariffItem: FC<TariffItemProps> = ({ tariff, buttonHandler }) => {
             <span className={styles.accent}>{tariff.price}</span>рублей
           </p>
         </div>
-        <Button variant="accent" onClick={buttonHandler}>
-          Оплатить тариф
-        </Button>
+        {isCurrentUserTariff ? (
+          <div className={styles.currentTariff}>
+            Ваш текущий тариф <CheckIcon width={60} height={60} />
+          </div>
+        ) : (
+          <Button
+            variant="accent"
+            onClick={buttonHandler}
+            disabled={isSubmitting}
+          >
+            Оплатить тариф
+          </Button>
+        )}
       </div>
     </article>
   );

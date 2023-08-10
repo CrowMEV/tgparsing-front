@@ -4,6 +4,7 @@ import styles from './tariff-info.module.sass';
 import Button from '../ui/button/Button';
 import { useNavigate } from 'react-router-dom';
 import { Routes } from '../../router/routes';
+import Toggle from '../ui/toggle/toggle';
 
 const TariffInfo = () => {
   const [tariffDetailIsOpened, setTariffDetailIsOpened] = useState(false);
@@ -46,6 +47,10 @@ const TariffInfo = () => {
             <p className={styles.tariffField}>
               Доступно: <span className={styles.tariffValue}>120 парсеров</span>
             </p>
+          </div>
+          <div className={styles.autoRenewal}>
+            Автоматическое продление тарифа
+            <Toggle />
           </div>
           <Button
             variant="accent"
