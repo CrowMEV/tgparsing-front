@@ -1,8 +1,10 @@
 import { array, date, number, object, ref, string } from 'yup';
-import { ValidationErrors } from '../../../consts/validation';
+import { TASK_NAME_REGEX, ValidationErrors } from '../../../consts/validation';
 
 export const activitiesValidation = object({
-  name: string().required(ValidationErrors.required),
+  name: string()
+    .required(ValidationErrors.required)
+    .matches(TASK_NAME_REGEX, ValidationErrors.taskName),
   groups: array().of(
     object({
       id: string(),
@@ -29,6 +31,5 @@ export const activitiesValidation = object({
     .max(new Date(), ValidationErrors.dateValidation.futureDate),
   endDate: date()
     .required(ValidationErrors.required)
-    .typeError(ValidationErrors.numberValidation.numberType)
     .min(ref('startDate'), ValidationErrors.dateValidation.earlier),
 });

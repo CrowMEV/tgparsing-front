@@ -14,7 +14,6 @@ import Button from '../../ui/button/Button';
 import styles from './geolocation.module.sass';
 import sharedStyles from '../index.module.sass';
 import { api } from '../../../services/api';
-import { error } from 'console';
 
 const RADIUSES = [500, 1000, 2000, 3000, 5000] as const;
 

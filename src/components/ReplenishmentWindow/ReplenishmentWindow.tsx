@@ -19,7 +19,6 @@ type ReplenishmentWindowProps = {
 
 type ReplenishmentRequest = {
   amount: string;
-  email: string;
 };
 
 const ReplenishmentWindow = ({
@@ -54,16 +53,12 @@ const ReplenishmentWindow = ({
         <Formik
           initialValues={{ amount: '' }}
           validationSchema={replenishmentSchema}
-          onSubmit={({ amount }) =>
-            submitHandler({
-              email: user.email,
-              amount,
-            })
-          }
+          onSubmit={(values) => submitHandler(values)}
         >
           {({ values, errors, touched, handleChange, handleBlur, isValid }) => (
             <Form className={styles.form}>
               <TextInput
+                type="number"
                 autoComplete="off"
                 name="amount"
                 placeholder="Сумма пополнения"

@@ -7,12 +7,14 @@ export const ValidationErrors = {
   phoneNumber: 'Номер должен начинаться с "+" и содержать от 4 до 14 символов',
   lastName: 'Формат: "Иванов"',
   firstName: 'Формат: "Иван"',
+  taskName:
+    'Имя задачи может содержать в себе только тире, подчеркивание и пробел',
+  notImage: 'Неподдерживаемый формат изображения',
+  chooseOne: 'Необходимо выбрать хотя бы одно значение',
   moreThan: (fieldName: string) =>
     `Значение должно быть больше чем ${fieldName}`,
   min: (value: number) => `Поле должно содержать не менее ${value} символов`,
   max: (value: number) => `Поле должно содержать не более ${value} символов`,
-  notImage: 'Неподдерживаемый формат изображения',
-  chooseOne: 'Необходимо выбрать хотя бы одно значение',
 
   numberValidation: {
     positive: 'Значение должно быть больше нуля',
@@ -45,3 +47,5 @@ export const NAME_REGEX = /^([А-ЯЁ]{0,1}[а-яё-]+|[A-Z]{0,1}[a-z-]+)$/;
 export const PHONE_REGEX = /^\+[0-9+][0-9()-]{4,14}\d$/;
 
 export const NUMBER_ONLY_REGEX = /^\d+$/;
+
+export const TASK_NAME_REGEX = /^[А-ЯЁа-яёA-Za-z0-9-_ ]{1,50}$/;
