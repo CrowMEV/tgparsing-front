@@ -29,18 +29,6 @@ export const addTariff = createAppAsyncThunk<TariffResponse, Tariff>(
   },
 );
 
-export const getTariff = createAppAsyncThunk<TariffResponse, number>(
-  'tariff/getById',
-  async (id, { rejectWithValue, extra: api }) => {
-    try {
-      const { data } = await api.get(`${TariffRoutes.Tariffs}${id}`);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  },
-);
-
 export const updateTariff = createAppAsyncThunk<TariffResponse, TariffResponse>(
   'tariff/update',
   async (tariffData, { rejectWithValue, extra: api }) => {
