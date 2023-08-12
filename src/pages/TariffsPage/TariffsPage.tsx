@@ -15,6 +15,7 @@ import { ReactComponent as ArrowIcon } from '../../assets/images/icons/arrow.svg
 
 import styles from './tariff-page.module.sass';
 import { api } from '../../services/api';
+import { editUser } from '../../store/user-slice/userSlice';
 
 const TariffsPage = () => {
   const authStatus = useAppSelector(
@@ -26,6 +27,10 @@ const TariffsPage = () => {
 
   const activeTariffs = useAppSelector((state) => state.Tariff.tariffs).filter(
     (tariff) => tariff.active,
+  );
+
+  const userSubscribe = useAppSelector(
+    (state) => state.UserData.user?.subscribe,
   );
 
   useEffect(() => {
@@ -40,8 +45,9 @@ const TariffsPage = () => {
     setIsSubmitting(true);
     api
       .post(`/tariff/purchase/${tariffId}`)
-      .then(() => {
+      .then(({ data }) => {
         setSuccessMessageIsShown(true);
+        dispatch(editUser(data));
       })
       .catch(() => setFailMessageIsShown(true))
       .finally(() => setIsSubmitting(false));
@@ -69,6 +75,9 @@ const TariffsPage = () => {
             <TariffItem
               tariff={tariff}
               isSubmitting={isSubmitting}
+              isCurrentTariff={
+                !!userSubscribe && !!(userSubscribe.tariff_id === tariff.id)
+              }
               buttonHandler={
                 authStatus === AuthorizationStatus.Auth
                   ? () => payTariffHandler(tariff.id)

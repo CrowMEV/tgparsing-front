@@ -101,7 +101,9 @@ const AdminTariffs = () => {
                     }
                   />
                 ) : (
-                  <span>{tariff.active ? 'активный' : 'неактивный'}</span>
+                  <span className={`${tariff.active ? '' : styles.inactive}`}>
+                    {tariff.active ? 'активный' : 'неактивный'}
+                  </span>
                 )}
               </TableCell>
               {role === Roles.SuperUser && (

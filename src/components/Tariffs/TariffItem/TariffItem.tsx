@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Tariff } from '../../../types/tariff';
+import { TariffResponse } from '../../../types/tariff';
 import Button from '../../ui/button/Button';
 import styles from './tariff-item.module.sass';
 import { ParsersTitles } from '../../../consts/tariffs';
@@ -7,17 +7,17 @@ import { DAY_ENDINGS, getWordEnding } from '../../../utils/getWordEnding';
 import { ReactComponent as CheckIcon } from '../../../assets/images/icons/check-mark-icon.svg';
 
 interface TariffItemProps {
-  tariff: Tariff;
+  tariff: TariffResponse;
   buttonHandler: () => void;
   isSubmitting?: boolean;
-  isCurrentUserTariff?: boolean;
+  isCurrentTariff: boolean;
 }
 
 const TariffItem: FC<TariffItemProps> = ({
   tariff,
   buttonHandler,
   isSubmitting = false,
-  isCurrentUserTariff = false,
+  isCurrentTariff = false,
 }) => {
   return (
     <article className={styles.wrapper}>
@@ -67,7 +67,7 @@ const TariffItem: FC<TariffItemProps> = ({
             <span className={styles.accent}>{tariff.price}</span>рублей
           </p>
         </div>
-        {isCurrentUserTariff ? (
+        {isCurrentTariff ? (
           <div className={styles.currentTariff}>
             Ваш текущий тариф <CheckIcon width={60} height={60} />
           </div>
