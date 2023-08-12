@@ -12,6 +12,7 @@ import Toggle from '../../../components/ui/toggle/toggle';
 import Dropdown from '../../../components/ui/dropdown/Dropdown';
 
 import styles from './admin-user-card.module.sass';
+import TextInput from '../../ui/input/TextInput';
 
 interface AdminUserCardProps {
   user: User;
@@ -26,7 +27,6 @@ const AdminUserCard = ({ user, setUser }: AdminUserCardProps) => {
     () => ['Бухгалтер', 'Технический специалист', 'HR-специалист'],
     [],
   );
-  const TARIFFS = useMemo(() => ['Стандарт'], []);
 
   return (
     <main className={styles.profileWrapper}>
@@ -62,11 +62,7 @@ const AdminUserCard = ({ user, setUser }: AdminUserCardProps) => {
         <div className={styles.columnWrapper}>
           <div>
             <h3 className={styles.header}>Тариф</h3>
-            <Dropdown
-              options={TARIFFS}
-              selectedOption={TARIFFS[0]}
-              onChange={(option) => console.log(option)}
-            />
+            <TextInput temporaryDisabled placeholder="Тариф" />
           </div>
           <div>
             <h3 className={styles.header}>Часовой пояс</h3>

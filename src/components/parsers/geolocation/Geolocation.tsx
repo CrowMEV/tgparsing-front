@@ -51,8 +51,7 @@ const Geolocation = () => {
       })
       .then(() => actions.resetForm())
       .catch((error) => {
-        alert(error?.response?.data?.detail);
-        console.error(error);
+        alert(error);
       })
       .finally(() => setIsFetching(false));
   };
