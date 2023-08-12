@@ -6,7 +6,6 @@ import {
 } from '../../types/auth';
 import { createAppAsyncThunk } from '../createAppAsyncThunk';
 import { User } from '../../types/user';
-import { AxiosError } from 'axios';
 
 export const register = createAppAsyncThunk<
   RegistrationResponseData,
@@ -21,7 +20,7 @@ export const register = createAppAsyncThunk<
       );
       return data;
     } catch (error) {
-      return rejectWithValue((error as AxiosError).response?.data);
+      return rejectWithValue(error);
     }
   },
 );
@@ -33,7 +32,7 @@ export const login = createAppAsyncThunk<User, LoginData>(
       const { data } = await api.post<User>(ApiRoutes.Login, loginData);
       return data;
     } catch (error) {
-      return rejectWithValue((error as AxiosError).response?.data);
+      return rejectWithValue(error);
     }
   },
 );
@@ -44,7 +43,7 @@ export const logout = createAppAsyncThunk(
     try {
       await api.post(ApiRoutes.Logout);
     } catch (error) {
-      return rejectWithValue((error as AxiosError).response?.data);
+      return rejectWithValue(error);
     }
   },
 );
@@ -56,7 +55,7 @@ export const refresh = createAppAsyncThunk<User, void>(
       const { data } = await api.get<User>(ApiRoutes.Refresh);
       return data;
     } catch (error) {
-      return rejectWithValue((error as AxiosError).response?.data);
+      return rejectWithValue(error);
     }
   },
 );
@@ -68,7 +67,7 @@ export const patchUser = createAppAsyncThunk<User, FormData>(
       const { data } = await api.patch<User>(ApiRoutes.PatchUser, updatedUser);
       return data;
     } catch (error) {
-      return rejectWithValue((error as AxiosError).response?.data);
+      return rejectWithValue(error);
     }
   },
 );

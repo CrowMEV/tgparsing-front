@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Circle, Popup } from 'react-leaflet';
 import { Form, Formik, FormikHelpers } from 'formik';
 
+import { api } from '../../../services/api';
 import { geolocationValidation } from './geolocation-validation-schema';
 
 import Map from '../../Map/Map';
@@ -13,7 +13,6 @@ import Button from '../../ui/button/Button';
 
 import styles from './geolocation.module.sass';
 import sharedStyles from '../index.module.sass';
-import { api } from '../../../services/api';
 
 const RADIUSES = [500, 1000, 2000, 3000, 5000] as const;
 

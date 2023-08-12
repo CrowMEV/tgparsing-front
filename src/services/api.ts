@@ -1,9 +1,8 @@
 import axios from 'axios';
 import type { AppStore } from '../store';
-import { ApiRoutes } from '../store/user-slice/apiRoutes';
 import { localLogout } from '../store/user-slice/userSlice';
-import { logout } from '../store/user-slice/apiActions';
 import { BASE_URL } from '../consts/consts';
+import { getErrorMessage } from '../utils/getErrorMessage';
 
 const REQUEST_TIME = 5000;
 let store: AppStore;
@@ -22,6 +21,6 @@ api.interceptors.response.use(
     if (error.response.status === 401) {
       store.dispatch(localLogout());
     }
-    throw error;
+    throw getErrorMessage(error);
   },
 );

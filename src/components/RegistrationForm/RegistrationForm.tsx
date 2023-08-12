@@ -39,7 +39,7 @@ const RegistrationForm = () => {
         setSuccessMessageIsVisible(true);
       })
       .catch((error) => {
-        setErrorMessage(error.detail);
+        setErrorMessage(error);
       })
       .finally(() => {
         setIsSubmitting(false);

@@ -1,7 +1,6 @@
 import { Tariff, TariffResponse } from './../../types/tariff';
 import { createAppAsyncThunk } from '../createAppAsyncThunk';
 import { TariffRoutes } from './apiRoutes';
-import { AxiosError } from 'axios';
 
 export const getTariffs = createAppAsyncThunk<TariffResponse[], void>(
   'tariffs/getAll',
@@ -10,7 +9,7 @@ export const getTariffs = createAppAsyncThunk<TariffResponse[], void>(
       const { data } = await api.get(TariffRoutes.Tariffs);
       return data;
     } catch (error) {
-      return rejectWithValue((error as AxiosError).response?.data);
+      return rejectWithValue(error);
     }
   },
 );
@@ -25,7 +24,7 @@ export const addTariff = createAppAsyncThunk<TariffResponse, Tariff>(
       );
       return data;
     } catch (error) {
-      return rejectWithValue((error as AxiosError).response?.data);
+      return rejectWithValue(error);
     }
   },
 );
@@ -37,7 +36,7 @@ export const getTariff = createAppAsyncThunk<TariffResponse, number>(
       const { data } = await api.get(`${TariffRoutes.Tariffs}${id}`);
       return data;
     } catch (error) {
-      return rejectWithValue((error as AxiosError).response?.data);
+      return rejectWithValue(error);
     }
   },
 );
@@ -52,7 +51,7 @@ export const updateTariff = createAppAsyncThunk<TariffResponse, TariffResponse>(
       );
       return data;
     } catch (error) {
-      return rejectWithValue((error as AxiosError).response?.data);
+      return rejectWithValue(error);
     }
   },
 );
@@ -64,7 +63,7 @@ export const deleteTariff = createAppAsyncThunk<number, number>(
       await api.delete(`${TariffRoutes.Tariffs}${id}`);
       return id;
     } catch (error) {
-      return rejectWithValue((error as AxiosError).response?.data);
+      return rejectWithValue(error);
     }
   },
 );
