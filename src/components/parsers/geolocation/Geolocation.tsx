@@ -46,6 +46,8 @@ const Geolocation = () => {
           },
         ],
         accuracy_radius: values.radius,
+        //TODO
+        rerun: false,
       })
       .then(() => actions.resetForm())
       .catch((error) => {

@@ -60,6 +60,8 @@ const Activities = () => {
           comments: values.activities.includes('комментарии'),
           reposts: values.activities.includes('репосты'),
         },
+        //TODO
+        rerun: false,
       })
       .then(() => actions.resetForm())
       .catch((error) => {

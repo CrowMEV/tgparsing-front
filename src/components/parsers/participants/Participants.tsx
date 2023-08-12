@@ -39,6 +39,8 @@ const Participants = () => {
         task_name: values.name,
         parsed_chats: values.groups.map((group) => group.value),
         groups_count: values.amountFrom,
+        //TODO
+        rerun: false,
       })
       .then(() => actions.resetForm())
       .catch((error) => {
