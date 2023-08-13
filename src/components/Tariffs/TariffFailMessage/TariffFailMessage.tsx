@@ -19,7 +19,11 @@ const TariffFailMessage: FC<TariffFailMessageProps> = ({
           Недостаточно средств
           <br /> для оплаты тарифа
         </p>
-        <Button style={{ color: '#ffffff' }} variant="small">
+        <Button
+          style={{ color: '#ffffff' }}
+          variant="small"
+          onClick={() => setActive(false)}
+        >
           Пополнить баланс
         </Button>
       </div>

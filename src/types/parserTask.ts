@@ -1,4 +1,4 @@
-type Operations = 'parsing';
+export type Operations = 'parsing';
 export type WorkStatus = 'in_processing' | 'in_waiting' | 'failed' | 'success';
 
 export type ParserTask = {

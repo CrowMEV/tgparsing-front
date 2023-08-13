@@ -24,6 +24,7 @@ export const ValidationErrors = {
     maxNumber: (value: number) => `Значение должно быть меньше ${value}`,
     range: (min: number, max: number) =>
       `Значение должно быть не менее ${min} и не более ${max}`,
+    withoutSymbols: 'Поле обязательно и не должно содержать символов "eE+-"',
   },
 
   dateValidation: {
@@ -49,3 +50,5 @@ export const PHONE_REGEX = /^\+[0-9+][0-9()-]{4,14}\d$/;
 export const NUMBER_ONLY_REGEX = /^\d+$/;
 
 export const TASK_NAME_REGEX = /^[А-ЯЁа-яёA-Za-z0-9-_ ]{1,50}$/;
+
+export const NUMBER_SYMBOLS = /[eE+-]/;

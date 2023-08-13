@@ -1,3 +1,4 @@
+import { UserSubscribe } from './user-subscribe';
 //TODO Перечисление ролей
 interface Role {
   name: string;
@@ -21,4 +22,5 @@ export interface User {
   phone_number: string;
   created_at: string;
   balance: number;
+  subscribe: UserSubscribe;
 }

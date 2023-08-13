@@ -3,7 +3,7 @@ import Tasks from '../../components/Dashboard/Tasks/Tasks';
 import TariffInfo from '../../components/TariffInfo/TariffInfo';
 import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
-import { ParserTask } from '../../types/tasks';
+import { ParserTask } from '../../types/parserTask';
 import Loader from '../../components/ui/loader/loader';
 
 const MainPage = () => {

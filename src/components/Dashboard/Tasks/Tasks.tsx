@@ -5,7 +5,7 @@ import TableRow from '../../ui/table/tableRow/TableRow';
 import TableBody from '../../ui/table/tableBody/TableBody';
 import TableCell from '../../ui/table/tableCell/TableCell';
 import TableContainer from '../../ui/table/tableContainer/TableContainer';
-import { ParserTask } from '../../../types/tasks';
+import { ParserTask } from '../../../types/parserTask';
 import { FC } from 'react';
 import {
   getTaskOperationName,

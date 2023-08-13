@@ -1,4 +1,4 @@
-import { Operation, WorkStatus } from '../types/tasks';
+import { Operations, WorkStatus } from '../types/parserTask';
 
 export const getTaskStatusName = (status: WorkStatus) => {
   switch (status) {
@@ -15,7 +15,7 @@ export const getTaskStatusName = (status: WorkStatus) => {
   }
 };
 
-export const getTaskOperationName = (operation: Operation) => {
+export const getTaskOperationName = (operation: Operations) => {
   switch (operation) {
     case 'parsing':
       return 'Парсинг';
