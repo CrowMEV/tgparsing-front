@@ -48,7 +48,7 @@ export const NAV_ITEMS: MenuItem[] = [
 export const MENU_ITEMS: MenuItem[] = [
   {
     position: 0,
-    text: 'Дашбоард',
+    text: 'Дашборд',
     link: Routes.Dashboard,
     icon: <DashboardIcon />,
     menuCategory: MenuCategory.Navbar,

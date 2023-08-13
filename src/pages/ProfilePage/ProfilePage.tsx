@@ -42,7 +42,7 @@ const ProfilePage = () => {
           <TextInput
             className={styles.pricing}
             temporaryDisabled
-            placeholder="Тариф"
+            value={user.subscribe ? user.subscribe.id : 'Без тарифа'}
           />
         </div>
       </div>

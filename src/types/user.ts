@@ -1,11 +1,9 @@
 import { UserSubscribe } from './user-subscribe';
-//TODO Перечисление ролей
-interface Role {
+
+export interface Role {
   name: string;
+  pretty_name: string;
   is_active: boolean;
-  staff_action: [];
-  payment_action: string[];
-  role_action: [];
 }
 
 export interface User {
@@ -22,5 +20,5 @@ export interface User {
   phone_number: string;
   created_at: string;
   balance: number;
-  subscribe: UserSubscribe;
+  subscribe: UserSubscribe | null;
 }
