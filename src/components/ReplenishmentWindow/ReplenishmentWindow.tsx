@@ -31,7 +31,7 @@ const ReplenishmentWindow = ({
   const submitHandler = async (formData: ReplenishmentRequest) => {
     setIsFetching(true);
     try {
-      const { data } = await api.post('/payment/create/', formData);
+      const { data } = await api.post('/payment/create', formData);
       window.location.href = data;
     } catch (error) {
       console.error(error);
