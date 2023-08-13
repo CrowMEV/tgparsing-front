@@ -13,16 +13,17 @@ import { editUser } from '../../store/user-slice/userSlice';
 
 const TariffInfo = () => {
   const dispatch = useAppDispatch();
-  const [tariffDetailIsOpened, setTariffDetailIsOpened] = useState(false);
   const currentPath = useLocation().pathname;
   const navigate = useNavigate();
+
+  const user = useAppSelector((state) => state.UserData.user);
+  const userSubscribe = user?.subscribe;
+
+  const [tariffDetailIsOpened, setTariffDetailIsOpened] = useState(false);
   const [currentTariff, setCurrentTariff] = useState<TariffResponse | null>(
     null,
   );
   const [error, setError] = useState('');
-
-  const user = useAppSelector((state) => state.UserData.user);
-  const userSubscribe = user?.subscribe;
 
   useEffect(() => {
     if (userSubscribe) {

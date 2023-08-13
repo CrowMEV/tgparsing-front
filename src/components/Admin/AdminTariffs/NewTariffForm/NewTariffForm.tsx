@@ -99,17 +99,7 @@ const NewTariffForm: FC<NewTariffFormProps> = ({ isActive, setIsActive }) => {
               name="limitation_days"
               value={values.limitation_days}
               type="number"
-              onChange={(e) => {
-                console.log(e);
-                console.log({
-                  ...e,
-                  target: {
-                    ...e.target,
-                    value: e.target.value,
-                  },
-                });
-                handleChange(e);
-              }}
+              onChange={handleChange}
               onBlur={handleBlur}
               errorMessage={
                 errors.limitation_days && touched.limitation_days
