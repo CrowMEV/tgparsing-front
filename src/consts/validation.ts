@@ -38,12 +38,15 @@ export const ValidationErrors = {
 };
 
 export const EMAIL_REGEX =
-  /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+  /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
 
 export const PASS_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]|.*[_]).{8,}/;
 
-export const NAME_REGEX = /^([А-ЯЁ]{0,1}[а-яё-]+|[A-Z]{0,1}[a-z-]+)$/;
+export const NAME_LENGTH = 61;
+
+export const NAME_REGEX =
+  /^(([а-яА-ЯёЁ][а-яё]*)(-[а-яА-ЯёЁ][а-яё]*)?)|(([a-zA-Z][a-z]*)(-[a-zA-Z][a-z]*)?)$/;
 
 export const PHONE_REGEX = /^\+[0-9+][0-9()-]{4,14}\d$/;
 
