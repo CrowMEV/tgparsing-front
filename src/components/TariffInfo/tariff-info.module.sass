@@ -1,4 +1,17 @@
 @import "/src/assets/styles/variables.sass"
+@import "/src/assets/styles/mixins.sass"
+
+.tariffsDirection
+  @include header(20px)
+
+.tariffsDirection__link
+  text-decoration: underline
+
+  &:hover
+    opacity: 0.8
+
+  &:active
+    opacity: 0.6
   
 .info
   display: flex
@@ -56,4 +69,19 @@
   flex-direction: column
   row-gap: 18px
 
-  margin-bottom: 52px
+  margin-bottom: 50px
+
+.autoRenewal
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+  margin-bottom: 50px
+
+  @include header(16px)
+
+.error
+  margin-bottom: 50px
+  
+  text-align: center
+  color: $c-error

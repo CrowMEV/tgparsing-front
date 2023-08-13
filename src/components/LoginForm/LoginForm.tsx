@@ -29,7 +29,7 @@ const LoginForm = () => {
         setErrorMessage('');
       })
       .catch((error) => {
-        setErrorMessage(error.detail);
+        setErrorMessage(error);
       })
       .finally(() => {
         setIsSubmitting(false);

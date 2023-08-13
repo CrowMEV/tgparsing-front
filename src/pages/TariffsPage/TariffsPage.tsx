@@ -14,6 +14,8 @@ import SuccessMessageModal from '../../components/ui/SuccessMessageModal/Success
 import { ReactComponent as ArrowIcon } from '../../assets/images/icons/arrow.svg';
 
 import styles from './tariff-page.module.sass';
+import { api } from '../../services/api';
+import { editUser } from '../../store/user-slice/userSlice';
 
 const TariffsPage = () => {
   const authStatus = useAppSelector(
@@ -27,15 +29,28 @@ const TariffsPage = () => {
     (tariff) => tariff.active,
   );
 
+  const userSubscribe = useAppSelector(
+    (state) => state.UserData.user?.subscribe,
+  );
+
   useEffect(() => {
     dispatch(getTariffs());
   }, []);
 
   const [successMessageIsShown, setSuccessMessageIsShown] = useState(false);
   const [failMessageIsShown, setFailMessageIsShown] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const payTariffHandler = () => {
-    console.log('payment of the tariff');
+  const payTariffHandler = (tariffId: number) => {
+    setIsSubmitting(true);
+    api
+      .post(`/tariff/purchase/${tariffId}`)
+      .then(({ data }) => {
+        setSuccessMessageIsShown(true);
+        dispatch(editUser(data));
+      })
+      .catch(() => setFailMessageIsShown(true))
+      .finally(() => setIsSubmitting(false));
   };
 
   const returnHandler = () => {
@@ -59,9 +74,13 @@ const TariffsPage = () => {
           <li key={tariff.name}>
             <TariffItem
               tariff={tariff}
+              isSubmitting={isSubmitting}
+              isCurrentTariff={
+                !!userSubscribe && !!(userSubscribe.tariff_id === tariff.id)
+              }
               buttonHandler={
                 authStatus === AuthorizationStatus.Auth
-                  ? () => payTariffHandler()
+                  ? () => payTariffHandler(tariff.id)
                   : returnHandler
               }
             />
@@ -69,6 +88,7 @@ const TariffsPage = () => {
         ))}
       </ul>
       <SuccessMessageModal
+        className={styles.successMessage}
         isActive={successMessageIsShown}
         setActive={setSuccessMessageIsShown}
         message="Оплата тарифа произведена успешно"

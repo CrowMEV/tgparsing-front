@@ -52,6 +52,7 @@ export const userSlice = createSlice({
       })
       .addCase(logout.fulfilled.type, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.user = null;
         state.mode = null;
       })
       .addCase(refresh.fulfilled.type, (state, action: PayloadAction<User>) => {

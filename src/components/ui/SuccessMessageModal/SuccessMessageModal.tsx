@@ -10,16 +10,18 @@ type SuccessMessageModalProps = {
   isActive: boolean;
   setActive: (modalIsActive: boolean) => void;
   message: string;
+  className?: string;
 };
 
 const SuccessMessageModal: FC<SuccessMessageModalProps> = ({
   isActive,
   setActive,
   message,
+  className,
 }) => {
   return (
     <ModalWindow isActive={isActive} setActive={setActive}>
-      <div className={styles.wrapper}>
+      <div className={`${styles.wrapper} ${className ? className : ''}`}>
         <p className={styles.message}>{message}</p>
         <CheckMarkIcon width="60" height="60" />
       </div>
