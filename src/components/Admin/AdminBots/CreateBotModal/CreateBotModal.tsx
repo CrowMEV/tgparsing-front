@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import {
   createBotValidation,
   verificationCodeValidation,
-} from '../validation-schema';
+} from './validation-schema';
 
 import TextInput from '../../../ui/input/TextInput';
 import Button from '../../../ui/button/Button';
@@ -58,7 +58,7 @@ const CreateBotModal = ({ isActive, setIsActive }: CreateBotModalProps) => {
   };
 
   return (
-    <ModalWindow isActive={isActive} setActive={setIsActive}>
+    <ModalWindow clickByOut={false} isActive={isActive} setActive={setIsActive}>
       <article className={styles.wrapper}>
         {!isConnectionOpen && !status && (
           <Formik

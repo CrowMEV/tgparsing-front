@@ -1,5 +1,5 @@
 import { object, string } from 'yup';
-import { ValidationErrors } from '../../../consts/validation';
+import { ValidationErrors } from '../../../../consts/validation';
 
 export const createBotValidation = object({
   apiId: string().required(ValidationErrors.required),

@@ -62,7 +62,7 @@ const AdminBots: FC<AdminBotsProps> = ({ bots }) => {
             <TableRow key={bot.id}>
               <TableCell>{bot.api_id}</TableCell>
               <TableCell>{bot.api_hash}</TableCell>
-              <TableCell> </TableCell>
+              <TableCell>{bot.phone_number}</TableCell>
               <TableCell>{bot.work_status}</TableCell>
               <TableCell>{bot.block_status}</TableCell>
               <TableCell>
