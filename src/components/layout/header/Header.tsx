@@ -4,7 +4,6 @@ import { ReactComponent as NotificationIcon } from '../../../assets/images/icons
 import { ReactComponent as PowerIcon } from '../../../assets/images/icons/power-button.svg';
 import { Routes } from '../../../router/routes';
 import NavTabs from '../../ui/navTabs/navTabs';
-import { ReactElement } from 'react';
 import { MenuCategory, MenuItem } from '../menu-items';
 import Logo from '../../ui/logo/Logo';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
@@ -15,7 +14,7 @@ import { changeMode } from '../../../store/user-slice/userSlice';
 import { logoutChannel } from '../../../services/logout-channel';
 
 interface PropTypes {
-  menuItems: { text: string; link: Routes; icon?: ReactElement }[];
+  menuItems: MenuItem[];
   currentPage: MenuItem;
 }
 
@@ -74,7 +73,8 @@ const Header = ({ menuItems, currentPage }: PropTypes) => {
                   index === currentLinkPosition
                     ? styles.header__link_active
                     : ''
-                }`}
+                }
+                ${item.disabled ? styles.header__link_disabled : ''}`}
                 key={item.text}
               >
                 {item.icon && (
@@ -84,7 +84,9 @@ const Header = ({ menuItems, currentPage }: PropTypes) => {
               </Link>
             ))}
           </NavTabs>
-          <button className={styles.header__link}>
+          <button
+            className={`${styles.header__link} ${styles.header__link_disabled}`}
+          >
             <div className={styles.header__icon}>
               <NotificationIcon />
             </div>

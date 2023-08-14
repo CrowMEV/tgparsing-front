@@ -26,6 +26,7 @@ export interface MenuItem {
   link: Routes;
   icon?: ReactElement;
   menuCategory: MenuCategory;
+  disabled?: boolean;
 }
 
 export const NAV_ITEMS: MenuItem[] = [
@@ -42,6 +43,7 @@ export const NAV_ITEMS: MenuItem[] = [
     link: Routes.Documents,
     icon: <DocumentIcon />,
     menuCategory: MenuCategory.Profile,
+    disabled: true,
   },
 ];
 
@@ -66,6 +68,7 @@ export const MENU_ITEMS: MenuItem[] = [
     link: Routes.Mailing,
     icon: <MailingIcon />,
     menuCategory: MenuCategory.Navbar,
+    disabled: true,
   },
   {
     position: 3,
@@ -73,6 +76,7 @@ export const MENU_ITEMS: MenuItem[] = [
     link: Routes.Inviting,
     icon: <InvitingIcon />,
     menuCategory: MenuCategory.Navbar,
+    disabled: true,
   },
   {
     position: 4,
@@ -80,6 +84,7 @@ export const MENU_ITEMS: MenuItem[] = [
     link: Routes.Base,
     icon: <BaseIcon />,
     menuCategory: MenuCategory.Navbar,
+    disabled: true,
   },
   {
     position: 5,
@@ -87,6 +92,7 @@ export const MENU_ITEMS: MenuItem[] = [
     link: Routes.Reports,
     icon: <ReportIcon />,
     menuCategory: MenuCategory.Navbar,
+    disabled: true,
   },
   {
     position: 6,
@@ -94,6 +100,7 @@ export const MENU_ITEMS: MenuItem[] = [
     link: Routes.Finance,
     icon: <FinanceIcon />,
     menuCategory: MenuCategory.Navbar,
+    disabled: true,
   },
   {
     position: 7,
@@ -118,6 +125,7 @@ export const ADMIN_NAV_ITEMS: MenuItem[] = [
     link: Routes.AdminDocuments,
     icon: <DocumentIcon />,
     menuCategory: MenuCategory.Profile,
+    disabled: true,
   },
 ];
 

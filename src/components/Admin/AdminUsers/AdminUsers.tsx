@@ -54,7 +54,9 @@ const AdminUsers: FC<AdminUsersProps> = ({ users }) => {
                 />
               </TableCell>
             ))}
-            <TableCell variant="head">Блок</TableCell>
+            <TableCell className={styles.userHeadCell__block} variant="head">
+              Блок
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -76,7 +78,7 @@ const AdminUsers: FC<AdminUsersProps> = ({ users }) => {
                   evt.stopPropagation();
                 }}
               >
-                <Toggle />
+                <Toggle className={styles.toggle} />
               </TableCell>
             </TableRow>
           ))}

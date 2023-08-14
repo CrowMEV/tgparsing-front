@@ -1,5 +1,4 @@
-import { ReactElement, useState } from 'react';
-import { Routes } from '../../../router/routes';
+import { useState } from 'react';
 
 import { MenuCategory, MenuItem } from '../menu-items';
 import { useAppSelector } from '../../../hooks/redux';
@@ -12,7 +11,7 @@ import Button from '../../ui/button/Button';
 import styles from './index.module.sass';
 
 interface PropTypes {
-  menuItems: { text: string; link: Routes; icon?: ReactElement }[];
+  menuItems: MenuItem[];
   currentPage: MenuItem;
 }
 
@@ -44,6 +43,7 @@ const Navbar = ({ menuItems, currentPage }: PropTypes) => {
                   text={item.text}
                   icon={item.icon}
                   isActive={index === currentLinkPosition}
+                  isDisabled={item.disabled}
                   key={item.text}
                 />
               ))}
