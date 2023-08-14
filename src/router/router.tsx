@@ -4,13 +4,8 @@ import Layout from '../components/layout/Layout';
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
 
 import DashboardPage from '../pages/DashboardPage/DashboardPage';
-import MailingPage from '../pages/Mailing/MailingPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
-import BasePage from '../pages/BasePage/BasePage';
-import FinancePage from '../pages/FinancePage/FinancePage';
-import ReportPage from '../pages/ReportPage/ReportPage';
-import InvitingPage from '../pages/InvitingPage/InvitingPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import DocumentsPage from '../pages/DocumentsPage/DocumentsPage';
 import AuthLayout from '../components/AuthLayout/AuthLayout';
@@ -27,8 +22,8 @@ import UsersAdminPage from '../pages/Admin/UsersPage/UsersAdminPage';
 import BotsAdminPage from '../pages/Admin/BotsPage/BotsAdminPage';
 import FinanceAdminPage from '../pages/Admin/FinancePage/FinanceAdminPage';
 import UserPage from '../pages/Admin/UserPage/UserPage';
-import BotPage from '../pages/Admin/BotPage/BotPage';
 import AdminProfilePage from '../pages/Admin/AdminProfilePage/AdminProfilePage';
+import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 
 export const router = createBrowserRouter([
   {
@@ -42,10 +37,6 @@ export const router = createBrowserRouter([
         path: Routes.Dashboard,
         element: <DashboardPage />,
         index: true,
-      },
-      {
-        path: Routes.Mailing,
-        element: <MailingPage />,
       },
       {
         path: Routes.Parsers,
@@ -66,32 +57,12 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: Routes.Base,
-        element: <BasePage />,
-      },
-      {
-        path: Routes.Finance,
-        element: <FinancePage />,
-      },
-      {
-        path: Routes.Reports,
-        element: <ReportPage />,
-      },
-      {
-        path: Routes.Inviting,
-        element: <InvitingPage />,
-      },
-      {
         path: Routes.Tariffs,
         element: <TariffsPage />,
       },
       {
         path: Routes.Profile,
         element: <ProfilePage />,
-      },
-      {
-        path: Routes.Documents,
-        element: <DocumentsPage />,
       },
     ],
   },
@@ -127,7 +98,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '*',
-    element: <div>404</div>,
+    element: <NotFoundPage />,
   },
   {
     element: (

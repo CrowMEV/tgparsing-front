@@ -34,7 +34,7 @@ const TariffInfo = () => {
     }
   }, [userSubscribe]);
 
-  if (!userSubscribe || !currentTariff)
+  if (!userSubscribe)
     return (
       <p className={styles.tariffsDirection}>
         Для начала работы{' '}
@@ -47,6 +47,8 @@ const TariffInfo = () => {
         )}
       </p>
     );
+
+  if (!currentTariff) return null;
 
   const autoRenewalHandler = () => {
     api

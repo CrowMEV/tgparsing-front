@@ -7,12 +7,21 @@ interface NavLinkProps {
   link: string;
   isActive: boolean;
   icon?: ReactElement;
+  isDisabled?: boolean;
 }
 
-const NavLink: FC<NavLinkProps> = ({ text, link, isActive, icon }) => {
+const NavLink: FC<NavLinkProps> = ({
+  text,
+  link,
+  isActive,
+  icon,
+  isDisabled = false,
+}) => {
   return (
     <Link
-      className={`${styles.navLink} ${isActive ? styles.navLink_active : ''}`}
+      className={`${styles.navLink} ${isActive ? styles.navLink_active : ''} ${
+        isDisabled ? styles.navLink_disabled : ''
+      }`}
       to={link}
     >
       {icon && <div className={styles.navIcon}>{icon}</div>}
