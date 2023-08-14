@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-import { User } from '../../../types/user';
+import { Role, User } from '../../../types/user';
 import { api } from '../../../services/api';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { patchUser } from '../../../store/user-slice/apiActions';
@@ -22,11 +22,27 @@ interface AdminUserCardProps {
 const AdminUserCard = ({ user, setUser }: AdminUserCardProps) => {
   const dispatch = useAppDispatch();
   const adminId = useAppSelector((state) => state.UserData.user?.id);
+  const [staffList, setStaffList] = useState<Role[]>([]);
 
-  const STAFF_MEMBERS = useMemo(
-    () => ['Бухгалтер', 'Технический специалист', 'HR-специалист'],
-    [],
-  );
+  useEffect(() => {
+    api
+      .get('/role/')
+      .then((r) => setStaffList(r.data))
+      .catch((e) => console.error(e));
+  }, []);
+
+  const handleSubmit = useCallback((field: string, value: string | Blob) => {
+    const formData = new FormData();
+    formData.append(field, value);
+    if (adminId === user.id) {
+      dispatch(patchUser(formData));
+    } else {
+      api
+        .patch(`/user/${user.id}`, formData)
+        .then((r) => setUser(r.data))
+        .catch((e) => alert(e));
+    }
+  }, []);
 
   return (
     <main className={styles.profileWrapper}>
@@ -52,7 +68,7 @@ const AdminUserCard = ({ user, setUser }: AdminUserCardProps) => {
             <h3 className={`${styles.header} ${styles.balanceHeader}`}>
               Текущий баланс
             </h3>
-            <p className={styles.balance}>250,00 ₽</p>
+            <p className={styles.balance}>{user.balance} ₽</p>
           </div>
           <PassData disabled={adminId !== user.id} />
         </div>
@@ -62,26 +78,18 @@ const AdminUserCard = ({ user, setUser }: AdminUserCardProps) => {
         <div className={styles.columnWrapper}>
           <div>
             <h3 className={styles.header}>Тариф</h3>
-            <TextInput temporaryDisabled placeholder="Тариф" />
+            <TextInput
+              temporaryDisabled
+              value={user.subscribe ? user.subscribe.tariff_id : 'Без тарифа'}
+            />
           </div>
           <div>
             <h3 className={styles.header}>Часовой пояс</h3>
             <TimezonePicker
               selectedTimezone={user.timezone}
-              onChange={async (timezone) => {
-                const formData = new FormData();
-                formData.append('timezone', String(timezone));
-                if (adminId === user.id) {
-                  dispatch(patchUser(formData));
-                } else {
-                  api
-                    .patch(`/user/${user.id}`, formData)
-                    .then((r) =>
-                      setUser({ ...user, timezone: r.data.timezone }),
-                    )
-                    .catch((e) => console.error(e));
-                }
-              }}
+              onChange={(timezone) =>
+                handleSubmit('timezone', String(timezone))
+              }
             />
           </div>
         </div>
@@ -89,21 +97,37 @@ const AdminUserCard = ({ user, setUser }: AdminUserCardProps) => {
           <div>
             <Toggle
               className={styles.header}
-              toggleHandler={(e) => console.log(e)}
+              disabled={user.id === adminId}
+              checked={user.is_staff}
+              toggleHandler={(e) => {
+                if (user.id === adminId) return;
+                handleSubmit('is_staff', String(e.target.checked));
+              }}
               title="Сотрудник компании"
             />
             <Dropdown
-              options={STAFF_MEMBERS}
-              selectedOption={STAFF_MEMBERS[0]}
+              disabled={!user.is_staff || user.id === adminId}
+              options={staffList.map((staff) => staff.pretty_name)}
+              selectedOption={user.role.pretty_name}
               onChange={(option) => {
-                console.log(option);
+                if (user.id === adminId) return;
+                const newRole = staffList.find(
+                  (staff) => staff.pretty_name === option,
+                )?.name;
+                if (!newRole) return;
+                handleSubmit('role', newRole);
               }}
             />
           </div>
           <div>
             <Toggle
               className={`${styles.header} ${styles.toggleLabel}`}
-              toggleHandler={(e) => console.log(e)}
+              checked={!user.is_active}
+              disabled={user.id === adminId}
+              toggleHandler={(e) => {
+                if (user.id === adminId) return;
+                handleSubmit('is_active', String(!e.target.checked));
+              }}
               title="Блокировка пользователя"
             />
           </div>
