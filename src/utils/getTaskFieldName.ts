@@ -1,4 +1,5 @@
 import { Operations, WorkStatus } from '../types/parserTask';
+import { PaymentAction } from '../types/payment';
 
 export const getTaskStatusName = (status: WorkStatus) => {
   switch (status) {
@@ -21,5 +22,14 @@ export const getTaskOperationName = (operation: Operations) => {
       return 'Парсинг';
     default:
       return operation;
+  }
+};
+
+export const getPaymentOperationName = (operation: PaymentAction) => {
+  switch (operation) {
+    case 'credit':
+      return 'списание';
+    case 'debit':
+      return 'зачисление';
   }
 };

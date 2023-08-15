@@ -1,0 +1,30 @@
+@import "src/assets/styles/mixins.sass"
+
+
+.innerWrapper
+  display: flex
+  justify-content: space-between
+
+  margin-bottom: 20px
+
+.title
+  @include header(20px)
+
+.loaderWrapper
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 30vh
+
+.csvLink
+  grid-area: csv
+  justify-self: end
+
+  text-decoration: underline
+  color: $c-additional
+
+.csvLink:hover
+  opacity: 0.8
+
+.csvLink:active
+  opacity: 0.6
