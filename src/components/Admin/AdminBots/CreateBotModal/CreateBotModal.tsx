@@ -44,7 +44,7 @@ const CreateBotModal = ({ isActive, setIsActive }: CreateBotModalProps) => {
   const handleSubmit = (values: initialValues) => {
     setIsLoading(true);
     socket.current = new WebSocket(
-      `wss://api.tgparsing.ru/telegram/tgaccount/create?api_id=${values.apiId}&api_hash=${values.apiHash}&phone_number=${values.phoneNumber}`,
+      `wss://api.tgparsing.ru/telegram/tgaccount/create?api_id=${values.apiId}&api_hash=${values.apiHash}&phone_number=%2b${values.phoneNumber}`,
     );
     socket.current.onclose = (e) => {
       setStatus({ code: e.code, reason: e.reason });
@@ -99,7 +99,7 @@ const CreateBotModal = ({ isActive, setIsActive }: CreateBotModalProps) => {
                       ? errors.phoneNumber
                       : ''
                   }
-                  hintMessage="Начинается с +, 11 цифр"
+                  hintMessage="11 цифр, без +"
                   placeholder="Телефон"
                   placeholderStyle={{ backgroundColor: '#2B3243' }}
                   onChange={handleChange}

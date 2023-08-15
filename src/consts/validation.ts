@@ -16,6 +16,8 @@ export const ValidationErrors = {
     `Значение должно быть больше чем ${fieldName}`,
   min: (value: number) => `Поле должно содержать не менее ${value} символов`,
   max: (value: number) => `Поле должно содержать не более ${value} символов`,
+  exactLength: (value: number) =>
+    `Поле должно содержать ровно ${value} символов`,
 
   numberValidation: {
     positive: 'Значение должно быть больше нуля',
@@ -46,8 +48,7 @@ export const PASS_REGEX =
 
 export const NAME_LENGTH = 61;
 
-export const NAME_REGEX =
-  /^(([а-яА-ЯёЁ][а-яё]*)(-[а-яА-ЯёЁ][а-яё]*)?)|(([a-zA-Z][a-z]*)(-[a-zA-Z][a-z]*)?)$/;
+export const NAME_REGEX = /^[А-ЯA-ZЁ][а-яa-zё]*(-[А-ЯA-ZЁ][а-яa-zё]*)?$/;
 
 export const PHONE_REGEX = /^\+[0-9+][0-9()-]{4,14}\d$/;
 export const RU_PHONE_REGEX = /^\+7[0-9]{10}$/;

@@ -1,15 +1,19 @@
 import { object, string } from 'yup';
 import {
-  RU_PHONE_REGEX,
+  NUMBER_ONLY_REGEX,
   ValidationErrors,
 } from '../../../../consts/validation';
+
+const NUMBER_LENGTH = 11;
 
 export const createBotValidation = object({
   apiId: string().required(ValidationErrors.required),
   apiHash: string().required(ValidationErrors.required),
   phoneNumber: string()
     .required(ValidationErrors.required)
-    .matches(RU_PHONE_REGEX, ValidationErrors.ruPhoneNumber),
+    .min(NUMBER_LENGTH, ValidationErrors.exactLength(NUMBER_LENGTH))
+    .max(NUMBER_LENGTH, ValidationErrors.exactLength(NUMBER_LENGTH))
+    .matches(NUMBER_ONLY_REGEX, ValidationErrors.numberValidation.numberType),
 });
 
 export const verificationCodeValidation = object({

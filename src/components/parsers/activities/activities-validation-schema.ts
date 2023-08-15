@@ -18,7 +18,6 @@ export const activitiesValidation = object({
   amountFrom: number()
     .required(ValidationErrors.required)
     .typeError(ValidationErrors.numberValidation.numberType)
-    .max(5, ValidationErrors.numberValidation.maxNumber(5))
     .test({
       message: ValidationErrors.numberValidation.withoutSymbols,
       test: (value) =>
