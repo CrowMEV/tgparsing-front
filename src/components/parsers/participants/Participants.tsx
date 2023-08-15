@@ -45,7 +45,7 @@ const Participants = () => {
       })
       .then(() => actions.resetForm())
       .catch((error) => {
-        alert(error);
+        console.error(error);
       })
       .finally(() => setIsFetching(false));
   };

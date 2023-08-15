@@ -63,9 +63,7 @@ const Activities = () => {
         rerun: false,
       })
       .then(() => actions.resetForm())
-      .catch((error) => {
-        alert(error);
-      })
+      .catch((e) => console.error(e))
       .finally(() => setIsFetching(false));
   };
 

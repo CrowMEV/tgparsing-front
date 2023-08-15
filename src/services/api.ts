@@ -27,6 +27,11 @@ api.interceptors.response.use(
     if (error.response.status === 401) {
       store.dispatch(localLogout());
     }
-    throw getErrorMessage(error);
+    if (error.response.status < 500) {
+      const clearErrorMessage = getErrorMessage(error);
+      alert(clearErrorMessage);
+      throw clearErrorMessage;
+    }
+    throw error;
   },
 );

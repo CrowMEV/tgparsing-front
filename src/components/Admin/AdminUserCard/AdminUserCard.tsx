@@ -40,7 +40,7 @@ const AdminUserCard = ({ user, setUser }: AdminUserCardProps) => {
       api
         .patch(`/user/${user.id}`, formData)
         .then((r) => setUser(r.data))
-        .catch((e) => alert(e));
+        .catch((e) => console.error(e));
     }
   }, []);
 
