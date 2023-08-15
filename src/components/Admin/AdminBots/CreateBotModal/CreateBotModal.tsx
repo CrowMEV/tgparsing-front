@@ -99,7 +99,7 @@ const CreateBotModal = ({ isActive, setIsActive }: CreateBotModalProps) => {
                       ? errors.phoneNumber
                       : ''
                   }
-                  hintMessage="Начинается с 7, без +"
+                  hintMessage="Начинается с +, 11 цифр"
                   placeholder="Телефон"
                   placeholderStyle={{ backgroundColor: '#2B3243' }}
                   onChange={handleChange}
