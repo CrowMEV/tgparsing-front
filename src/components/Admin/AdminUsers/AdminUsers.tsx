@@ -78,7 +78,7 @@ const AdminUsers: FC<AdminUsersProps> = ({ users }) => {
                   evt.stopPropagation();
                 }}
               >
-                <Toggle className={styles.toggle} />
+                <Toggle className={styles.toggle} checked={user.is_banned} />
               </TableCell>
             </TableRow>
           ))}

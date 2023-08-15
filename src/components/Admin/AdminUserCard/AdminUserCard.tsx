@@ -95,18 +95,9 @@ const AdminUserCard = ({ user, setUser }: AdminUserCardProps) => {
         </div>
         <div className={`${styles.columnWrapper} ${styles.toggleColumn}`}>
           <div>
-            <Toggle
-              className={styles.header}
-              disabled={user.id === adminId}
-              checked={user.is_staff}
-              toggleHandler={(e) => {
-                if (user.id === adminId) return;
-                handleSubmit('is_staff', String(e.target.checked));
-              }}
-              title="Сотрудник компании"
-            />
+            <h3 className={styles.header}>Роль</h3>
             <Dropdown
-              disabled={!user.is_staff || user.id === adminId}
+              disabled={user.id === adminId}
               options={staffList.map((staff) => staff.pretty_name)}
               selectedOption={user.role.pretty_name}
               onChange={(option) => {
@@ -122,11 +113,11 @@ const AdminUserCard = ({ user, setUser }: AdminUserCardProps) => {
           <div>
             <Toggle
               className={`${styles.header} ${styles.toggleLabel}`}
-              checked={!user.is_active}
+              checked={user.is_banned}
               disabled={user.id === adminId}
               toggleHandler={(e) => {
                 if (user.id === adminId) return;
-                handleSubmit('is_active', String(!e.target.checked));
+                handleSubmit('is_banned', String(e.target.checked));
               }}
               title="Блокировка пользователя"
             />
