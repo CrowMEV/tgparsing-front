@@ -43,11 +43,6 @@ const AdminFinance: FC<AdminFinance> = ({
     });
   };
 
-  const totalAmount = payments.reduce(
-    (result, payment) => result + payment.amount,
-    0,
-  );
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.periodWrapper}>

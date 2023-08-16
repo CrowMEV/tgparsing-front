@@ -14,7 +14,7 @@ const FinanceAdminPage = () => {
   useEffect(() => {
     setIsLoading(true);
     api
-      .get(`/payment/${searchParams.toString()}`)
+      .get(`/payment/`)
       .then(({ data }) => setPayments(data))
       .catch((error) => console.error(error))
       .finally(() => setIsLoading(false));
