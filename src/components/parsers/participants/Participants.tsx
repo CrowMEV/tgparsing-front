@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { FieldArray, Form, Formik, FormikHelpers, getIn } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -22,6 +23,7 @@ type FormValues = {
 
 const Participants = () => {
   const MAX_FIELDS = 5;
+  const isDisabled = useOutletContext<boolean>();
   const [isFetching, setIsFetching] = useState(false);
 
   const initialValues: FormValues = {
@@ -110,6 +112,15 @@ const Participants = () => {
                           ) : null}
                         </div>
                       ))}
+                      <IconButton
+                        disabled={values.groups.length >= MAX_FIELDS}
+                        onClick={() => push({ id: uuidv4(), value: '' })}
+                      >
+                        <div className={sharedStyles.createFieldBtn}>
+                          <PlusIcon />
+                          Добавить поле
+                        </div>
+                      </IconButton>
                     </div>
                   </>
                 )}
@@ -148,11 +159,13 @@ const Participants = () => {
             </div>
             <Button
               style={{ maxWidth: '610px' }}
-              variant="accent"
+              variant={isDisabled ? 'additional' : 'accent'}
               type="submit"
-              disabled={isFetching}
+              disabled={isFetching || isDisabled}
             >
-              Начать сбор аудитории
+              {isDisabled
+                ? 'Недоступно для вашего тарифа'
+                : 'Начать сбор аудитории'}
             </Button>
           </Form>
         )}

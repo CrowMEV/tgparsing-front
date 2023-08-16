@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { Form, Formik, FormikHelpers } from 'formik';
 
 import { api } from '../../../services/api';
@@ -23,6 +24,7 @@ type FormValues = {
 };
 
 const Geolocation = () => {
+  const isDisabled = useOutletContext<boolean>();
   const [isFetching, setIsFetching] = useState(false);
 
   const initialValues: FormValues = {
@@ -138,11 +140,13 @@ const Geolocation = () => {
             </div>
             <Button
               style={{ maxWidth: '610px' }}
-              variant="accent"
+              variant={isDisabled ? 'additional' : 'accent'}
               type="submit"
-              disabled={isFetching}
+              disabled={isFetching || isDisabled}
             >
-              Начать сбор аудитории
+              {isDisabled
+                ? 'Недоступно для вашего тарифа'
+                : 'Начать сбор аудитории'}
             </Button>
           </Form>
         )}
