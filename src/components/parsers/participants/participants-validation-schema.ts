@@ -1,5 +1,9 @@
 import { array, number, object, string } from 'yup';
-import { TASK_NAME_REGEX, ValidationErrors } from '../../../consts/validation';
+import {
+  NUMBER_SYMBOLS,
+  TASK_NAME_REGEX,
+  ValidationErrors,
+} from '../../../consts/validation';
 
 export const participantsValidation = object({
   name: string()
@@ -14,5 +18,10 @@ export const participantsValidation = object({
   amountFrom: number()
     .required(ValidationErrors.required)
     .typeError(ValidationErrors.numberValidation.numberType)
-    .min(1, ValidationErrors.numberValidation.minNumber(1)),
+    .max(5, ValidationErrors.numberValidation.maxNumber(5))
+    .test({
+      message: ValidationErrors.numberValidation.withoutSymbols,
+      test: (value) =>
+        typeof value === 'number' && !NUMBER_SYMBOLS.test(value.toString()),
+    }),
 });

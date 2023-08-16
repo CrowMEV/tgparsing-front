@@ -21,6 +21,7 @@ type FormValues = {
 };
 
 const Participants = () => {
+  const MAX_FIELDS = 5;
   const [isFetching, setIsFetching] = useState(false);
 
   const initialValues: FormValues = {
@@ -44,7 +45,7 @@ const Participants = () => {
       })
       .then(() => actions.resetForm())
       .catch((error) => {
-        alert(error);
+        console.error(error);
       })
       .finally(() => setIsFetching(false));
   };
@@ -68,7 +69,7 @@ const Participants = () => {
                         Каналы и группы для поиска
                       </h3>
                       <IconButton
-                        disabled={values.groups.length >= 5}
+                        disabled={values.groups.length >= MAX_FIELDS}
                         onClick={() => push({ id: uuidv4(), value: '' })}
                       >
                         <PlusIcon />

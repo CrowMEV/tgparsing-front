@@ -1,5 +1,9 @@
 import { array, date, number, object, ref, string } from 'yup';
-import { TASK_NAME_REGEX, ValidationErrors } from '../../../consts/validation';
+import {
+  NUMBER_SYMBOLS,
+  TASK_NAME_REGEX,
+  ValidationErrors,
+} from '../../../consts/validation';
 
 export const activitiesValidation = object({
   name: string()
@@ -14,11 +18,19 @@ export const activitiesValidation = object({
   amountFrom: number()
     .required(ValidationErrors.required)
     .typeError(ValidationErrors.numberValidation.numberType)
-    .min(1, ValidationErrors.numberValidation.minNumber(1)),
+    .test({
+      message: ValidationErrors.numberValidation.withoutSymbols,
+      test: (value) =>
+        typeof value === 'number' && !NUMBER_SYMBOLS.test(value.toString()),
+    }),
   // amountTo: number()
   //   .required(ValidationErrors.required)
   //   .typeError(ValidationErrors.numberValidation.numberType)
-  //   .min(1, ValidationErrors.numberValidation.minNumber(1))
+  //   .test({
+  //     message: ValidationErrors.numberValidation.withoutSymbols,
+  //     test: (value) =>
+  //       typeof value === 'number' && !NUMBER_SYMBOLS.test(value.toString()),
+  //   })
   //   .when('amountFrom', (from, schema) => {
   //     return schema.test({
   //       test: (to) => to > from[0],

@@ -24,9 +24,14 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (config) => config,
   async (error) => {
-    if (error.response.status === 401) {
+    const status = error.response.status;
+    if (status === 401) {
       store.dispatch(localLogout());
+    } else if (status < 500 && status > 399) {
+      const clearErrorMessage = getErrorMessage(error);
+      alert(clearErrorMessage);
+      throw clearErrorMessage;
     }
-    throw getErrorMessage(error);
+    throw error;
   },
 );

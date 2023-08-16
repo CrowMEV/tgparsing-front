@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { FieldArray, Form, Formik, FormikHelpers, getIn } from 'formik';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -27,9 +27,9 @@ type FormValues = {
   activities: string[];
 };
 
-const ACTIVITIES = ['комментарии', 'репосты'];
-
 const Activities = () => {
+  const ACTIVITIES = useMemo(() => ['комментарии', 'репосты'], []);
+  const MAX_FIELDS = 5;
   const [isFetching, setIsFetching] = useState(false);
   const [isSelectionActive, setIsSelectionActive] = useState(false);
 
@@ -47,7 +47,6 @@ const Activities = () => {
     values: FormValues,
     actions: FormikHelpers<FormValues>,
   ) => {
-    // actions.resetForm();
     setIsFetching(true);
     api
       .post('/telegram/parser/activemembers', {
@@ -64,9 +63,7 @@ const Activities = () => {
         rerun: false,
       })
       .then(() => actions.resetForm())
-      .catch((error) => {
-        alert(error);
-      })
+      .catch((e) => console.error(e))
       .finally(() => setIsFetching(false));
   };
 
@@ -89,7 +86,7 @@ const Activities = () => {
                         Каналы и группы для поиска
                       </h3>
                       <IconButton
-                        disabled={values.groups.length >= 5}
+                        disabled={values.groups.length >= MAX_FIELDS}
                         onClick={() => push({ id: uuidv4(), value: '' })}
                       >
                         <PlusIcon />
