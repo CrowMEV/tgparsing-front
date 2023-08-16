@@ -10,6 +10,7 @@ import { TariffResponse } from '../../types/tariff';
 import { api } from '../../services/api';
 import { PARSER_ENDINGS, getWordEnding } from '../../utils/getWordEnding';
 import { editUser } from '../../store/user-slice/userSlice';
+import { ParsersTitles } from '../../consts/tariffs';
 
 const TariffInfo = () => {
   const dispatch = useAppDispatch();
@@ -112,6 +113,26 @@ const TariffInfo = () => {
               Доступно сегодня:{' '}
               <span className={styles.tariffValue}>
                 {userSubscribe.tariff_options.parsers_per_day}
+              </span>
+            </p>
+            <p className={styles.tariffField}>
+              Способы сбора:{' '}
+              <span className={styles.tariffValue}>
+                {currentTariff.options.activity && (
+                  <>
+                    - {ParsersTitles.activemembers[1]}
+                    <br />
+                  </>
+                )}
+                {currentTariff.options.geo && (
+                  <>
+                    - {ParsersTitles.geomembers[1]}
+                    <br />
+                  </>
+                )}
+                {currentTariff.options.members && (
+                  <>- {ParsersTitles.members[1]}</>
+                )}
               </span>
             </p>
           </div>

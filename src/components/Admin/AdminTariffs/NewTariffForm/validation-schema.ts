@@ -1,4 +1,4 @@
-import { number, object, string } from 'yup';
+import { number, object, string, boolean } from 'yup';
 import {
   NUMBER_SYMBOLS,
   ValidationErrors,
@@ -42,5 +42,12 @@ export const tariffSchema = object().shape({
       )
       .positive(ValidationErrors.numberValidation.positive)
       .integer(ValidationErrors.numberValidation.integerNumber),
-  }),
+    members: boolean(),
+    activity: boolean(),
+    geo: boolean(),
+  }).test(
+    'parsers-check',
+    '',
+    (options) => options.activity || options.geo || options.members,
+  ),
 });

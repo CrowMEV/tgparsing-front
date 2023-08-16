@@ -1,0 +1,50 @@
+@import "src/assets/styles/mixins.sass"
+@import "/src/assets/styles/variables.sass"
+
+.wrapper
+  background-color: $c-secondary
+
+.periodWrapper
+  display: grid
+  grid-template-columns: 260px 260px
+  grid-template-areas: "title title" "input1 input2"
+  row-gap: 18px
+  column-gap: 24px
+
+  padding-top: 20px
+  padding-left: 20px
+
+.paymentFail
+  color: $c-error
+
+.periodTitle
+  grid-area: title
+
+  font-weight: 600
+
+.periodInput:nth-child(1)
+  grid-area: input2
+
+.periodInput:nth-child(2)
+  grid-area: input1
+
+.select
+  background-color: transparent
+
+  width: 150px
+
+  font-size: 14px
+  font-weight: 500
+
+  border: none
+  border-bottom: 1px solid $c-additional
+
+select option
+  background-color: $c-main
+
+.headCell
+  width: 220px
+  
+  
+.totalAmount
+  border-top: 1px solid $c-additional

@@ -65,3 +65,33 @@
 
   border-bottom: 1px solid $c-additional
   background-color: transparent
+
+
+.filterWrapper
+  display: flex
+  flex-direction: column
+  row-gap: 10px
+
+.filterLabel
+  display: flex
+  column-gap: 5px
+
+  cursor: pointer
+
+  svg
+    color: $c-additional
+
+    transition: all 0.2s
+
+.filterLabel:hover
+  svg
+    color: #ffffff
+
+.filterInput
+  width: 150px
+
+  font-size: 14px
+  font-weight: 500
+
+  border-bottom: 1px solid $c-additional
+  background-color: transparent

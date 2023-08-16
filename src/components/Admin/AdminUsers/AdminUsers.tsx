@@ -7,7 +7,6 @@ import TableSearch from '../../ui/table/tableSearch/TableSearch';
 import Table from '../../ui/table/Table';
 import TableBody from '../../ui/table/tableBody/TableBody';
 import styles from './admin-users.module.sass';
-import Toggle from '../../ui/toggle/toggle';
 import { User } from '../../../types/user';
 import { initialUsersFilter } from './filters';
 import { updateFilterReducer } from './reducers';
@@ -73,12 +72,8 @@ const AdminUsers: FC<AdminUsersProps> = ({ users }) => {
                 {new Date(user.created_at).toLocaleDateString('ru-RU')}
               </TableCell>
               <TableCell>{user.phone_number}</TableCell>
-              <TableCell
-                onClick={(evt) => {
-                  evt.stopPropagation();
-                }}
-              >
-                <Toggle className={styles.toggle} checked={user.is_banned} />
+              <TableCell className={user.is_banned ? styles.bannedUser : ''}>
+                {user.is_banned ? 'заблокирован' : 'активный'}
               </TableCell>
             </TableRow>
           ))}
