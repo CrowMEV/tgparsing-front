@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { FieldArray, Form, Formik, FormikHelpers, getIn } from 'formik';
+import { useOutletContext } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 import { activitiesValidation } from './activities-validation-schema';
@@ -28,6 +29,7 @@ type FormValues = {
 };
 
 const Activities = () => {
+  const isDisabled = useOutletContext<boolean>();
   const ACTIVITIES = useMemo(() => ['комментарии', 'репосты'], []);
   const MAX_FIELDS = 5;
   const [isFetching, setIsFetching] = useState(false);
@@ -250,11 +252,13 @@ const Activities = () => {
             </div>
             <Button
               style={{ maxWidth: '610px' }}
-              variant="accent"
+              variant={isDisabled ? 'additional' : 'accent'}
               type="submit"
-              disabled={isFetching}
+              disabled={isFetching || isDisabled}
             >
-              Начать сбор аудитории
+              {isDisabled
+                ? 'Недоступно для вашего тарифа'
+                : 'Начать сбор аудитории'}
             </Button>
           </Form>
         )}
