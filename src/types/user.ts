@@ -14,6 +14,7 @@ export interface User {
   timezone: number;
   is_staff: boolean;
   is_active: boolean;
+  is_banned: boolean;
   is_verified: boolean;
   avatar_url: string;
   role: Role;

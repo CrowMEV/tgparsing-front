@@ -4,19 +4,21 @@ import Loader from '../../../components/ui/loader/loader';
 import AdminFinance from '../../../components/Admin/AdminFinance/AdminFinance';
 import { Payment } from '../../../types/payment';
 import { api } from '../../../services/api';
+import { useSearchParams } from 'react-router-dom';
 
 const FinanceAdminPage = () => {
   const [payments, setPayments] = useState<Payment[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     setIsLoading(true);
     api
-      .get('/payment/')
+      .get(`/payment/${searchParams.toString()}`)
       .then(({ data }) => setPayments(data))
       .catch((error) => console.error(error))
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [searchParams]);
 
   return (
     <div className={styles.wrapper}>
@@ -29,7 +31,11 @@ const FinanceAdminPage = () => {
           <Loader />
         </div>
       ) : (
-        <AdminFinance payments={payments} />
+        <AdminFinance
+          payments={payments}
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+        />
       )}
     </div>
   );
