@@ -1,5 +1,3 @@
-import { User } from './user';
-
 export type PaymentAction = 'credit' | 'debit';
 
 export interface Payment {

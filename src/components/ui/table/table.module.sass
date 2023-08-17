@@ -20,14 +20,14 @@
   border-collapse: collapse
 
 .table__header
+  position: sticky
+  top: 0px
   font-size: 16px
   font-weight: 500
   text-align: left
+  z-index: 10
 
 .table__headCell
-  position: sticky
-  top: 0px
-
   vertical-align: top
 
   background-color: $c-secondary
@@ -36,36 +36,6 @@
 .table__cell
   padding: 10px 0
   border-bottom: 1px solid $c-support-text
-
-.searchWrapper
-  display: flex
-  flex-direction: column
-  row-gap: 10px
-
-.searchLabel
-  display: flex
-  column-gap: 5px
-
-  cursor: pointer
-
-  svg
-    color: $c-additional
-
-    transition: all 0.2s
-
-.searchLabel:hover
-  svg
-    color: #ffffff
-
-.searchInput
-  width: 150px
-
-  font-size: 14px
-  font-weight: 500
-
-  border-bottom: 1px solid $c-additional
-  background-color: transparent
-
 
 .filterWrapper
   display: flex

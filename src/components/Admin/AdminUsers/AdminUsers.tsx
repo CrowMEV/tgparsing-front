@@ -3,7 +3,6 @@ import TableCell from '../../ui/table/tableCell/TableCell';
 import TableContainer from '../../ui/table/tableContainer/TableContainer';
 import TableHead from '../../ui/table/tableHead/TableHead';
 import TableRow from '../../ui/table/tableRow/TableRow';
-import TableSearch from '../../ui/table/tableSearch/TableSearch';
 import Table from '../../ui/table/Table';
 import TableBody from '../../ui/table/tableBody/TableBody';
 import styles from './admin-users.module.sass';
@@ -12,6 +11,8 @@ import { initialUsersFilter } from './filters';
 import { updateFilterReducer } from './reducers';
 import { useNavigate } from 'react-router-dom';
 import { Routes } from '../../../router/routes';
+import TableFilter from '../../ui/table/tableFilter/TableFilter';
+import TableTextInput from '../../ui/table/tableTextInput/TableTextInput';
 
 interface AdminUsersProps {
   users: User[];
@@ -26,7 +27,7 @@ const AdminUsers: FC<AdminUsersProps> = ({ users }) => {
   const navigate = useNavigate();
 
   return (
-    <TableContainer style={{ height: '700px' }}>
+    <TableContainer style={{ height: '500px' }}>
       <Table>
         <TableHead>
           <TableRow>
@@ -36,21 +37,24 @@ const AdminUsers: FC<AdminUsersProps> = ({ users }) => {
                 key={filter.name}
                 className={styles.userHeadCell}
               >
-                <TableSearch
+                <TableFilter
                   title={filter.title}
                   isActive={filter.isActive}
-                  showSearchHandler={() =>
+                  setActive={() =>
                     dispatch({
                       filter: { ...filter, isActive: !filter.isActive },
                     })
                   }
-                  value={filter.value}
-                  onChange={(evt) =>
-                    dispatch({
-                      filter: { ...filter, value: evt.target.value },
-                    })
-                  }
-                />
+                >
+                  <TableTextInput
+                    value={filter.value}
+                    onChange={(evt) =>
+                      dispatch({
+                        filter: { ...filter, value: evt.target.value },
+                      })
+                    }
+                  />
+                </TableFilter>
               </TableCell>
             ))}
             <TableCell className={styles.userHeadCell__block} variant="head">
