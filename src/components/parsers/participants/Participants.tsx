@@ -112,15 +112,6 @@ const Participants = () => {
                           ) : null}
                         </div>
                       ))}
-                      <IconButton
-                        disabled={values.groups.length >= MAX_FIELDS}
-                        onClick={() => push({ id: uuidv4(), value: '' })}
-                      >
-                        <div className={sharedStyles.createFieldBtn}>
-                          <PlusIcon />
-                          Добавить поле
-                        </div>
-                      </IconButton>
                     </div>
                   </>
                 )}
