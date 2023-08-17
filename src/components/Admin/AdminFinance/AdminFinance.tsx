@@ -38,7 +38,6 @@ const AdminFinance: FC<AdminFinance> = ({
     setSearchParams((params) => {
       if (!value) params.delete(key);
       else params.set(key, value);
-      params;
       return params;
     });
   };
