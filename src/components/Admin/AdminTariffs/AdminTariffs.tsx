@@ -37,7 +37,7 @@ const AdminTariffs = () => {
   };
 
   return (
-    <TableContainer style={{ height: '550px' }}>
+    <TableContainer style={{ height: '500px' }}>
       <Table>
         <TableHead>
           <TableRow>

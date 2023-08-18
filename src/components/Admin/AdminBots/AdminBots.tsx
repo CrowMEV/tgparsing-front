@@ -6,11 +6,12 @@ import TableCell from '../../ui/table/tableCell/TableCell';
 import TableContainer from '../../ui/table/tableContainer/TableContainer';
 import TableHead from '../../ui/table/tableHead/TableHead';
 import TableRow from '../../ui/table/tableRow/TableRow';
-import TableSearch from '../../ui/table/tableSearch/TableSearch';
 import styles from './admin-bots.module.sass';
 import IconButton from '../../ui/iconButton/IconButton';
 import { ReactComponent as BasketIcon } from '../../../assets/images/icons/trash.svg';
 import { api } from '../../../services/api';
+import TableFilter from '../../ui/table/tableFilter/TableFilter';
+import TableTextInput from '../../ui/table/tableTextInput/TableTextInput';
 
 interface AdminBotsProps {
   bots: Bot[];
@@ -27,7 +28,7 @@ const AdminBots: FC<AdminBotsProps> = ({ bots }) => {
   };
 
   return (
-    <TableContainer style={{ height: '750px' }}>
+    <TableContainer style={{ height: '500px' }}>
       <Table>
         <TableHead>
           <TableRow>
@@ -35,13 +36,16 @@ const AdminBots: FC<AdminBotsProps> = ({ bots }) => {
               api id
             </TableCell>
             <TableCell variant="head" className={styles.headCell}>
-              <TableSearch
+              <TableFilter
                 title="api hash"
                 isActive={filterIsActive}
-                showSearchHandler={setFilterActive}
-                value={filterValue}
-                onChange={(evt) => setFilterValue(evt.target.value)}
-              />
+                setActive={setFilterActive}
+              >
+                <TableTextInput
+                  value={filterValue}
+                  onChange={(evt) => setFilterValue(evt.target.value)}
+                />
+              </TableFilter>
             </TableCell>
             <TableCell variant="head" className={styles.headCell}>
               Телефон
