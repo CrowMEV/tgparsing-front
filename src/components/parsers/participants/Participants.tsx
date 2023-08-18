@@ -70,12 +70,6 @@ const Participants = () => {
                       <h3 className={sharedStyles.header}>
                         Каналы и группы для поиска
                       </h3>
-                      <IconButton
-                        disabled={values.groups.length >= MAX_FIELDS}
-                        onClick={() => push({ id: uuidv4(), value: '' })}
-                      >
-                        <PlusIcon />
-                      </IconButton>
                     </div>
                     <div className={sharedStyles.groupsInputsWrapper}>
                       {values.groups.map((group, index) => (
@@ -112,6 +106,15 @@ const Participants = () => {
                           ) : null}
                         </div>
                       ))}
+                      <IconButton
+                        disabled={values.groups.length >= MAX_FIELDS}
+                        onClick={() => push({ id: uuidv4(), value: '' })}
+                      >
+                        <div className={sharedStyles.createFieldBtn}>
+                          <PlusIcon />
+                          {`Добавить поле (${values.groups.length}/${MAX_FIELDS})`}
+                        </div>
+                      </IconButton>
                     </div>
                   </>
                 )}
