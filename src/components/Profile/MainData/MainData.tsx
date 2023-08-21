@@ -35,7 +35,7 @@ const MainData = ({ user, variant = 'user', onSubmit }: MainDataProps) => {
     firstname: user.firstname || '',
     lastname: user.lastname || '',
     email: user.email || '',
-    phone_number: user.phone_number || '',
+    phone_number: user.phone_number,
   };
 
   const handleSubmit = async (
