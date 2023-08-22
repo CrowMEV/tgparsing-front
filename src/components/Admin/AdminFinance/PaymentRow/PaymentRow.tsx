@@ -11,7 +11,6 @@ interface PaymentRowProps {
 }
 
 const PaymentRow: FC<PaymentRowProps> = ({ payment }) => {
-  console.log(Number(payment.amount));
   return (
     <TableRow key={payment.id}>
       <TableCell>{payment.email}</TableCell>
